@@ -56,7 +56,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
         _showSnackBar('Image picking canceled');
       }
     } catch (e) {
-      // Handle exceptions
+
       print('Error picking image: $e');
       _showSnackBar('Error picking image: $e');
     }
@@ -79,7 +79,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
       final String downloadURL = await storageReference.getDownloadURL();
       return downloadURL;
     } catch (e) {
-      // Handle exceptions
+
       print('Error uploading image to Firebase: $e');
       _showSnackBar('Error uploading image to Firebase: $e');
       rethrow;

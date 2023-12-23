@@ -14,7 +14,7 @@ class ImageConstant {
 
   // Splash Screen images
 
-  static String imgLogo = '$imagePath/img_logo.png';
+  static String imgLogo = '$imagePath/app_logo.svg';
 
   // Login images
   static String imgGoogleIcon = '$imagePath/img_google_icon.svg';

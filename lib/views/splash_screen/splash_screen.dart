@@ -48,8 +48,8 @@ class _SplashScreenState extends State<SplashScreen> {
               SizedBox(height: 5.v),
               CustomImageView(
                 imagePath: ImageConstant.imgLogo,
-                height: 72.adaptSize,
-                width: 72.adaptSize,
+                height: 100.adaptSize,
+                width: 100.adaptSize,
               ),
             ],
           ),
