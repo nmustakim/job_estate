@@ -171,7 +171,7 @@ class _HomeState extends ConsumerState<Home> {
     Navigator.pushNamed(context, AppRoutes.recentJobsScreen);
   }
 
-  onTapSeemore(BuildContext context) {
+  onTapSeeMore(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.recentJobsScreen);
   }
 

@@ -57,7 +57,6 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
         });
         widget.onImagePicked(imageURL);
       } else {
-
         _showSnackBar('Image picking canceled');
       }
     } catch (e) {
@@ -103,7 +102,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: _showPickImageDialog,
-      child: Text(uploadedFileName ?? 'Logo',overflow: TextOverflow.ellipsis,),
+      child: Text(uploadedFileName== '' ?'Uploaded' : 'Logo',overflow: TextOverflow.ellipsis,),
     );
   }
 }

@@ -12,6 +12,8 @@ import '../../controllers/jobs/add_job_controller.dart';
 import '../../controllers/jobs/fetch_jobs_controller.dart';
 
 import '../../models/job_model.dart';
+import '../../widgets/app_bar/appbar_leading_image.dart';
+import '../../widgets/app_bar/appbar_subtitle.dart';
 import '../../widgets/media_picker.dart';
 import '../../widgets/app_bar/appbar_title.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
@@ -38,6 +40,7 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
   final _jobSummaryController = TextEditingController();
   final _educationController = TextEditingController();
   String skillTitle = 'Software';
+
 
 
   @override
@@ -70,8 +73,10 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                 validator: (value) => Validator.validateField(value: value)),
             SizedBox(height: 16.v),
             ImagePickerWidget(
-              onImagePicked: (String imagePath) {
-                print('Image picked: $imagePath');
+              onImagePicked: (String imageUrl) {
+                setState(() {
+                  _logoNameController.text = imageUrl;
+                });
               },
             ),
 
@@ -165,7 +170,7 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                                 .toList(),
                             employmentType: _employmentTypeController.text,
                             postedDate: DateTime.now(),
-                            logo: "_logoController.text",
+                            logo: _logoNameController.text,
                             organizationName: _organizationNameController.text,
                             organizationType: _organizationTypeController.text,
                             jobSummary: _jobSummaryController.text,
@@ -191,10 +196,18 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return CustomAppBar(
+        leading: AppbarLeadingImage(
+            imagePath: ImageConstant.imgArrowLeftBlueGray300,
+            margin: EdgeInsets.only(left: 16.h, top: 16.v, bottom: 15.v),
+            onTap: () {
+              onTapArrowLeft(context);
+            }),
         height: 50.v,
-        title: AppbarTitle(
-          margin: EdgeInsets.only(left: 16.h, top: 16.h),
-          text: "Upload job",
-        ));
+        title: AppbarSubtitle(
+            text: "Publish job",
+            margin: EdgeInsets.only(left: 12.h)));
+  }
+  onTapArrowLeft(BuildContext context) {
+    Navigator.pop(context);
   }
 }
