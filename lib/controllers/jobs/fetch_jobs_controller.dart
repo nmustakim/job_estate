@@ -24,7 +24,7 @@ class JobsController extends StateNotifier<BaseState> {
 
       jobList =
           querySnapshot.docs.map((doc) => Job.fromJson(doc.data())).toList();
-
+      print("JobsList:$jobList");
       state = FetchJobsSuccessState(jobList);
     } catch (error, stackTrace) {
       print('fetchJobs() error = $error');

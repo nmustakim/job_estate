@@ -27,7 +27,7 @@ class CategoriesItemWidget extends StatelessWidget {
             ),
             SizedBox(height: 7.v),
             Text(
-              "lbl_man_shirt",
+              "Title",
               style: CustomTextStyles.bodySmall10,
             ),
           ],

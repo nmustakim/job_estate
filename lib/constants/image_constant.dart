@@ -5,6 +5,7 @@ class ImageConstant {
   static String imgLoveOutlined = '$imagePath/love.svg';
 
   static String imgProfile = '$imagePath/profile.svg';
+  static String imgPublish = '$imagePath/img_upload.svg';
   static String imgSave = '$imagePath/save.svg';
   static String imgCheck = '$imagePath/check.svg';
   static String imgProgramming = '$imagePath/programming.svg';

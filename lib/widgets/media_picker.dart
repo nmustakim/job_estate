@@ -16,6 +16,7 @@ class ImagePickerWidget extends StatefulWidget {
 
 class _ImagePickerWidgetState extends State<ImagePickerWidget> {
   final ImagePicker _picker = ImagePicker();
+  String? uploadedFileName;
 
   Future<void> _showPickImageDialog() async {
     final ImageSource? source = await showDialog<ImageSource>(
@@ -51,12 +52,16 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
 
       if (image != null) {
         final String imageURL = await _uploadImageToFirebase(image.path);
+        setState(() {
+          uploadedFileName = imageURL;
+        });
         widget.onImagePicked(imageURL);
       } else {
+
         _showSnackBar('Image picking canceled');
       }
     } catch (e) {
-
+      // Handle exceptions
       print('Error picking image: $e');
       _showSnackBar('Error picking image: $e');
     }
@@ -79,7 +84,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
       final String downloadURL = await storageReference.getDownloadURL();
       return downloadURL;
     } catch (e) {
-
+      // Handle exceptions
       print('Error uploading image to Firebase: $e');
       _showSnackBar('Error uploading image to Firebase: $e');
       rethrow;
@@ -98,7 +103,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: _showPickImageDialog,
-      child: Text('Logo'),
+      child: Text(uploadedFileName ?? 'Logo',overflow: TextOverflow.ellipsis,),
     );
   }
 }

@@ -34,6 +34,7 @@ class _HomeState extends ConsumerState<Home> {
     mediaQueryData = MediaQuery.of(context);
     final jobsState = ref.watch(jobsProvider);
     final jobs = jobsState is FetchJobsSuccessState ? jobsState.jobsList:[];
+    print(jobs);
     return SafeArea(
         child: Scaffold(
             appBar: _buildAppBar(context),
@@ -59,7 +60,7 @@ class _HomeState extends ConsumerState<Home> {
                             seeMoreLink: "View all",
                           ),
                           JobCardList(
-                            jobsList: jobs as List <Job>,
+                            jobsList: jobs,
                             isHome: true,
                           )
                         ])))));

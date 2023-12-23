@@ -48,7 +48,7 @@ class AuthenticationController extends StateNotifier<BaseState> {
       if (firebaseAuth.currentUser != null) {
         state = LoginSuccessState();
         hideKeyboard(context);
-        toast("Login successful");
+
         ref.read(jobsProvider.notifier).fetchJobs();
         NavigationService.navigateAndRemoveUntil(AppRoutes.homeContainerScreen);
       } else {

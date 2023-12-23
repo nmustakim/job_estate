@@ -1,10 +1,8 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:job_estate/views/account_screen/publish_job_screen.dart';
 import 'package:job_estate/views/home_container_screen/home_container_screen.dart';
 import 'package:job_estate/views/recent_jobs_screen/recent_jobs_screen.dart';
 import 'package:job_estate/widgets/job_details.dart';
-
 
 import '../views/home_screen/widgets/search_sheet.dart';
 import '../views/login_screen/login_screen.dart';
@@ -15,12 +13,11 @@ import '../views/search_result_screen/search_result_screen.dart';
 
 import '../views/splash_screen/splash_screen.dart';
 
-
 class AppRoutes {
   static const String splashScreen = '/splash_screen';
   static const String recentJobsScreen = '/recent_jobs_screen';
-    static const String typeWiseJobsScreen = '/typewise_jobs_screen';
-       static const String jobDetailsScreen = '/job_details';
+  static const String typeWiseJobsScreen = '/typewise_jobs_screen';
+  static const String jobDetailsScreen = '/job_details';
 
   static const String loginScreen = '/login_screen';
 
@@ -30,28 +27,17 @@ class AppRoutes {
 
   static const String homeContainerScreen = '/home_container_screen';
 
-  static const String superFlashSaleScreen = '/super_flash_sale_screen';
-
   static const String favoriteProductScreen = '/favorite_product_screen';
 
-  static const String productDetailScreen = '/product_detail_screen';
-
-  static const String reviewProductScreen = '/review_product_screen';
-
-  static const String writeReviewFillScreen = '/write_review_fill_screen';
-
   static const String notificationScreen = '/notification_screen';
-
-  static const String notificationOfferScreen = '/notification_offer_screen';
 
   static const String notificationFeedScreen = '/notification_feed_screen';
 
   static const String notificationActivityScreen =
       '/notification_activity_screen';
 
-
-
-  static const String searchJobsByCategoryScreen = '/search_jobs_by_category_screen';
+  static const String searchJobsByCategoryScreen =
+      '/search_jobs_by_category_screen';
 
   static const String searchResultScreen = '/search_result_screen';
 
@@ -63,47 +49,32 @@ class AppRoutes {
   static const String sortByScreen = '/sort_by_screen';
 
   static const String filterScreen = '/filter_screen';
-
-  static const String cartPage = '/cart_page';
   static const String searchScreen = '/search_screen';
-
-  static const String shipToScreen = '/ship_to_screen';
-
   static const String paymentMethodScreen = '/payment_method_screen';
 
-
-
-  static const String accountPage = '/account_page';
+  static const String accountScreen = '/account_page';
+  static const String publishJobScreen = '/publish_job_screen';
 
   static const String profileScreen = '/profile_screen';
 
   static const String changePasswordScreen = '/change_password_screen';
 
-
-
-  static const String addPaymentScreen = '/add_payment_screen';
-
-
   static const String addCardScreen = '/add_card_screen';
-
-  static const String lailyfaFebrinaCardScreen = '/lailyfa_febrina_card_screen';
 
   static const String appNavigationScreen = '/app_navigation_screen';
 
   static Map<String, WidgetBuilder> routes = {
-    homeContainerScreen: (context)=>HomeContainerScreen(),
+    homeContainerScreen: (context) => HomeContainerScreen(),
     splashScreen: (context) => SplashScreen(),
     loginScreen: (context) => LoginScreen(),
     registerScreen: (context) => RegisterScreen(),
-    recentJobsScreen:(context)=>RecentJobsScreen(),
-  
-
+    recentJobsScreen: (context) => RecentJobsScreen(),
+    publishJobScreen: (context) => PublishJobScreen(),
     searchScreen: (context) => SearchSheet(),
     searchJobsByCategoryScreen: (context) => SearchJobsByCategoryScreen(),
     searchResultScreen: (context) => SearchResultScreen(),
-
     searchResultNoDataFoundScreen: (context) => SearchResultNoDataFoundScreen(),
 
-  //
-    };
+    //
+  };
 }

@@ -61,14 +61,16 @@ class JobDetails extends StatelessWidget {
               _buildHeader(context, title: "Roles & Responsibilities"),
         
               SizedBox(height: 10),
-              ListView.builder(
-                itemCount: job.rolesAndResponsibilities.length,
-                itemBuilder: (context, index) {
-                  return Text(
-                    job.rolesAndResponsibilities[index],
-                    style: theme.textTheme.bodyMedium,
-                  );
-                },
+              Expanded(
+                child: ListView.builder(
+                  itemCount: job.rolesAndResponsibilities.length,
+                  itemBuilder: (context, index) {
+                    return Text(
+                      job.rolesAndResponsibilities[index],
+                      style: theme.textTheme.bodyMedium,
+                    );
+                  },
+                ),
               ),
                  SizedBox(height: 10),
                     _buildHeader(context, title: "Requirements"),
@@ -76,7 +78,8 @@ class JobDetails extends StatelessWidget {
               CustomElevatedButton(
                 text: "Apply",
                 onPressed: () {},
-              )
+              ),
+              SizedBox(height: 12.v,)
             ],
           ),
         ),

@@ -8,22 +8,22 @@ import 'package:job_estate/utils/validator.dart';
 import 'package:job_estate/widgets/custom_elevated_button.dart';
 
 
-import '../controllers/jobs/add_job_controller.dart';
-import '../controllers/jobs/fetch_jobs_controller.dart';
+import '../../controllers/jobs/add_job_controller.dart';
+import '../../controllers/jobs/fetch_jobs_controller.dart';
 
-import '../models/job_model.dart';
-import '../widgets/media_picker.dart';
-import '../widgets/app_bar/appbar_title.dart';
-import '../widgets/app_bar/custom_app_bar.dart';
-import '../widgets/custom_dropdown.dart';
-import '../widgets/custom_text_form_field.dart';
+import '../../models/job_model.dart';
+import '../../widgets/media_picker.dart';
+import '../../widgets/app_bar/appbar_title.dart';
+import '../../widgets/app_bar/custom_app_bar.dart';
+import '../../widgets/custom_dropdown.dart';
+import '../../widgets/custom_text_form_field.dart';
 
-class JobUploadScreen extends StatefulWidget {
+class PublishJobScreen extends StatefulWidget {
   @override
-  _JobUploadScreenState createState() => _JobUploadScreenState();
+  _PublishJobScreenState createState() => _PublishJobScreenState();
 }
 
-class _JobUploadScreenState extends State<JobUploadScreen> {
+class _PublishJobScreenState extends State<PublishJobScreen> {
   final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
@@ -107,6 +107,7 @@ class _JobUploadScreenState extends State<JobUploadScreen> {
             SizedBox(height: 16.v),
             CustomTextFormField(
                 suffix: CustomDropdownFormField(
+
                   items:Lists().employmentType,
                   onChanged: (value) {
                     setState(() {

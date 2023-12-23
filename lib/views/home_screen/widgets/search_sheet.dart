@@ -21,32 +21,32 @@ class SearchSheet extends StatelessWidget {
                   },
                   child: Padding(
                       padding: EdgeInsets.only(left: 16.h),
-                      child: Text("msg_nike_air_max_2703",
+                      child: Text("qwertyu",
                           style: theme.textTheme.bodySmall))),
               SizedBox(height: 37.v),
               Padding(
                   padding: EdgeInsets.only(left: 16.h),
-                  child: Text("msg_nike_air_vapormax",
+                  child: Text("mnfgydydfyt",
                       style: theme.textTheme.bodySmall)),
               SizedBox(height: 34.v),
               Padding(
                   padding: EdgeInsets.only(left: 16.h),
-                  child: Text("msg_nike_air_max_2703",
+                  child: Text("vcvc",
                       style: theme.textTheme.bodySmall)),
               SizedBox(height: 36.v),
               Padding(
                   padding: EdgeInsets.only(left: 16.h),
-                  child: Text("msg_nike_air_max_2704",
+                  child: Text("hgu",
                       style: theme.textTheme.bodySmall)),
               SizedBox(height: 37.v),
               Padding(
                   padding: EdgeInsets.only(left: 16.h),
-                  child: Text("msg_nike_air_vapormax2",
+                  child: Text("hgfuyf",
                       style: theme.textTheme.bodySmall)),
               SizedBox(height: 35.v),
               Padding(
                   padding: EdgeInsets.only(left: 16.h),
-                  child: Text("msg_nike_air_max_97",
+                  child: Text("tuy",
                       style: theme.textTheme.bodySmall)),
               SizedBox(height: 5.v)
             ]));

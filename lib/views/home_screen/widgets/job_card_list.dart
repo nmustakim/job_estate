@@ -9,7 +9,7 @@ import 'job_card.dart';
 
 
 class JobCardList extends StatefulWidget {
-  final List<Job> jobsList;
+  final List<dynamic> jobsList;
   final bool? isHome;
   const JobCardList({Key? key, required this.jobsList, this.isHome})
       : super(key: key);

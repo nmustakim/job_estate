@@ -20,7 +20,7 @@ class Job {
     required this.salary, required this.postedBy, this.applicants,
     required this.skills, required this.employmentType, required this.postedDate, required this.logo, required this.organizationName, required this.organizationType, required this.jobSummary, required this.rolesAndResponsibilities, required this.education, required this.certification});
 
-  // Encoding this object to a map
+
   Map<String, dynamic> toJson() => {
     'id': id,
     'title': title,
@@ -40,7 +40,7 @@ class Job {
     'certification': certification,
   };
 
-  // Decoding from a map to this object
+
   factory Job.fromJson(Map<String, dynamic> json) => Job(
     id: json['id'],
     title: json['title'],

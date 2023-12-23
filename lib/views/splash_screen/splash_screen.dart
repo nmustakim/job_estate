@@ -1,13 +1,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:job_estate/main.dart';
-import 'package:job_estate/views/job_upload_screen.dart';
+import 'package:job_estate/views/account_screen/publish_job_screen.dart';
 
 
 import '../../theme/theme_helper.dart';
 import '../../constants/image_constant.dart';
 import '../../utils/size_utils.dart';
 import '../../widgets/custom_image_view.dart';
+import '../home_container_screen/home_container_screen.dart';
 import '../login_screen/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -29,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => JobUploadScreen()),
+        MaterialPageRoute(builder: (context) => HomeContainerScreen()),
       );
     });
   }

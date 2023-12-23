@@ -132,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
           width: 72.adaptSize,
           padding: EdgeInsets.all(20.h),
           decoration: IconButtonStyleHelper.fillPrimary,
-          child: CustomImageView(imagePath: ImageConstant.imgClose)),
+          child: CustomImageView(imagePath: ImageConstant.imgLogo)),
       SizedBox(height: 16.v),
       Text("Welcome to JobEstate", style: theme.textTheme.titleMedium),
       SizedBox(height: 10.v),

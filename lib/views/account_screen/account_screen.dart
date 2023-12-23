@@ -28,7 +28,7 @@ class AccountScreen extends StatelessWidget {
                   _buildAccountOption(context,
                       image: ImageConstant.imgProfile,
                       orderLabel: "Profile", onTapAccountOption: () {
-                    onTapAccountOption(context);
+                    onTapProfile(context);
                   }),
                   _buildAccountOption(context,
                       image: ImageConstant.imgCheck,
@@ -43,6 +43,11 @@ class AccountScreen extends StatelessWidget {
                     onTapAccountOption1(context);
                   }),
                   SizedBox(height: 5.v),
+                  _buildAccountOption(context,
+                      image: ImageConstant.imgPublish,
+                      orderLabel: "Publish job", onTapAccountOption: () {
+                        onTapPublishJob(context);
+                      }),
                   Consumer(builder: (context, ref, _) {
                     return OutlinedButton(
                         onPressed: () {
@@ -103,11 +108,14 @@ class AccountScreen extends StatelessWidget {
     Navigator.pushNamed(context, AppRoutes.notificationScreen);
   }
 
-  onTapAccountOption(BuildContext context) {
+  onTapProfile(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.profileScreen);
   }
 
   onTapAccountOption1(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.addPaymentScreen);
+
+  }
+  onTapPublishJob(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.publishJobScreen);
   }
 }
