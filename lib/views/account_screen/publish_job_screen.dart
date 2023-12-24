@@ -46,7 +46,18 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(context),
+      appBar:CustomAppBar(
+          leadingWidth: 50.v,
+          leading: AppbarLeadingImage(
+              imagePath: ImageConstant.imgArrowLeftBlueGray300,
+              margin: EdgeInsets.only(left: 16.h, top: 16.v, bottom: 15.v),
+              onTap: () {
+                Navigator.pop(context);
+              }),
+          height: 50.v,
+          title: AppbarSubtitle(
+              text: "Publish job",
+              margin: EdgeInsets.only(left: 12.h))),
       body: Form(
         key: _formKey,
         child: ListView(
@@ -194,20 +205,5 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
     );
   }
 
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return CustomAppBar(
-        leading: AppbarLeadingImage(
-            imagePath: ImageConstant.imgArrowLeftBlueGray300,
-            margin: EdgeInsets.only(left: 16.h, top: 16.v, bottom: 15.v),
-            onTap: () {
-              onTapArrowLeft(context);
-            }),
-        height: 50.v,
-        title: AppbarSubtitle(
-            text: "Publish job",
-            margin: EdgeInsets.only(left: 12.h)));
-  }
-  onTapArrowLeft(BuildContext context) {
-    Navigator.pop(context);
-  }
+
 }

@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:job_estate/app_export/app_export.dart';
 
 class ImagePickerWidget extends StatefulWidget {
   final ValueChanged<String> onImagePicked;
@@ -102,7 +103,17 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: _showPickImageDialog,
-      child: Text(uploadedFileName== '' ?'Uploaded' : 'Logo',overflow: TextOverflow.ellipsis,),
+      child: Padding(
+        padding:  EdgeInsets.symmetric(horizontal: 16.v),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(uploadedFileName== '' ?'Uploaded' : 'Logo',overflow: TextOverflow.ellipsis,),
+            Icon(Icons.image)
+
+          ],
+        ),
+      ),
     );
   }
 }

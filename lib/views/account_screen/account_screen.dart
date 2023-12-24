@@ -20,7 +20,17 @@ class AccountScreen extends StatelessWidget {
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
         child: Scaffold(
-            appBar: _buildAppBar(context),
+      appBar: CustomAppBar(
+          title:
+          AppbarTitle(text: "Account", margin: EdgeInsets.only(left: 16.h)),
+          actions: [
+            AppbarTrailingImage(
+                imagePath: ImageConstant.imgNotificationIcon,
+                margin: EdgeInsets.fromLTRB(13.h, 15.v, 13.h, 16.v),
+                onTap: () {
+                  onTapNotificationIcon(context);
+                })
+          ]),
             body: Container(
                 width: double.maxFinite,
                 padding: EdgeInsets.symmetric(vertical: 11.v),
@@ -33,9 +43,6 @@ class AccountScreen extends StatelessWidget {
                   _buildAccountOption(context,
                       image: ImageConstant.imgCheck,
                       orderLabel: "Applied Jobs"),
-                  _buildAccountOption(context,
-                      image: ImageConstant.imgLoveIcon,
-                      orderLabel: "Favourite Jobs"),
                   SizedBox(height: 5.v),
                   _buildAccountOption(context,
                       image: ImageConstant.imgSave,
@@ -63,19 +70,7 @@ class AccountScreen extends StatelessWidget {
                 ]))));
   }
 
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return CustomAppBar(
-        title:
-            AppbarTitle(text: "Account", margin: EdgeInsets.only(left: 16.h)),
-        actions: [
-          AppbarTrailingImage(
-              imagePath: ImageConstant.imgNotificationIcon,
-              margin: EdgeInsets.fromLTRB(13.h, 15.v, 13.h, 16.v),
-              onTap: () {
-                onTapNotificationIcon(context);
-              })
-        ]);
-  }
+
 
   Widget _buildAccountOption(
     BuildContext context, {

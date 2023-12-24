@@ -4,6 +4,9 @@ import 'package:job_estate/widgets/app_bar/custom_app_bar_job_list.dart';
 import 'package:job_estate/widgets/custom_elevated_button.dart';
 
 import '../models/job_model.dart';
+import 'app_bar/appbar_leading_image.dart';
+import 'app_bar/appbar_subtitle.dart';
+import 'app_bar/custom_app_bar.dart';
 
 class JobDetails extends StatelessWidget {
   final Job job;
@@ -14,7 +17,18 @@ class JobDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBarForJobList(title: 'Job Details',),
+        appBar:CustomAppBar(
+            leadingWidth: 50.v,
+            leading: AppbarLeadingImage(
+                imagePath: ImageConstant.imgArrowLeftBlueGray300,
+                margin: EdgeInsets.only(left: 16.h, top: 16.v, bottom: 15.v),
+                onTap: () {
+                  Navigator.pop(context);
+                }),
+            height: 50.v,
+            title: AppbarSubtitle(
+                text: "Job details",
+                margin: EdgeInsets.only(left: 12.h))),
         body: Padding(
           padding:  EdgeInsets.symmetric(horizontal:16.0.h),
           child: Column(
@@ -27,7 +41,7 @@ class JobDetails extends StatelessWidget {
                 children: [
                   Container(
                     height:80.h,width: 80.h,
-              
+
                     decoration: BoxDecoration(color: Colors.grey.withOpacity(0.2),borderRadius: BorderRadius.circular(12),
                     ),
                     padding:EdgeInsets.all(16),child: CustomImageView(imagePath: job.logo,height:50.adaptSize,width: 50.adaptSize,)),
@@ -51,7 +65,7 @@ class JobDetails extends StatelessWidget {
               SizedBox(height: 20.h),
                        _buildHeader(context, title: "Job Summary"),
 
-         
+
               SizedBox(height: 10),
               Text(
                 job.jobSummary ?? '',
@@ -59,7 +73,7 @@ class JobDetails extends StatelessWidget {
               ),
               SizedBox(height: 20),
               _buildHeader(context, title: "Roles & Responsibilities"),
-        
+
               SizedBox(height: 10),
               Expanded(
                 child: ListView.builder(
@@ -86,6 +100,8 @@ class JobDetails extends StatelessWidget {
       ),
     );
   }
+
+
   
   Widget _buildHeader(
     BuildContext context, {

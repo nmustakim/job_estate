@@ -1,9 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:job_estate/main.dart';
 import 'package:job_estate/views/account_screen/publish_job_screen.dart';
 
 
+import '../../controllers/jobs/fetch_jobs_controller.dart';
 import '../../theme/theme_helper.dart';
 import '../../constants/image_constant.dart';
 import '../../utils/size_utils.dart';
@@ -11,22 +13,23 @@ import '../../widgets/custom_image_view.dart';
 import '../home_container_screen/home_container_screen.dart';
 import '../login_screen/login_screen.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({Key? key})
       : super(
           key: key,
         );
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  ConsumerState<SplashScreen> createState() => _SplashScreenState();
 }
 
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 3), () {
+      ref.read(jobsProvider.notifier).fetchJobs();
 
       Navigator.pushReplacement(
         context,

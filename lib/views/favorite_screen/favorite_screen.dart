@@ -33,31 +33,25 @@ class _FavoriteScreenState extends ConsumerState<FavoriteScreen> {
     mediaQueryData = MediaQuery.of(context);
     final jobsState = ref.watch(jobsProvider);
     final jobs = jobsState is FetchJobsSuccessState ? jobsState.jobsList:[];
-    return SafeArea(
-        child: Scaffold(
-            appBar: _buildAppBar(context),
-            body: Padding(
-                padding: EdgeInsets.only(left: 16.h, top: 8.v, right: 16.h),
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    physics: BouncingScrollPhysics(),
-                    itemCount: 4,
-                    itemBuilder: (context, index) {
-                      final job = jobs[index];
-                      return JobCard(job: job, onTap: () { onTapJobCard(context,job); },);
-                    }))));
+    return Scaffold(
+        appBar: _buildAppBar(context),
+        body: Padding(
+            padding: EdgeInsets.only(left: 16.h, top: 8.v, right: 16.h),
+            child: ListView.builder(
+                shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
+                itemCount: jobs.length,
+                itemBuilder: (context, index) {
+                  final job = jobs[index];
+                  return JobCard(job: job, onTap: () { onTapJobCard(context,job); },);
+                })));
   }
 
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return CustomAppBar(
         leadingWidth: 40.h,
-        leading: AppbarLeadingImage(
-            imagePath: ImageConstant.imgArrowLeftBlueGray300,
-            margin: EdgeInsets.only(left: 16.h, top: 16.v, bottom: 15.v),
-            onTap: () {
-              onTapArrowLeft(context);
-            }),
+
         title: AppbarSubtitle(
             text: "Favorite jobs",
             margin: EdgeInsets.only(left: 12.h)));
@@ -73,7 +67,4 @@ class _FavoriteScreenState extends ConsumerState<FavoriteScreen> {
   }
 
 
-  onTapArrowLeft(BuildContext context) {
-    Navigator.pop(context);
-  }
 }
