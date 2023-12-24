@@ -7,16 +7,14 @@ import 'package:job_estate/utils/lists.dart';
 import 'package:job_estate/utils/validator.dart';
 import 'package:job_estate/widgets/custom_elevated_button.dart';
 
-
 import '../../controllers/jobs/add_job_controller.dart';
-import '../../controllers/jobs/fetch_jobs_controller.dart';
 
 import '../../models/job_model.dart';
 import '../../widgets/app_bar/appbar_leading_image.dart';
 import '../../widgets/app_bar/appbar_subtitle.dart';
 import '../../widgets/custom_header.dart';
 import '../../widgets/media_picker.dart';
-import '../../widgets/app_bar/appbar_title.dart';
+
 import '../../widgets/app_bar/custom_app_bar.dart';
 import '../../widgets/custom_dropdown.dart';
 import '../../widgets/custom_text_form_field.dart';
@@ -46,9 +44,8 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      appBar:CustomAppBar(
+      appBar: CustomAppBar(
           leadingWidth: 50.v,
           leading: AppbarLeadingImage(
               imagePath: ImageConstant.imgArrowLeftBlueGray300,
@@ -58,8 +55,7 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
               }),
           height: 50.v,
           title: AppbarSubtitle(
-              text: "Publish job",
-              margin: EdgeInsets.only(left: 12.h))),
+              text: "Publish job", margin: EdgeInsets.only(left: 12.h))),
       body: Form(
         key: _formKey,
         child: ListView(
@@ -94,8 +90,6 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                 });
               },
             ),
-
-
             SizedBox(height: 16.v),
             CustomHeader(title: 'Job Title'),
             CustomTextFormField(
@@ -133,8 +127,7 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
             CustomHeader(title: 'Employment type'),
             CustomTextFormField(
                 suffix: CustomDropdownFormField(
-
-                  items:Lists().employmentType,
+                  items: Lists().employmentType,
                   onChanged: (value) {
                     setState(() {
                       _employmentTypeController.text = value ?? '';
@@ -150,16 +143,16 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
               spacing: 8.0,
               runSpacing: 8.0,
               children: [
-
                 ...selectedSkills.map((skill) => Chip(
-                  label: Text(skill),
-                  onDeleted: () {
-                    setState(() {
-                      selectedSkills.remove(skill);
-                      _skillsRequiredController.text = selectedSkills.join(',');
-                    });
-                  },
-                )),
+                      label: Text(skill),
+                      onDeleted: () {
+                        setState(() {
+                          selectedSkills.remove(skill);
+                          _skillsRequiredController.text =
+                              selectedSkills.join(',');
+                        });
+                      },
+                    )),
                 CustomTextFormField(
                   controller: _skillsRequiredController,
                   hintText: 'Enter skills',
@@ -170,12 +163,9 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                     });
                   },
                 ),
-
               ],
             ),
             CustomHeader(title: 'Education'),
-
-
             CustomTextFormField(
               suffix: CustomDropdownFormField(
                 hintText: 'Select education',
@@ -187,18 +177,17 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                 },
               ),
               controller: _educationController,
-
             ),
-
             SizedBox(height: 20.v),
             Consumer(builder: (context, ref, _) {
-              final state = ref.watch(addJobsProvider);
-              return Padding(
-                padding: const EdgeInsets.only(bottom:16.0),
-                child: CustomElevatedButton(
-                  onPressed: () {
+              final publishJobState = ref.watch(publishJobProvider);
+              return CustomElevatedButton(
+                onPressed: () async {
+                  if (!(publishJobState is! LoadingState)) {
                     if (_formKey.currentState!.validate()) {
-                      ref.read(jobsProvider.notifier).addJob(Job(
+                      await ref
+                          .read(publishJobProvider.notifier)
+                          .publishJob(Job(
                             title: _titleController.text,
                             location: _locationController.text,
                             salary: int.parse(_salaryController.text),
@@ -217,24 +206,19 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                             certification: [],
                           ));
                     }
-                  },
-                  buttonStyle: ElevatedButton.styleFrom(
-                      backgroundColor: state is LoadingState
-                          ? Colors.grey
-                          : theme.primaryColor),
-                  text: state is LoadingState ? 'Please wait...' : 'Submit',
-                ),
+                  }
+                },
+                buttonStyle: ElevatedButton.styleFrom(
+                    backgroundColor: publishJobState is LoadingState
+                        ? Colors.grey
+                        : theme.primaryColor),
+                text: publishJobState is LoadingState ? 'Please wait...' : 'Submit',
               );
             }),
+            SizedBox(height: 12.h,)
           ],
         ),
       ),
     );
   }
-
-
-
 }
-
-
-

@@ -7,9 +7,9 @@ List <Job> jobsList;
 FetchJobsSuccessState(this.jobsList);
 }
 
-class AddJobsSuccessState extends SuccessState{
+class PublishJobSuccessState extends SuccessState{
 
-  AddJobsSuccessState();
+  PublishJobSuccessState();
 }
 
 class RemoveJobsSuccessState extends SuccessState{

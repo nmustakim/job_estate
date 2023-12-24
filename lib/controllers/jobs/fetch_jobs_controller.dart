@@ -19,6 +19,7 @@ class JobsController extends StateNotifier<BaseState> {
   Future<void> fetchJobs(
       {String? location, String? employmentType, int? salary}) async {
     try {
+      state = LoadingState();
       QuerySnapshot<Map<String, dynamic>> querySnapshot =
           await FirebaseFirestore.instance.collection('Jobs').get();
 
@@ -34,28 +35,5 @@ class JobsController extends StateNotifier<BaseState> {
     }
   }
 
-  Future<void> addJob(Job job) async {
-    try {
-      await FirebaseFirestore.instance.collection('Jobs').add(job.toJson());
-      await fetchJobs();
-    } catch (error, stackTrace) {
-      print('addJob() error = $error');
-      print(stackTrace);
-      state = ErrorState(message: error.toString());
-      toast("Error adding jobs");
-    }
-  }
 
-  Future<void> removeJob(String jobId) async {
-    try {
-      await FirebaseFirestore.instance.collection('Jobs').doc(jobId).delete();
-
-      await fetchJobs();
-    } catch (error, stackTrace) {
-      print('removeJob() error = $error');
-      print(stackTrace);
-      state = ErrorState(message: error.toString());
-      toast("Error removing jobs");
-    }
-  }
 }

@@ -9,32 +9,37 @@ import '../../core/states/base_states.dart';
 import '../../models/job_model.dart';
 import 'fetch_jobs_controller.dart';
 
-final addJobsProvider = StateNotifierProvider<AddJobsController, BaseState>(
-  (ref) => AddJobsController(ref: ref),
+final publishJobProvider =
+    StateNotifierProvider<PublishJobController, BaseState>(
+  (ref) => PublishJobController(ref: ref),
 );
 
-class AddJobsController extends StateNotifier<BaseState> {
+class PublishJobController extends StateNotifier<BaseState> {
+  PublishJobController({required this.ref}) : super(const InitialState());
+
   final Ref? ref;
-  AddJobsController({this.ref}) : super(const InitialState());
 
-
-
-
-  Future<void> addJob(Job job) async {
+  Future<void> publishJob(Job job) async {
     try {
       state = const LoadingState();
+      print("Loading");
 
-      final DocumentReference documentReference =
-          await FirebaseFirestore.instance.collection('Jobs').add(job.toJson());
+      await FirebaseFirestore.instance.runTransaction((transaction) async {
+        final DocumentReference documentReference = await FirebaseFirestore
+            .instance
+            .collection('Jobs')
+            .add(job.toJson());
 
-      final String docId = documentReference.id;
-      job = job.copyWith(id: docId);
+        final String docId = documentReference.id;
+        job = job.copyWith(id: docId);
 
-      await documentReference.update({'id': docId});
+        await documentReference.update({'id': docId});
+      });
 
       await ref!.read(jobsProvider.notifier).fetchJobs();
 
-      state = AddJobsSuccessState();
+      state = PublishJobSuccessState();
+      print("Success");
     } catch (error, stackTrace) {
       print('addJob() error = $error');
       print(stackTrace);
@@ -42,9 +47,8 @@ class AddJobsController extends StateNotifier<BaseState> {
       state = ErrorState(message: error.toString());
       toast("Error adding jobs");
     }
+    finally{
+      state = InitialState();
+    }
   }
-
-
-
-
 }
