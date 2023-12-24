@@ -16,7 +16,7 @@ class CustomTextFormField extends StatelessWidget {
     this.textInputType = TextInputType.text,
     this.maxLines,
     this.hintText,
-    this.label,
+    this.labelText,
     this.hintStyle,
     this.prefix,
     this.prefixConstraints,
@@ -51,7 +51,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType? textInputType;
   final int? maxLines;
   final String? hintText;
-  final String? label;
+  final String? labelText;
   final TextStyle? hintStyle;
   final TextStyle? labelStyle;
 
@@ -102,7 +102,7 @@ class CustomTextFormField extends StatelessWidget {
       );
   InputDecoration get decoration => InputDecoration(
         hintText: hintText ?? "",
-        labelText: label ?? '',
+        labelText: labelText ?? '',
         hintStyle: hintStyle ?? theme.textTheme.bodySmall,
         labelStyle: labelStyle ?? theme.textTheme.bodyMedium,
         prefixIcon: prefix,
@@ -116,7 +116,7 @@ class CustomTextFormField extends StatelessWidget {
               vertical: 15.v,
             ),
         fillColor:
-            fillColor ?? theme.colorScheme.onPrimaryContainer.withOpacity(1),
+            fillColor ?? theme.colorScheme.onPrimaryContainer,
         filled: filled,
         border: borderDecoration ??
             OutlineInputBorder(

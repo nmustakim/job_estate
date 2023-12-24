@@ -84,7 +84,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
       final String downloadURL = await storageReference.getDownloadURL();
       return downloadURL;
     } catch (e) {
-      // Handle exceptions
+
       print('Error uploading image to Firebase: $e');
       _showSnackBar('Error uploading image to Firebase: $e');
       rethrow;
@@ -108,7 +108,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(uploadedFileName== '' ?'Uploaded' : 'Logo',overflow: TextOverflow.ellipsis,),
+            Text(uploadedFileName== '' ?'Uploaded' : 'Upload logo',overflow: TextOverflow.ellipsis,),
             Icon(Icons.image)
 
           ],

@@ -14,6 +14,7 @@ import '../../controllers/jobs/fetch_jobs_controller.dart';
 import '../../models/job_model.dart';
 import '../../widgets/app_bar/appbar_leading_image.dart';
 import '../../widgets/app_bar/appbar_subtitle.dart';
+import '../../widgets/custom_header.dart';
 import '../../widgets/media_picker.dart';
 import '../../widgets/app_bar/appbar_title.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
@@ -45,6 +46,7 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar:CustomAppBar(
           leadingWidth: 50.v,
@@ -63,16 +65,15 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
         child: ListView(
           padding: EdgeInsets.fromLTRB(16.h, 24.v, 16.h, 0),
           children: <Widget>[
-            _buildHeader(context, title: 'Organization Name'),
+            CustomHeader(title: 'Organization Name'),
             CustomTextFormField(
                 controller: _organizationNameController,
-                label: 'Organization Name',
+                hintText: 'Enter organization name',
                 validator: (value) => Validator.validateField(value: value)),
             SizedBox(height: 16.v),
-            _buildHeader(context, title: 'Organization Name'),
+            CustomHeader(title: 'Organization type'),
             CustomTextFormField(
                 suffix: CustomDropdownFormField(
-                  hintText: 'Select organization type',
                   items: Lists().organizationType,
                   onChanged: (value) {
                     setState(() {
@@ -82,10 +83,10 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                   },
                 ),
                 controller: _organizationTypeController,
-                label: 'Organization Type',
+                hintText: 'Select organization type',
                 validator: (value) => Validator.validateField(value: value)),
             SizedBox(height: 16.v),
-            _buildHeader(context, title: 'Organization Name'),
+            CustomHeader(title: 'Logo'),
             ImagePickerWidget(
               onImagePicked: (String imageUrl) {
                 setState(() {
@@ -96,40 +97,40 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
 
 
             SizedBox(height: 16.v),
-            _buildHeader(context, title: 'Organization Name'),
+            CustomHeader(title: 'Job Title'),
             CustomTextFormField(
                 controller: _titleController,
-                label: 'Job Title',
+                hintText: 'Enter job title',
                 validator: (value) => Validator.validateField(value: value)),
             SizedBox(height: 16.v),
-            _buildHeader(context, title: 'Organization Name'),
+            CustomHeader(title: 'Job Summary'),
             CustomTextFormField(
                 controller: _jobSummaryController,
-                label: 'Job Summary',
+                hintText: 'Enter job summary',
                 maxLines: 4,
                 validator: (value) => Validator.validateField(value: value)),
             SizedBox(height: 16.v),
-            _buildHeader(context, title: 'Organization Name'),
+            CustomHeader(title: 'Description'),
             CustomTextFormField(
                 controller: _descriptionController,
-                label: 'Description',
+                hintText: 'Enter description',
                 maxLines: 10,
                 validator: (value) => Validator.validateField(value: value)),
             SizedBox(height: 16.v),
-            _buildHeader(context, title: 'Organization Name'),
+            CustomHeader(title: 'Location'),
             CustomTextFormField(
                 controller: _locationController,
-                label: 'Location',
+                hintText: 'Enter location',
                 validator: (value) => Validator.validateField(value: value)),
             SizedBox(height: 16.v),
-            _buildHeader(context, title: 'Organization Name'),
+            CustomHeader(title: 'Salary'),
             CustomTextFormField(
                 textInputType: TextInputType.number,
                 controller: _salaryController,
-                label: 'Salary',
+                hintText: 'Salary',
                 validator: (value) => Validator.validateField(value: value)),
             SizedBox(height: 16.v),
-            _buildHeader(context, title: 'Organization Name'),
+            CustomHeader(title: 'Employment type'),
             CustomTextFormField(
                 suffix: CustomDropdownFormField(
 
@@ -141,9 +142,10 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                   },
                 ),
                 controller: _employmentTypeController,
-                label: 'Employment type',
+                hintText: 'Select employment type',
                 validator: (value) => Validator.validateField(value: value)),
             SizedBox(height: 16.v),
+            CustomHeader(title: 'Skills'),
             Wrap(
               spacing: 8.0,
               runSpacing: 8.0,
@@ -160,7 +162,7 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                 )),
                 CustomTextFormField(
                   controller: _skillsRequiredController,
-                  label: 'Skills',
+                  hintText: 'Enter skills',
                   onSubmitted: (value) {
                     setState(() {
                       selectedSkills.add(value);
@@ -171,21 +173,22 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
 
               ],
             ),
+            CustomHeader(title: 'Education'),
 
-            SizedBox(height: 16.v),
-            // CustomTextFormField(
-            //   suffix: CustomDropdownFormField(
-            //     hintText: 'Select education',
-            //     items: Lists().educationalDegrees,
-            //     onChanged: (value) {
-            //       setState(() {
-            //         _educationController.text = value ?? '';
-            //       });
-            //     },
-            //   ),
-            //   controller: _educationController,
-            //   label: 'Education',
-            // ),
+
+            CustomTextFormField(
+              suffix: CustomDropdownFormField(
+                hintText: 'Select education',
+                items: Lists().educationalDegrees,
+                onChanged: (value) {
+                  setState(() {
+                    _educationController.text = value ?? '';
+                  });
+                },
+              ),
+              controller: _educationController,
+
+            ),
 
             SizedBox(height: 20.v),
             Consumer(builder: (context, ref, _) {
