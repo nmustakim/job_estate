@@ -4,6 +4,7 @@ import 'package:job_estate/app_export/app_export.dart';
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     Key? key,
+    this.onSubmitted,
     this.alignment,
     this.width,
     this.controller,
@@ -31,7 +32,7 @@ class CustomTextFormField extends StatelessWidget {
   }) : super(
           key: key,
         );
-
+  final ValueChanged<String>? onSubmitted; //
   final Alignment? alignment;
 
   final double? width;
@@ -85,7 +86,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget get textFormFieldWidget => SizedBox(
         width: width ?? double.maxFinite,
         child: TextFormField(
-
+          onFieldSubmitted: onSubmitted,
           readOnly: isReadOnly ?? false,
           controller: controller,
           focusNode: focusNode ?? FocusNode(),

@@ -41,7 +41,7 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
   final _educationController = TextEditingController();
   String skillTitle = 'Software';
 
-
+  List<String> selectedSkills = [];
 
   @override
   Widget build(BuildContext context) {
@@ -63,11 +63,13 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
         child: ListView(
           padding: EdgeInsets.fromLTRB(16.h, 24.v, 16.h, 0),
           children: <Widget>[
+            _buildHeader(context, title: 'Organization Name'),
             CustomTextFormField(
                 controller: _organizationNameController,
                 label: 'Organization Name',
                 validator: (value) => Validator.validateField(value: value)),
             SizedBox(height: 16.v),
+            _buildHeader(context, title: 'Organization Name'),
             CustomTextFormField(
                 suffix: CustomDropdownFormField(
                   hintText: 'Select organization type',
@@ -83,6 +85,7 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                 label: 'Organization Type',
                 validator: (value) => Validator.validateField(value: value)),
             SizedBox(height: 16.v),
+            _buildHeader(context, title: 'Organization Name'),
             ImagePickerWidget(
               onImagePicked: (String imageUrl) {
                 setState(() {
@@ -93,34 +96,40 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
 
 
             SizedBox(height: 16.v),
+            _buildHeader(context, title: 'Organization Name'),
             CustomTextFormField(
                 controller: _titleController,
                 label: 'Job Title',
                 validator: (value) => Validator.validateField(value: value)),
             SizedBox(height: 16.v),
+            _buildHeader(context, title: 'Organization Name'),
             CustomTextFormField(
                 controller: _jobSummaryController,
                 label: 'Job Summary',
                 maxLines: 4,
                 validator: (value) => Validator.validateField(value: value)),
             SizedBox(height: 16.v),
+            _buildHeader(context, title: 'Organization Name'),
             CustomTextFormField(
                 controller: _descriptionController,
                 label: 'Description',
                 maxLines: 10,
                 validator: (value) => Validator.validateField(value: value)),
             SizedBox(height: 16.v),
+            _buildHeader(context, title: 'Organization Name'),
             CustomTextFormField(
                 controller: _locationController,
                 label: 'Location',
                 validator: (value) => Validator.validateField(value: value)),
             SizedBox(height: 16.v),
+            _buildHeader(context, title: 'Organization Name'),
             CustomTextFormField(
                 textInputType: TextInputType.number,
                 controller: _salaryController,
                 label: 'Salary',
                 validator: (value) => Validator.validateField(value: value)),
             SizedBox(height: 16.v),
+            _buildHeader(context, title: 'Organization Name'),
             CustomTextFormField(
                 suffix: CustomDropdownFormField(
 
@@ -135,19 +144,34 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                 label: 'Employment type',
                 validator: (value) => Validator.validateField(value: value)),
             SizedBox(height: 16.v),
-            CustomTextFormField(
-              suffix: CustomDropdownFormField(
-                hintText: 'Select skills',
-                items: Lists().skills,
-                onChanged: (value) {
-                  setState(() {
-                    _skillsRequiredController.text = value ?? '';
-                  });
-                },
-              ),
-              controller: _skillsRequiredController,
-              label: 'Skills',
+            Wrap(
+              spacing: 8.0,
+              runSpacing: 8.0,
+              children: [
+
+                ...selectedSkills.map((skill) => Chip(
+                  label: Text(skill),
+                  onDeleted: () {
+                    setState(() {
+                      selectedSkills.remove(skill);
+                      _skillsRequiredController.text = selectedSkills.join(',');
+                    });
+                  },
+                )),
+                CustomTextFormField(
+                  controller: _skillsRequiredController,
+                  label: 'Skills',
+                  onSubmitted: (value) {
+                    setState(() {
+                      selectedSkills.add(value);
+                      _skillsRequiredController.text = selectedSkills.join(',');
+                    });
+                  },
+                ),
+
+              ],
             ),
+
             SizedBox(height: 16.v),
             // CustomTextFormField(
             //   suffix: CustomDropdownFormField(
@@ -206,4 +230,8 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
   }
 
 
+
 }
+
+
+
