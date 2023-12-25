@@ -32,7 +32,7 @@ class PublishJobController extends StateNotifier<BaseState> {
 
       job = job.copyWith(id: docRef.id);
 
-      await docRef.set(job.toJson());
+      await docRef.set(job.toJson()).then((value) => ref!.read(jobsProvider.notifier).fetchJobs());
 
       state = PublishJobSuccessState();
       print("Success");
