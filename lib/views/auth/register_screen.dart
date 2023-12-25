@@ -159,7 +159,11 @@ class RegisterScreen extends StatelessWidget {
     return Consumer(builder: (context, ref, _) {
     final  authState = ref.watch(authenticationProvider);
       return CustomElevatedButton(
-          text: "Sign up",
+          buttonStyle: ElevatedButton.styleFrom(
+              backgroundColor: authState is LoadingState
+                  ? Colors.grey : theme.primaryColor
+          ),
+          text: authState is LoadingState ?"Please wait...":"Sign up",
           onPressed: () async {
             if (_formKey.currentState!.validate()) {
               if (!(authState is LoadingState)) {
