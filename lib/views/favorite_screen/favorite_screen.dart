@@ -22,11 +22,6 @@ class FavoriteScreen extends ConsumerStatefulWidget {
 }
 
 class _FavoriteScreenState extends ConsumerState<FavoriteScreen> {
-  @override
-  void initState() {
-  ref.read(jobsProvider.notifier).fetchJobs();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
