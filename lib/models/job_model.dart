@@ -14,12 +14,45 @@ class Job {
   final String jobSummary;
   final List<String> rolesAndResponsibilities;
   final String education;
-  final List<String> certification;
 
-  Job({ this.id, required this.title,  required this.location,
-    required this.salary, required this.postedBy, this.applicants,
-    required this.skills, required this.employmentType, required this.postedDate, required this.logo, required this.organizationName, required this.organizationType, required this.jobSummary, required this.rolesAndResponsibilities, required this.education, required this.certification});
+  Job({
+    this.id,
+    required this.title,
+    required this.location,
+    required this.salary,
+    required this.postedBy,
+    this.applicants,
+    required this.skills,
+    required this.employmentType,
+    required this.postedDate,
+    required this.logo,
+    required this.organizationName,
+    required this.organizationType,
+    required this.jobSummary,
+    required this.rolesAndResponsibilities,
+    required this.education,
+  });
 
+  factory Job.fromJson(Map<String, dynamic> json) => Job(
+    id: json['id'],
+    title: json['title'],
+    location: json['location'],
+    salary: json['salary'],
+    postedBy: json['postedBy'],
+    applicants: json['applicants'] != null
+        ? List<String>.from(json['applicants'])
+        : null,
+    skills: List<String>.from(json['skillsRequired']),
+    employmentType: json['employmentType'],
+    postedDate: DateTime.parse(json['postedDate']),
+    logo: json['logo'],
+    organizationName: json['organizationName'],
+    organizationType: json['organizationType'],
+    jobSummary: json['jobSummary'],
+    rolesAndResponsibilities:
+    List<String>.from(json['rolesAndResponsibilities']),
+    education: json['education'],
+  );
 
   Map<String, dynamic> toJson() => {
     'id': id,
@@ -37,28 +70,8 @@ class Job {
     'jobSummary': jobSummary,
     'rolesAndResponsibilities': rolesAndResponsibilities,
     'education': education,
-    'certification': certification,
   };
 
-
-  factory Job.fromJson(Map<String, dynamic> json) => Job(
-    id: json['id'],
-    title: json['title'],
-    location: json['location'],
-    salary: json['salary'],
-    postedBy: json['postedBy'],
-    applicants: json['applicants'] != null ? List<String>.from(json['applicants']) : null,
-    skills: List<String>.from(json['skillsRequired']),
-    employmentType: json['employmentType'],
-    postedDate: DateTime.parse(json['postedDate']),
-    logo: json['logo'],
-    organizationName: json['organizationName'],
-    organizationType: json['organizationType'],
-    jobSummary: json['jobSummary'],
-    rolesAndResponsibilities: List<String>.from(json['rolesAndResponsibilities']),
-    education: json['education'],
-    certification: List<String>.from(json['certification']),
-  );
   Job copyWith({
     String? id,
     String? title,
@@ -77,7 +90,6 @@ class Job {
     List<String>? rolesAndResponsibilities,
     List<String>? requirements,
     String? education,
-    List<String>? certification,
   }) {
     return Job(
       id: id ?? this.id,
@@ -93,10 +105,9 @@ class Job {
       organizationName: organizationName ?? this.organizationName,
       organizationType: organizationType ?? this.organizationType,
       jobSummary: jobSummary ?? this.jobSummary,
-      rolesAndResponsibilities: rolesAndResponsibilities ?? this.rolesAndResponsibilities,
+      rolesAndResponsibilities:
+      rolesAndResponsibilities ?? this.rolesAndResponsibilities,
       education: education ?? this.education,
-      certification: certification ?? this.certification,
     );
   }
-
 }

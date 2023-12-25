@@ -20,35 +20,31 @@ class PublishJobController extends StateNotifier<BaseState> {
   final Ref? ref;
 
   Future<void> publishJob(Job job) async {
+    print("Loading");
     try {
       state = const LoadingState();
       print("Loading");
 
-      await FirebaseFirestore.instance.runTransaction((transaction) async {
-        final DocumentReference documentReference = await FirebaseFirestore
-            .instance
-            .collection('Jobs')
-            .add(job.toJson());
+      final DocumentReference docRef = FirebaseFirestore
+          .instance
+          .collection('Jobs')
+          .doc();
 
-        final String docId = documentReference.id;
-        job = job.copyWith(id: docId);
+      job = job.copyWith(id: docRef.id);
 
-        await documentReference.update({'id': docId});
-      });
-
-      await ref!.read(jobsProvider.notifier).fetchJobs();
+      await docRef.set(job.toJson());
 
       state = PublishJobSuccessState();
       print("Success");
     } catch (error, stackTrace) {
-      print('addJob() error = $error');
+      print('publishJob() error = $error');
       print(stackTrace);
 
       state = ErrorState(message: error.toString());
       toast("Error adding jobs");
-    }
-    finally{
+    } finally {
       state = InitialState();
     }
   }
+
 }

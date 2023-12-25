@@ -7,7 +7,7 @@ import 'package:job_estate/utils/lists.dart';
 import 'package:job_estate/utils/validator.dart';
 import 'package:job_estate/widgets/custom_elevated_button.dart';
 
-import '../../controllers/jobs/add_job_controller.dart';
+import '../../controllers/jobs/publish_job_controller.dart';
 
 import '../../models/job_model.dart';
 import '../../widgets/app_bar/appbar_leading_image.dart';
@@ -31,16 +31,17 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
   final _locationController = TextEditingController();
   final _logoNameController = TextEditingController();
   final _salaryController = TextEditingController();
-  final _postedByController = TextEditingController();
   final _skillsRequiredController = TextEditingController();
   final _employmentTypeController = TextEditingController();
   final _organizationNameController = TextEditingController();
   final _organizationTypeController = TextEditingController();
   final _jobSummaryController = TextEditingController();
   final _educationController = TextEditingController();
-  String skillTitle = 'Software';
+  final _rolesAndResponsibilitiesController = TextEditingController();
 
+  String skillTitle = 'Software';
   List<String> selectedSkills = [];
+  List<String> selectedRolesAndResponsibilities= [];
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +67,7 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                 controller: _organizationNameController,
                 hintText: 'Enter organization name',
                 validator: (value) => Validator.validateField(value: value)),
-            SizedBox(height: 16.v),
+            SizedBox(height: 16.h),
             CustomHeader(title: 'Organization type'),
             CustomTextFormField(
                 suffix: CustomDropdownFormField(
@@ -81,7 +82,7 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                 controller: _organizationTypeController,
                 hintText: 'Select organization type',
                 validator: (value) => Validator.validateField(value: value)),
-            SizedBox(height: 16.v),
+            SizedBox(height: 16.h),
             CustomHeader(title: 'Logo'),
             ImagePickerWidget(
               onImagePicked: (String imageUrl) {
@@ -96,7 +97,7 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                 controller: _titleController,
                 hintText: 'Enter job title',
                 validator: (value) => Validator.validateField(value: value)),
-            SizedBox(height: 16.v),
+            SizedBox(height: 16.h),
             CustomHeader(title: 'Job Summary'),
             CustomTextFormField(
                 controller: _jobSummaryController,
@@ -110,13 +111,13 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                 hintText: 'Enter description',
                 maxLines: 10,
                 validator: (value) => Validator.validateField(value: value)),
-            SizedBox(height: 16.v),
+            SizedBox(height: 16.h),
             CustomHeader(title: 'Location'),
             CustomTextFormField(
                 controller: _locationController,
                 hintText: 'Enter location',
                 validator: (value) => Validator.validateField(value: value)),
-            SizedBox(height: 16.v),
+            SizedBox(height: 16.h),
             CustomHeader(title: 'Salary'),
             CustomTextFormField(
                 textInputType: TextInputType.number,
@@ -140,8 +141,8 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
             SizedBox(height: 16.v),
             CustomHeader(title: 'Skills'),
             Wrap(
-              spacing: 8.0,
-              runSpacing: 8.0,
+              spacing: 4.0,
+              runSpacing: 4.0,
               children: [
                 ...selectedSkills.map((skill) => Chip(
                       label: Text(skill),
@@ -178,33 +179,76 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
               ),
               controller: _educationController,
             ),
+            SizedBox(height: 16.h),
+            CustomHeader(title: 'Roles and Responsibilities'),
+            Wrap(
+              spacing: 4.0,
+              runSpacing: 0.0,
+              children: [
+                ...selectedRolesAndResponsibilities.map((role) => Chip(
+                  label: Text(role),
+                  onDeleted: () {
+                    setState(() {
+                      selectedRolesAndResponsibilities.remove(role);
+                    });
+                  },
+                )),
+                CustomTextFormField(
+                  hintText: 'Enter role and responsibility',
+                  onSubmitted: (value) {
+                    setState(() {
+                      selectedRolesAndResponsibilities.add(value);
+
+                      _rolesAndResponsibilitiesController.clear();
+                    });
+                  },
+                  controller: _rolesAndResponsibilitiesController,
+                ),
+              ],
+            ),
             SizedBox(height: 20.v),
             Consumer(builder: (context, ref, _) {
               final publishJobState = ref.watch(publishJobProvider);
               return CustomElevatedButton(
                 onPressed: () async {
-                  if (!(publishJobState is! LoadingState)) {
+                  if (publishJobState is! LoadingState) {
                     if (_formKey.currentState!.validate()) {
+
                       await ref
                           .read(publishJobProvider.notifier)
                           .publishJob(Job(
                             title: _titleController.text,
                             location: _locationController.text,
                             salary: int.parse(_salaryController.text),
-                            postedBy: _postedByController.text,
-                            skills: _skillsRequiredController.text
-                                .split(',')
-                                .toList(),
+                            postedBy: "User",
+                            skills: selectedSkills,
                             employmentType: _employmentTypeController.text,
                             postedDate: DateTime.now(),
                             logo: _logoNameController.text,
                             organizationName: _organizationNameController.text,
                             organizationType: _organizationTypeController.text,
                             jobSummary: _jobSummaryController.text,
-                            rolesAndResponsibilities: [],
+                            rolesAndResponsibilities: selectedRolesAndResponsibilities,
                             education: _educationController.text,
-                            certification: [],
+
                           ));
+
+                      _titleController.clear();
+                      _locationController.clear();
+                      _salaryController.clear();
+                      _descriptionController.clear();
+                      _skillsRequiredController.clear();
+                      _employmentTypeController.clear();
+                      _organizationNameController.clear();
+                      _organizationTypeController.clear();
+                      _jobSummaryController.clear();
+                      _educationController.clear();
+                      _rolesAndResponsibilitiesController.clear();
+                      selectedSkills.clear();
+                      selectedRolesAndResponsibilities.clear();
+                      setState(() {
+
+                      });
                     }
                   }
                 },
@@ -212,10 +256,14 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                     backgroundColor: publishJobState is LoadingState
                         ? Colors.grey
                         : theme.primaryColor),
-                text: publishJobState is LoadingState ? 'Please wait...' : 'Submit',
+                text: publishJobState is LoadingState
+                    ? 'Please wait...'
+                    : 'Submit',
               );
             }),
-            SizedBox(height: 12.h,)
+            SizedBox(
+              height: 12.h,
+            )
           ],
         ),
       ),
