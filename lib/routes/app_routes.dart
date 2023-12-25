@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:job_estate/views/account_screen/profile_screen.dart';
 import 'package:job_estate/views/account_screen/publish_job_screen.dart';
 import 'package:job_estate/views/home_container_screen/home_container_screen.dart';
 import 'package:job_estate/views/recent_jobs_screen/recent_jobs_screen.dart';
@@ -70,6 +71,7 @@ class AppRoutes {
     registerScreen: (context) => RegisterScreen(),
     recentJobsScreen: (context) => RecentJobsScreen(),
     publishJobScreen: (context) => PublishJobScreen(),
+    profileScreen: (context) => ProfileScreen(),
     searchScreen: (context) => SearchSheet(),
     searchJobsByCategoryScreen: (context) => SearchJobsByCategoryScreen(),
     searchResultScreen: (context) => SearchResultScreen(),

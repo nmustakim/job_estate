@@ -61,7 +61,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
         _showSnackBar('Image picking canceled');
       }
     } catch (e) {
-      // Handle exceptions
+
       print('Error picking image: $e');
       _showSnackBar('Error picking image: $e');
     }

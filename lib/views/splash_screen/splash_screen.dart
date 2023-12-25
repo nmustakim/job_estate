@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:job_estate/controllers/user/user_controller.dart';
 import 'package:job_estate/main.dart';
 import 'package:job_estate/views/account_screen/publish_job_screen.dart';
 
@@ -30,6 +31,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     super.initState();
     Future.delayed(Duration(seconds: 3), () {
       ref.read(jobsProvider.notifier).fetchJobs();
+      ref.read(userProvider.notifier).fetchUser();
 
       Navigator.pushReplacement(
         context,

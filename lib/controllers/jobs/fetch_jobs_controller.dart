@@ -16,8 +16,7 @@ class JobsController extends StateNotifier<BaseState> {
 
   List<Job> jobList = [];
 
-  Future<void> fetchJobs(
-      {String? location, String? employmentType, int? salary}) async {
+  Future<void> fetchJobs() async {
     try {
       state = LoadingState();
       QuerySnapshot<Map<String, dynamic>> querySnapshot =
