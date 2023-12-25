@@ -104,13 +104,7 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                 hintText: 'Enter job summary',
                 maxLines: 4,
                 validator: (value) => Validator.validateField(value: value)),
-            SizedBox(height: 16.v),
-            CustomHeader(title: 'Description'),
-            CustomTextFormField(
-                controller: _descriptionController,
-                hintText: 'Enter description',
-                maxLines: 10,
-                validator: (value) => Validator.validateField(value: value)),
+
             SizedBox(height: 16.h),
             CustomHeader(title: 'Location'),
             CustomTextFormField(
@@ -236,7 +230,6 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                       _titleController.clear();
                       _locationController.clear();
                       _salaryController.clear();
-                      _descriptionController.clear();
                       _skillsRequiredController.clear();
                       _employmentTypeController.clear();
                       _organizationNameController.clear();

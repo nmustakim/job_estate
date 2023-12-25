@@ -41,9 +41,12 @@ class JobCard extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                        job.organizationName,
-                        style: theme.textTheme.titleLarge
+                      SizedBox(
+                        width: 230.v,
+                        child: Text(
+                          job.organizationName,
+                          style: theme.textTheme.titleLarge,overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                          SizedBox(height: 6.0.v),
                       Text(

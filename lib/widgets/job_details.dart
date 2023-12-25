@@ -17,7 +17,7 @@ class JobDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar:CustomAppBar(
+        appBar: CustomAppBar(
             leadingWidth: 50.v,
             leading: AppbarLeadingImage(
                 imagePath: ImageConstant.imgArrowLeftBlueGray300,
@@ -27,25 +27,35 @@ class JobDetails extends StatelessWidget {
                 }),
             height: 50.v,
             title: AppbarSubtitle(
-                text: "Job details",
-                margin: EdgeInsets.only(left: 12.h))),
+                text: "Job details", margin: EdgeInsets.only(left: 12.h))),
         body: Padding(
-          padding:  EdgeInsets.symmetric(horizontal:16.0.h),
+          padding: EdgeInsets.symmetric(horizontal: 16.0.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SizedBox(height: 16.h,),
+              SizedBox(
+                height: 16.h,
+              ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
-                    height:80.h,width: 80.h,
-
-                    decoration: BoxDecoration(color: Colors.grey.withOpacity(0.2),borderRadius: BorderRadius.circular(12),
-                    ),
-                    padding:EdgeInsets.all(16),child: CustomImageView(imagePath: job.logo,height:50.adaptSize,width: 50.adaptSize,)),
-                 SizedBox(width: 20.h,),
+                      height: 80.h,
+                      width: 80.h,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: EdgeInsets.all(16),
+                      child: CustomImageView(
+                        imagePath: job.logo,
+                        height: 50.adaptSize,
+                        width: 50.adaptSize,
+                      )),
+                  SizedBox(
+                    width: 20.h,
+                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -53,7 +63,9 @@ class JobDetails extends StatelessWidget {
                         job.organizationName,
                         style: theme.textTheme.titleMedium,
                       ),
-                      SizedBox(height: 1.h,),
+                      SizedBox(
+                        height: 1.h,
+                      ),
                       Text(
                         job.location,
                         style: theme.textTheme.bodyMedium,
@@ -63,37 +75,54 @@ class JobDetails extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 20.h),
-                       _buildHeader(context, title: "Job Summary"),
-
-
-              SizedBox(height: 10),
+              _buildHeader(context, title: "Job Summary"),
+              SizedBox(height: 8.h),
               Text(
                 job.jobSummary ?? '',
                 style: theme.textTheme.bodyMedium,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 20.h),
               _buildHeader(context, title: "Roles & Responsibilities"),
-
-              SizedBox(height: 10),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: job.rolesAndResponsibilities.length,
-                  itemBuilder: (context, index) {
-                    return Text(
-                      job.rolesAndResponsibilities[index],
+              SizedBox(height: 8.h),
+              Wrap(
+                spacing: 6.0,
+                children: [
+                  ...job.rolesAndResponsibilities.map((role) =>  Text(
+                      role,
                       style: theme.textTheme.bodyMedium,
-                    );
-                  },
-                ),
+                    ),
+                  ),
+                ],
               ),
-                 SizedBox(height: 10),
-                    _buildHeader(context, title: "Requirements"),
+              SizedBox(height: 20.h),
+              _buildHeader(context, title: "Education"),
+              SizedBox(height: 8.h),
+              Text(
+                job.education,
+                style: theme.textTheme.bodyMedium,
+              ),
+              SizedBox(height: 20.h),
+              _buildHeader(context, title: "Required Skills"),
+              SizedBox(height: 8.h),
+              Wrap(
+                spacing: 6.0, // Adjust spacing as needed
+                children: [
+                  ...job.skills.map((skill) => Chip(
+                    label: Text(
+                      skill,
+                      style: theme.textTheme.bodyMedium,
+                    ),
+                  )),
+                ],
+              ),
               SizedBox(height: 20),
               CustomElevatedButton(
                 text: "Apply",
                 onPressed: () {},
               ),
-              SizedBox(height: 12.v,)
+              SizedBox(
+                height: 12.v,
+              )
             ],
           ),
         ),
@@ -101,13 +130,10 @@ class JobDetails extends StatelessWidget {
     );
   }
 
-
-  
   Widget _buildHeader(
     BuildContext context, {
     required String title,
   }) {
-    return Text(title,
-        style: theme.textTheme.titleMedium);
+    return Text(title, style: theme.textTheme.titleMedium);
   }
 }
