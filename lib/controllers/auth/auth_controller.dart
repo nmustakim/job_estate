@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:job_estate/app_export/app_export.dart';
@@ -8,6 +9,7 @@ import 'package:job_estate/services/navigation_service.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../core/states/base_states.dart';
+import '../../models/user_model.dart';
 
 // Define a provider for FirebaseAuth
 final firebaseAuthProvider = Provider<FirebaseAuth>((ref) {
@@ -19,7 +21,7 @@ final authStateProvider = StreamProvider<User?>((ref) {
 });
 
 final authenticationProvider = StateNotifierProvider(
-      (ref) => AuthenticationController(
+  (ref) => AuthenticationController(
     ref: ref,
     firebaseAuth: ref.read(firebaseAuthProvider),
   ),
@@ -34,10 +36,11 @@ class AuthenticationController extends StateNotifier<BaseState> {
 
   Stream<User?> get authStateChange => firebaseAuth.authStateChanges();
 
-  static StateNotifierProvider<AuthenticationController, dynamic> get controller =>
-      authenticationProvider;
+  static StateNotifierProvider<AuthenticationController, dynamic>
+      get controller => authenticationProvider;
 
-  Future<void> signIn(context,{required String email, required String password}) async {
+  Future<void> signIn(context,
+      {required String email, required String password}) async {
     try {
       state = LoadingState();
       await firebaseAuth.signInWithEmailAndPassword(
@@ -48,8 +51,10 @@ class AuthenticationController extends StateNotifier<BaseState> {
       if (firebaseAuth.currentUser != null) {
         state = LoginSuccessState();
         hideKeyboard(context);
-         ref.read(jobsProvider.notifier).fetchJobs().then((value) =>   NavigationService.navigateAndRemoveUntil(AppRoutes.homeContainerScreen));
-
+        ref.read(jobsProvider.notifier).fetchJobs().then((value) =>
+            NavigationService.navigateAndRemoveUntil(
+                AppRoutes.homeContainerScreen));
+        toast("Login successful");
       } else {
         state = ErrorState(message: "Something went wrong");
         toast("Login failed");
@@ -62,17 +67,101 @@ class AuthenticationController extends StateNotifier<BaseState> {
     }
   }
 
-  Future<void> signUp({required String email, required String password}) async {
+  Future<void> signUp({
+    required String email,
+    required String password,
+    required String fullName,
+    String? phoneNumber,
+    String? resumeUrl,
+    String? profileImageUrl,
+    String? address,
+    String? city,
+    String? district,
+    String? country,
+    List<String>? skills,
+    String? bio,
+    String? educationLevel,
+    List<Experience>? experiences,
+    List<Education>? educations,
+  }) async {
     try {
       state = LoadingState();
-      await firebaseAuth.createUserWithEmailAndPassword(
+
+      final UserCredential userCredential =
+          await firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+
+      final User? user = userCredential.user;
+
+      if (user != null) {
+        await addUserToFirestore(
+          user: user,
+          fullName: fullName,
+          phoneNumber: phoneNumber,
+          resumeUrl: resumeUrl,
+          profileImageUrl: profileImageUrl,
+          address: address,
+          city: city,
+          state: district,
+          country: country,
+          skills: skills,
+          bio: bio,
+          educationLevel: educationLevel,
+          experiences: experiences,
+          educations: educations,
+        );
+
+        state = RegisterSuccessState();
+        toast("Sign up successful");
+        ref.read(jobsProvider.notifier).fetchJobs().then((value) =>
+            NavigationService.navigateAndRemoveUntil(
+                AppRoutes.homeContainerScreen));
+      }
     } on FirebaseAuthException catch (e) {
       state = ErrorState(message: e.message ?? '');
     } finally {
       state = InitialState();
+    }
+  }
+
+  Future<void> addUserToFirestore({
+    required User user,
+    required String fullName,
+    String? phoneNumber,
+    String? resumeUrl,
+    String? profileImageUrl,
+    String? address,
+    String? city,
+    String? state,
+    String? country,
+    List<String>? skills,
+    String? bio,
+    String? educationLevel,
+    List<Experience>? experiences,
+    List<Education>? educations,
+  }) async {
+    try {
+      await FirebaseFirestore.instance.collection('Users').doc(user.uid).set({
+        'userId': user.uid,
+        'email': user.email,
+        'firstName': fullName,
+        'phoneNumber': phoneNumber,
+        'resumeUrl': resumeUrl,
+        'profileImageUrl': profileImageUrl,
+        'address': address,
+        'city': city,
+        'state': state,
+        'country': country,
+        'skills': skills,
+        'bio': bio,
+        'educationLevel': educationLevel,
+        'experiences': experiences?.map((exp) => exp.toJson()).toList(),
+        'educations': educations?.map((edu) => edu.toJson()).toList(),
+      });
+    } catch (e) {
+      print("Error adding user to Firestore: $e");
     }
   }
 

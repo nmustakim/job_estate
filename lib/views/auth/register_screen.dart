@@ -1,6 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:job_estate/controllers/auth/auth_controller.dart';
 
+import '../../core/states/base_states.dart';
 import '../../routes/app_routes.dart';
 import '../../services/navigation_service.dart';
 import '../../theme/custom_text_style.dart';
@@ -11,7 +14,6 @@ import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_icon_button.dart';
 import '../../widgets/custom_image_view.dart';
 import '../../widgets/custom_text_form_field.dart';
-
 
 // ignore_for_file: must_be_immutable
 class RegisterScreen extends StatelessWidget {
@@ -65,18 +67,16 @@ class RegisterScreen extends StatelessWidget {
                                 style: CustomTextStyles.labelLargePrimary_1,
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    NavigationService.navigateToNamedRoute(AppRoutes.loginScreen);
-
+                                    NavigationService.navigateToNamedRoute(
+                                        AppRoutes.loginScreen);
                                   },
                               )
                             ]),
                             textAlign: TextAlign.left,
                           ),
-
                           SizedBox(height: 5.v)
                         ])))));
   }
-
 
   Widget _buildPageHeader(BuildContext context) {
     return Column(children: [
@@ -93,7 +93,6 @@ class RegisterScreen extends StatelessWidget {
     ]);
   }
 
-
   Widget _buildFullName(BuildContext context) {
     return CustomTextFormField(
         controller: fullNameController,
@@ -107,7 +106,6 @@ class RegisterScreen extends StatelessWidget {
         prefixConstraints: BoxConstraints(maxHeight: 48.v),
         contentPadding: EdgeInsets.only(top: 15.v, right: 30.h, bottom: 15.v));
   }
-
 
   Widget _buildEmail(BuildContext context) {
     return CustomTextFormField(
@@ -123,7 +121,6 @@ class RegisterScreen extends StatelessWidget {
         prefixConstraints: BoxConstraints(maxHeight: 48.v),
         contentPadding: EdgeInsets.only(top: 15.v, right: 30.h, bottom: 15.v));
   }
-
 
   Widget _buildPassword(BuildContext context) {
     return CustomTextFormField(
@@ -158,19 +155,27 @@ class RegisterScreen extends StatelessWidget {
         contentPadding: EdgeInsets.only(top: 15.v, right: 30.h, bottom: 15.v));
   }
 
-
   Widget _buildSignUp(BuildContext context) {
-    return CustomElevatedButton(
-        text: "Sign up",
-        onPressed: () {
-          onTapSignUp(context);
-        });
+    return Consumer(builder: (context, ref, _) {
+    final  authState = ref.watch(authenticationProvider);
+      return CustomElevatedButton(
+          text: "Sign up",
+          onPressed: () async {
+            if (_formKey.currentState!.validate()) {
+              if (!(authState is LoadingState)) {
+                await ref.read(authenticationProvider.notifier).signUp(
+                    email: emailController.text.trim(),
+                    password: passwordController.text.trim(),
+                    fullName: fullNameController.text);
+                fullNameController.clear();
+                emailController.clear();
+                passwordController.clear();
+              }
+            }
+          });
+    });
   }
 
-
-  onTapSignUp(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.homeContainerScreen);
-  }
   onTapSignIn(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.loginScreen);
   }

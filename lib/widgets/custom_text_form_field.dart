@@ -34,18 +34,12 @@ class CustomTextFormField extends StatelessWidget {
         );
   final ValueChanged<String>? onSubmitted; //
   final Alignment? alignment;
-
   final double? width;
-
   final TextEditingController? controller;
-
   final FocusNode? focusNode;
-
   final bool? isReadOnly;
   final bool? autofocus;
-
   final TextStyle? textStyle;
-
   final bool? obscureText;
   final TextInputAction? textInputAction;
   final TextInputType? textInputType;
@@ -54,23 +48,14 @@ class CustomTextFormField extends StatelessWidget {
   final String? labelText;
   final TextStyle? hintStyle;
   final TextStyle? labelStyle;
-
   final Widget? prefix;
-
   final BoxConstraints? prefixConstraints;
-
   final Widget? suffix;
-
   final BoxConstraints? suffixConstraints;
-
   final EdgeInsets? contentPadding;
-
   final InputBorder? borderDecoration;
-
   final Color? fillColor;
-
   final bool? filled;
-
   final FormFieldValidator<String>? validator;
 
   @override
@@ -115,8 +100,7 @@ class CustomTextFormField extends StatelessWidget {
               horizontal: 12.h,
               vertical: 15.v,
             ),
-        fillColor:
-            fillColor ?? theme.colorScheme.onPrimaryContainer,
+        fillColor: fillColor ?? theme.colorScheme.onPrimaryContainer,
         filled: filled,
         border: borderDecoration ??
             OutlineInputBorder(
@@ -142,7 +126,7 @@ class CustomTextFormField extends StatelessWidget {
                 width: 1,
               ),
             ),
-    floatingLabelBehavior: FloatingLabelBehavior.always,
+        floatingLabelBehavior: FloatingLabelBehavior.always,
       );
 }
 
