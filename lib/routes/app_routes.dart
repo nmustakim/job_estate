@@ -5,8 +5,8 @@ import 'package:job_estate/views/recent_jobs_screen/recent_jobs_screen.dart';
 import 'package:job_estate/widgets/job_details.dart';
 
 import '../views/home_screen/widgets/search_sheet.dart';
-import '../views/login_screen/login_screen.dart';
-import '../views/register_screen/register_screen.dart';
+import '../views/auth/login_screen.dart';
+import '../views/auth/register_screen.dart';
 import '../views/search_jobs_by_category_screen/search_jobs_by_category_screen.dart';
 import '../views/search_result_no_data_found_screen/search_result_no_data_found_screen.dart';
 import '../views/search_result_screen/search_result_screen.dart';

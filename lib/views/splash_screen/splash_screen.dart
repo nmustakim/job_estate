@@ -11,7 +11,7 @@ import '../../constants/image_constant.dart';
 import '../../utils/size_utils.dart';
 import '../../widgets/custom_image_view.dart';
 import '../home_container_screen/home_container_screen.dart';
-import '../login_screen/login_screen.dart';
+import '../auth/login_screen.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({Key? key})

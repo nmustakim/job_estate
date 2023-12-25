@@ -142,10 +142,10 @@ class CustomTextFormField extends StatelessWidget {
                 width: 1,
               ),
             ),
+    floatingLabelBehavior: FloatingLabelBehavior.always,
       );
 }
 
-/// Extension on [CustomTextFormField] to facilitate inclusion of all types of border style etc
 extension TextFormFieldStyleHelper on CustomTextFormField {
   static OutlineInputBorder get outlineBlueTL5 => OutlineInputBorder(
         borderRadius: BorderRadius.circular(5.h),

@@ -1,6 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../routes/app_routes.dart';
+import '../../services/navigation_service.dart';
 import '../../theme/custom_text_style.dart';
 import '../../theme/theme_helper.dart';
 import '../../constants/image_constant.dart';
@@ -21,7 +23,7 @@ class RegisterScreen extends StatelessWidget {
 
   TextEditingController passwordController = TextEditingController();
 
-  TextEditingController passwordController1 = TextEditingController();
+  TextEditingController retypePasswordController = TextEditingController();
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -47,26 +49,35 @@ class RegisterScreen extends StatelessWidget {
                           SizedBox(height: 8.v),
                           _buildPassword(context),
                           SizedBox(height: 8.v),
-                          _buildPassword1(context),
+                          _buildPasswordAgain(context),
                           SizedBox(height: 20.v),
                           _buildSignUp(context),
                           SizedBox(height: 20.v),
                           RichText(
-                              text: TextSpan(children: [
-                                TextSpan(
-                                    text: "msg_have_an_account2",
-                                    style: theme.textTheme.bodySmall),
-                                TextSpan(text: " "),
-                                TextSpan(
-                                    text: "lbl_sign_in",
-                                    style: CustomTextStyles.labelLargePrimary_1)
-                              ]),
-                              textAlign: TextAlign.left),
+                            text: TextSpan(children: [
+                              TextSpan(
+                                text: "Have an account",
+                                style: theme.textTheme.bodySmall,
+                              ),
+                              const TextSpan(text: " "),
+                              TextSpan(
+                                text: "Sign in",
+                                style: CustomTextStyles.labelLargePrimary_1,
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    NavigationService.navigateToNamedRoute(AppRoutes.loginScreen);
+
+                                  },
+                              )
+                            ]),
+                            textAlign: TextAlign.left,
+                          ),
+
                           SizedBox(height: 5.v)
                         ])))));
   }
 
-  /// Section Widget
+
   Widget _buildPageHeader(BuildContext context) {
     return Column(children: [
       CustomIconButton(
@@ -74,19 +85,19 @@ class RegisterScreen extends StatelessWidget {
           width: 72.adaptSize,
           padding: EdgeInsets.all(20.h),
           decoration: IconButtonStyleHelper.fillPrimary,
-          child: CustomImageView(imagePath: ImageConstant.imgClose)),
+          child: CustomImageView(imagePath: ImageConstant.imgLogo)),
       SizedBox(height: 16.v),
-      Text("msg_let_s_get_started", style: theme.textTheme.titleMedium),
+      Text("Let's get started", style: theme.textTheme.titleMedium),
       SizedBox(height: 9.v),
-      Text("msg_create_an_new_account", style: theme.textTheme.bodySmall)
+      Text("Create new account", style: theme.textTheme.bodySmall)
     ]);
   }
 
-  /// Section Widget
+
   Widget _buildFullName(BuildContext context) {
     return CustomTextFormField(
         controller: fullNameController,
-        hintText: "lbl_full_name",
+        hintText: "Full name",
         prefix: Container(
             margin: EdgeInsets.fromLTRB(16.h, 12.v, 10.h, 12.v),
             child: CustomImageView(
@@ -97,11 +108,11 @@ class RegisterScreen extends StatelessWidget {
         contentPadding: EdgeInsets.only(top: 15.v, right: 30.h, bottom: 15.v));
   }
 
-  /// Section Widget
+
   Widget _buildEmail(BuildContext context) {
     return CustomTextFormField(
         controller: emailController,
-        hintText: "lbl_your_email",
+        hintText: "Email",
         textInputType: TextInputType.emailAddress,
         prefix: Container(
             margin: EdgeInsets.fromLTRB(16.h, 12.v, 10.h, 12.v),
@@ -113,11 +124,11 @@ class RegisterScreen extends StatelessWidget {
         contentPadding: EdgeInsets.only(top: 15.v, right: 30.h, bottom: 15.v));
   }
 
-  /// Section Widget
+
   Widget _buildPassword(BuildContext context) {
     return CustomTextFormField(
         controller: passwordController,
-        hintText: "lbl_password",
+        hintText: "Password",
         textInputType: TextInputType.visiblePassword,
         prefix: Container(
             margin: EdgeInsets.fromLTRB(16.h, 12.v, 10.h, 12.v),
@@ -130,11 +141,10 @@ class RegisterScreen extends StatelessWidget {
         contentPadding: EdgeInsets.only(top: 15.v, right: 30.h, bottom: 15.v));
   }
 
-  /// Section Widget
-  Widget _buildPassword1(BuildContext context) {
+  Widget _buildPasswordAgain(BuildContext context) {
     return CustomTextFormField(
-        controller: passwordController1,
-        hintText: "lbl_password_again",
+        controller: retypePasswordController,
+        hintText: "Password again",
         textInputAction: TextInputAction.done,
         textInputType: TextInputType.visiblePassword,
         prefix: Container(
@@ -148,17 +158,20 @@ class RegisterScreen extends StatelessWidget {
         contentPadding: EdgeInsets.only(top: 15.v, right: 30.h, bottom: 15.v));
   }
 
-  /// Section Widget
+
   Widget _buildSignUp(BuildContext context) {
     return CustomElevatedButton(
-        text: "lbl_sign_up",
+        text: "Sign up",
         onPressed: () {
           onTapSignUp(context);
         });
   }
 
-  /// Navigates to the dashboardContainerScreen when the action is triggered.
+
   onTapSignUp(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.homeContainerScreen);
+  }
+  onTapSignIn(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.loginScreen);
   }
 }

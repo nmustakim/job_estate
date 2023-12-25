@@ -1,6 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:job_estate/app_export/app_export.dart';
+import 'package:job_estate/services/navigation_service.dart';
 
 
 import '../../controllers/auth/auth_controller.dart';
@@ -106,21 +108,25 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text("Forgot password",
                           style: CustomTextStyles.labelLargePrimary),
                       SizedBox(height: 7.v),
-                      GestureDetector(
-                          onTap: () {
-                            onNotHaveAccountPress(context);
-                          },
-                          child: RichText(
-                              text: TextSpan(children: [
-                                TextSpan(
-                                    text: "Don't have an account",
-                                    style: theme.textTheme.bodySmall),
-                                const TextSpan(text: " "),
-                                TextSpan(
-                                    text: "Register",
-                                    style: CustomTextStyles.labelLargePrimary_1)
-                              ]),
-                              textAlign: TextAlign.left)),
+                      RichText(
+                        text: TextSpan(children: [
+                          TextSpan(
+                            text: "Don't have an account",
+                            style: theme.textTheme.bodySmall,
+                          ),
+                          const TextSpan(text: " "),
+                          TextSpan(
+                            text: "Register",
+                            style: CustomTextStyles.labelLargePrimary_1,
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                              NavigationService.navigateToNamedRoute(AppRoutes.registerScreen);
+
+                              },
+                          )
+                        ]),
+                        textAlign: TextAlign.left,
+                      ),
                       SizedBox(height: 5.v)
                     ])))));
   }
@@ -140,7 +146,5 @@ class _LoginScreenState extends State<LoginScreen> {
     ]);
   }
 
-  onNotHaveAccountPress(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.registerScreen);
-  }
+
 }
