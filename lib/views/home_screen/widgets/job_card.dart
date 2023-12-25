@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:job_estate/app_export/app_export.dart';
 
 import '../../../models/job_model.dart';
@@ -73,8 +74,8 @@ class JobCard extends StatelessWidget {
                         Padding(
                           padding:  EdgeInsets.only(left: 8.h,bottom: 8.v),
                           child: Text(
-                            'Posted on: ${job.postedDate}',
-                            style: theme.textTheme.bodySmall
+                            'Posted on: ${DateFormat('dd-MM-yyyy, hh:mm a').format(job.postedDate)}',
+                            style: theme.textTheme.bodySmall,
                           ),
                         ),
     
