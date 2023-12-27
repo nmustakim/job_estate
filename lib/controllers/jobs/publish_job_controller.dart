@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:job_estate/controllers/jobs/job_states.dart';
@@ -25,14 +24,14 @@ class PublishJobController extends StateNotifier<BaseState> {
       state = const LoadingState();
       print("Loading");
 
-      final DocumentReference docRef = FirebaseFirestore
-          .instance
-          .collection('Jobs')
-          .doc();
+      final DocumentReference docRef =
+          FirebaseFirestore.instance.collection('Jobs').doc();
 
       job = job.copyWith(id: docRef.id);
 
-      await docRef.set(job.toJson()).then((value) => ref!.read(jobsProvider.notifier).fetchJobs());
+      await docRef
+          .set(job.toJson())
+          .then((value) => ref!.read(jobsProvider.notifier).fetchJobs());
 
       state = PublishJobSuccessState();
       print("Success");
@@ -46,5 +45,4 @@ class PublishJobController extends StateNotifier<BaseState> {
       state = InitialState();
     }
   }
-
 }

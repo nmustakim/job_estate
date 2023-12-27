@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomImageView extends StatelessWidget {
-
   String? imagePath;
 
   double? height;
@@ -20,7 +19,6 @@ class CustomImageView extends StatelessWidget {
   EdgeInsetsGeometry? margin;
   BorderRadius? radius;
   BoxBorder? border;
-
 
   CustomImageView({
     this.imagePath,
@@ -38,8 +36,6 @@ class CustomImageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('Image type ${ImageType.network}');
-
     return alignment != null
         ? Align(
             alignment: alignment!,
@@ -58,7 +54,6 @@ class CustomImageView extends StatelessWidget {
     );
   }
 
-
   _buildCircleImage() {
     if (radius != null) {
       return ClipRRect(
@@ -69,7 +64,6 @@ class CustomImageView extends StatelessWidget {
       return _buildImageWithBorder();
     }
   }
-
 
   _buildImageWithBorder() {
     if (border != null) {

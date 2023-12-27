@@ -4,6 +4,7 @@ import 'package:job_estate/controllers/user/user_controller.dart';
 import 'package:job_estate/core/states/base_states.dart';
 
 import '../../constants/image_constant.dart';
+import '../../controllers/user/userStates.dart';
 import '../../routes/app_routes.dart';
 import '../../theme/app_decoration.dart';
 import '../../theme/theme_helper.dart';
@@ -25,7 +26,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final userState = ref.watch(userProvider);
-    final user = userState is SuccessState ? userState:null;
+    final user = userState is FetchUserSuccessState ? userState.user:null;
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
         child: Scaffold(
@@ -43,7 +44,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                               children: [
                                 CustomImageView(
                                     imagePath:
-                                    ImageConstant.imgProfilePicture72x72,
+                                    user!.profileImageUrl,
                                     height: 72.adaptSize,
                                     width: 72.adaptSize,
                                     radius: BorderRadius.circular(36.h)),
@@ -62,19 +63,15 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       _buildProfileDetailOption(context,
                           dateIcon: ImageConstant.imgGenderIcon,
                           birthday: "gender",
-                          birthDateValue: "male"),
+                          birthDateValue: user.gender??""),
                       _buildProfileDetailOption(context,
                           dateIcon: ImageConstant.imgDateIcon,
                           birthday: "birthday",
-                          birthDateValue: "12_12_2000"),
+                          birthDateValue:user.birthDate.toString()),
                       _buildProfileDetailOption(context,
                           dateIcon: ImageConstant.imgMailPrimary,
                           birthday: "email",
-                          birthDateValue: "msg_rex4dom_gmail_com"),
-                      _buildProfileDetailOption(context,
-                          dateIcon: ImageConstant.imgCreditCardIcon,
-                          birthday: "phone_number",
-                          birthDateValue: "307_555_0133"),
+                          birthDateValue: user.email),
                       SizedBox(height: 5.v),
                       _buildProfileDetailOption(context,
                           dateIcon: ImageConstant.imgLockPrimary,

@@ -1,11 +1,15 @@
+import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:job_estate/controllers/user/user_controller.dart';
 import 'package:job_estate/main.dart';
+import 'package:job_estate/routes/app_routes.dart';
+import 'package:job_estate/services/navigation_service.dart';
 import 'package:job_estate/views/account_screen/publish_job_screen.dart';
 
-
+import '../../controllers/auth/auth_controller.dart';
 import '../../controllers/jobs/fetch_jobs_controller.dart';
 import '../../theme/theme_helper.dart';
 import '../../constants/image_constant.dart';
@@ -24,20 +28,34 @@ class SplashScreen extends ConsumerStatefulWidget {
   ConsumerState<SplashScreen> createState() => _SplashScreenState();
 }
 
-
 class _SplashScreenState extends ConsumerState<SplashScreen> {
+  StreamSubscription<User?>? _authSubscription;
+
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 3), () {
-      ref.read(jobsProvider.notifier).fetchJobs();
-      ref.read(userProvider.notifier).fetchUser();
-
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => HomeContainerScreen()),
-      );
+    Future.delayed(Duration(seconds: 3), () async {
+      _authSubscription = ref
+          .read(authenticationProvider.notifier)
+          .authStateChange
+          .listen((User? user) {
+        if (user != null) {
+          ref.read(jobsProvider.notifier).fetchJobs();
+          ref.read(userProvider.notifier).fetchUser();
+          NavigationService.navigateAndRemoveUntil(
+            AppRoutes.homeContainerScreen,
+          );
+        } else {
+          NavigationService.navigateAndRemoveUntil(AppRoutes.loginScreen);
+        }
+      });
     });
+  }
+
+  @override
+  void dispose() {
+    _authSubscription?.cancel();
+    super.dispose();
   }
   @override
   Widget build(BuildContext context) {

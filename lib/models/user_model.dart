@@ -14,6 +14,9 @@ class UserModel {
   final String? educationLevel;
   final List<Experience>? experiences;
   final List<Education>? educations;
+  final String? gender;
+  final String? userType;
+  final DateTime? birthDate;
 
   UserModel({
     required this.userId,
@@ -31,14 +34,18 @@ class UserModel {
     this.educationLevel,
     this.experiences,
     this.educations,
+    this.gender,
+    this.userType,
+    this.birthDate,
   });
+
 
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       userId: json['userId'],
       email: json['email'],
-      fullName: json['firstName'],
+      fullName: json['fullName'],
       phoneNumber: json['phoneNumber'],
       resumeUrl: json['resumeUrl'],
       profileImageUrl: json['profileImageUrl'],
@@ -55,15 +62,19 @@ class UserModel {
       educations: (json['educations'] as List<dynamic>?)
           ?.map((e) => Education.fromJson(e))
           .toList(),
+      gender: json['gender'],
+      userType: json['userType'],
+      birthDate: json['birthDate'] != null
+          ? DateTime.parse(json['birthDate'])
+          : null,
     );
   }
-
 
   Map<String, dynamic> toJson() {
     return {
       'userId': userId,
       'email': email,
-      'firstName': fullName,
+      'fullName': fullName,
       'phoneNumber': phoneNumber,
       'resumeUrl': resumeUrl,
       'profileImageUrl': profileImageUrl,
@@ -76,9 +87,13 @@ class UserModel {
       'educationLevel': educationLevel,
       'experiences': experiences?.map((e) => e.toJson()).toList(),
       'educations': educations?.map((e) => e.toJson()).toList(),
+      'gender': gender,
+      'userType': userType,
+      'birthDate': birthDate?.toIso8601String(), // Serialize birthDate
     };
   }
 }
+
 
 class Experience {
   final String title;
