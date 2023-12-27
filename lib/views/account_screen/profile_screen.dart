@@ -27,11 +27,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   Widget build(BuildContext context) {
     final userState = ref.watch(userProvider);
     final user = userState is FetchUserSuccessState ? userState.user:null;
-    mediaQueryData = MediaQuery.of(context);
+    // mediaQueryData = MediaQuery.of(context);
     return SafeArea(
         child: Scaffold(
             appBar: _buildAppBar(context),
-            body: Container(
+            body: user ==null?Center(child: Text('No user'),):Container(
                 width: double.maxFinite,
                 padding: EdgeInsets.symmetric(vertical: 36.v),
                 child: Column(
@@ -44,7 +44,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                               children: [
                                 CustomImageView(
                                     imagePath:
-                                    user!.profileImageUrl,
+                                    user.profileImageUrl,
                                     height: 72.adaptSize,
                                     width: 72.adaptSize,
                                     radius: BorderRadius.circular(36.h)),

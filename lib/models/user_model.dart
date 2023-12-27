@@ -1,72 +1,64 @@
 class UserModel {
   final String userId;
   final String email;
-  final String fullName;
-  final String? phoneNumber;
-  final String? resumeUrl;
-  final String? profileImageUrl;
+  final String firstName;
   final String? address;
-  final String? city;
-  final String? state;
-  final String? country;
-  final List<String>? skills;
   final String? bio;
-  final String? educationLevel;
-  final List<Experience>? experiences;
+  final String? city;
+  final String? country;
+  final String? phoneNumber;
+  final String? profileImageUrl;
+  final String? resumeUrl;
+  final String? state;
+  final List<String>? skills;
   final List<Education>? educations;
-  final String? gender;
-  final String? userType;
+  final List<Experience>? experiences;
   final DateTime? birthDate;
+  final String? gender;
 
   UserModel({
     required this.userId,
     required this.email,
-    required this.fullName,
-    this.phoneNumber,
-    this.resumeUrl,
-    this.profileImageUrl,
+    required this.firstName,
     this.address,
-    this.city,
-    this.state,
-    this.country,
-    this.skills,
     this.bio,
-    this.educationLevel,
-    this.experiences,
+    this.city,
+    this.country,
+    this.phoneNumber,
+    this.profileImageUrl,
+    this.resumeUrl,
+    this.state,
+    this.skills,
     this.educations,
-    this.gender,
-    this.userType,
+    this.experiences,
     this.birthDate,
+    this.gender,
   });
-
-
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       userId: json['userId'],
       email: json['email'],
-      fullName: json['fullName'],
-      phoneNumber: json['phoneNumber'],
-      resumeUrl: json['resumeUrl'],
-      profileImageUrl: json['profileImageUrl'],
+      firstName: json['firstName'],
       address: json['address'],
-      city: json['city'],
-      state: json['state'],
-      country: json['country'],
-      skills: List<String>.from(json['skills'] ?? []),
       bio: json['bio'],
-      educationLevel: json['educationLevel'],
-      experiences: (json['experiences'] as List<dynamic>?)
-          ?.map((e) => Experience.fromJson(e))
-          .toList(),
+      city: json['city'],
+      country: json['country'],
+      phoneNumber: json['phoneNumber'],
+      profileImageUrl: json['profileImageUrl'],
+      resumeUrl: json['resumeUrl'],
+      state: json['state'],
+      skills: List<String>.from(json['skills'] ?? []),
       educations: (json['educations'] as List<dynamic>?)
           ?.map((e) => Education.fromJson(e))
           .toList(),
-      gender: json['gender'],
-      userType: json['userType'],
+      experiences: (json['experiences'] as List<dynamic>?)
+          ?.map((e) => Experience.fromJson(e))
+          .toList(),
       birthDate: json['birthDate'] != null
           ? DateTime.parse(json['birthDate'])
           : null,
+      gender: json['gender'],
     );
   }
 
@@ -74,26 +66,23 @@ class UserModel {
     return {
       'userId': userId,
       'email': email,
-      'fullName': fullName,
-      'phoneNumber': phoneNumber,
-      'resumeUrl': resumeUrl,
-      'profileImageUrl': profileImageUrl,
+      'firstName': firstName,
       'address': address,
-      'city': city,
-      'state': state,
-      'country': country,
-      'skills': skills,
       'bio': bio,
-      'educationLevel': educationLevel,
-      'experiences': experiences?.map((e) => e.toJson()).toList(),
+      'city': city,
+      'country': country,
+      'phoneNumber': phoneNumber,
+      'profileImageUrl': profileImageUrl,
+      'resumeUrl': resumeUrl,
+      'state': state,
+      'skills': skills,
       'educations': educations?.map((e) => e.toJson()).toList(),
-      'gender': gender,
-      'userType': userType,
+      'experiences': experiences?.map((e) => e.toJson()).toList(),
       'birthDate': birthDate?.toIso8601String(), // Serialize birthDate
+      'gender': gender,
     };
   }
 }
-
 
 class Experience {
   final String title;
@@ -108,7 +97,6 @@ class Experience {
     required this.endDate,
   });
 
-
   factory Experience.fromJson(Map<String, dynamic> json) {
     return Experience(
       title: json['title'],
@@ -117,7 +105,6 @@ class Experience {
       endDate: json['endDate'],
     );
   }
-
 
   Map<String, dynamic> toJson() {
     return {
@@ -140,7 +127,6 @@ class Education {
     required this.graduationYear,
   });
 
-
   factory Education.fromJson(Map<String, dynamic> json) {
     return Education(
       degree: json['degree'],
@@ -148,7 +134,6 @@ class Education {
       graduationYear: json['graduationYear'],
     );
   }
-
 
   Map<String, dynamic> toJson() {
     return {

@@ -11,7 +11,7 @@ import 'package:nb_utils/nb_utils.dart';
 import '../../core/states/base_states.dart';
 import '../../models/user_model.dart';
 
-// Define a provider for FirebaseAuth
+
 final firebaseAuthProvider = Provider<FirebaseAuth>((ref) {
   return FirebaseAuth.instance;
 });
@@ -161,7 +161,8 @@ class AuthenticationController extends StateNotifier<BaseState> {
         'educations': educations?.map((edu) => edu.toJson()).toList(),
       });
     } catch (e) {
-      print("Error adding user to Firestore: $e");
+      toast("Error adding user details to Firestore");
+      print("Error adding user details to Firestore: $e");
     }
   }
 

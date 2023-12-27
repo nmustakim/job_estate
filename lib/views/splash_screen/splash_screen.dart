@@ -4,10 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:job_estate/controllers/user/user_controller.dart';
-import 'package:job_estate/main.dart';
 import 'package:job_estate/routes/app_routes.dart';
 import 'package:job_estate/services/navigation_service.dart';
-import 'package:job_estate/views/account_screen/publish_job_screen.dart';
 
 import '../../controllers/auth/auth_controller.dart';
 import '../../controllers/jobs/fetch_jobs_controller.dart';
@@ -15,8 +13,7 @@ import '../../theme/theme_helper.dart';
 import '../../constants/image_constant.dart';
 import '../../utils/size_utils.dart';
 import '../../widgets/custom_image_view.dart';
-import '../home_container_screen/home_container_screen.dart';
-import '../auth/login_screen.dart';
+
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({Key? key})
@@ -38,10 +35,11 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       _authSubscription = ref
           .read(authenticationProvider.notifier)
           .authStateChange
-          .listen((User? user) {
+          .listen((User? user) async {
         if (user != null) {
-          ref.read(jobsProvider.notifier).fetchJobs();
-          ref.read(userProvider.notifier).fetchUser();
+        await  ref.read(jobsProvider.notifier).fetchJobs();
+          await ref.read(userProvider.notifier).fetchUser();
+print(ref.read(userProvider.notifier).user?.email);
           NavigationService.navigateAndRemoveUntil(
             AppRoutes.homeContainerScreen,
           );

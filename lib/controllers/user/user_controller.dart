@@ -9,7 +9,7 @@ import '../../core/states/base_states.dart';
 import '../../models/user_model.dart';
 
 final userProvider = StateNotifierProvider<UserController, BaseState>(
-  (ref) => UserController(ref: ref),
+      (ref) => UserController(ref: ref),
 );
 
 class UserController extends StateNotifier<BaseState> {
@@ -22,16 +22,17 @@ class UserController extends StateNotifier<BaseState> {
     try {
       state = LoadingState();
 
-      final String userId = FirebaseAuth.instance.currentUser?.uid ?? '';
+      final String? userId = FirebaseAuth.instance.currentUser?.uid;
 
-      if (userId.isNotEmpty) {
+      if (userId != null && userId.isNotEmpty) {
         DocumentSnapshot<Map<String, dynamic>> userDoc = await FirebaseFirestore
             .instance
-            .collection('users')
+            .collection('Users')
             .doc(userId)
             .get();
 
         if (userDoc.exists) {
+          print("user exist");
           user = UserModel.fromJson(userDoc.data()!);
           state = FetchUserSuccessState(user!);
         } else {
@@ -43,8 +44,6 @@ class UserController extends StateNotifier<BaseState> {
         toast("User not authenticated");
       }
     } catch (error, stackTrace) {
-      print('fetchUser() error = $error');
-      print(stackTrace);
       state = ErrorState(message: error.toString());
       toast("Error fetching user");
     }

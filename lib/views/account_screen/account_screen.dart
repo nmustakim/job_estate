@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:job_estate/services/navigation_service.dart';
 
 import '../../controllers/auth/auth_controller.dart';
 import '../../routes/app_routes.dart';
@@ -20,17 +21,17 @@ class AccountScreen extends StatelessWidget {
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
         child: Scaffold(
-      appBar: CustomAppBar(
-          title:
-          AppbarTitle(text: "Account", margin: EdgeInsets.only(left: 16.h)),
-          actions: [
-            AppbarTrailingImage(
-                imagePath: ImageConstant.imgNotificationIcon,
-                margin: EdgeInsets.fromLTRB(13.h, 15.v, 13.h, 16.v),
-                onTap: () {
-                  onTapNotificationIcon(context);
-                })
-          ]),
+            appBar: CustomAppBar(
+                title: AppbarTitle(
+                    text: "Account", margin: EdgeInsets.only(left: 16.h)),
+                actions: [
+                  AppbarTrailingImage(
+                      imagePath: ImageConstant.imgNotificationIcon,
+                      margin: EdgeInsets.fromLTRB(13.h, 15.v, 13.h, 16.v),
+                      onTap: () {
+                        onTapNotificationIcon(context);
+                      })
+                ]),
             body: Container(
                 width: double.maxFinite,
                 padding: EdgeInsets.symmetric(vertical: 11.v),
@@ -38,7 +39,8 @@ class AccountScreen extends StatelessWidget {
                   _buildAccountOption(context,
                       image: ImageConstant.imgProfile,
                       orderLabel: "Profile", onTapAccountOption: () {
-                    onTapProfile(context);
+                    NavigationService.navigateToNamedRoute(
+                        AppRoutes.profileScreen);
                   }),
                   _buildAccountOption(context,
                       image: ImageConstant.imgCheck,
@@ -53,8 +55,8 @@ class AccountScreen extends StatelessWidget {
                   _buildAccountOption(context,
                       image: ImageConstant.imgPublish,
                       orderLabel: "Publish job", onTapAccountOption: () {
-                        onTapPublishJob(context);
-                      }),
+                    onTapPublishJob(context);
+                  }),
                   Consumer(builder: (context, ref, _) {
                     return OutlinedButton(
                         onPressed: () {
@@ -69,8 +71,6 @@ class AccountScreen extends StatelessWidget {
                   })
                 ]))));
   }
-
-
 
   Widget _buildAccountOption(
     BuildContext context, {
@@ -88,9 +88,7 @@ class AccountScreen extends StatelessWidget {
             decoration: AppDecoration.fillOnPrimaryContainer,
             child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               CustomImageView(
-                  imagePath: image,
-                  height: 24.adaptSize,
-                  width: 24.adaptSize),
+                  imagePath: image, height: 24.adaptSize, width: 24.adaptSize),
               Padding(
                   padding: EdgeInsets.only(left: 16.h, top: 2.v, bottom: 3.v),
                   child: Text(orderLabel,
@@ -103,13 +101,7 @@ class AccountScreen extends StatelessWidget {
     Navigator.pushNamed(context, AppRoutes.notificationScreen);
   }
 
-  onTapProfile(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.profileScreen);
-  }
-
-  onTapAccountOption1(BuildContext context) {
-
-  }
+  onTapAccountOption1(BuildContext context) {}
   onTapPublishJob(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.publishJobScreen);
   }
