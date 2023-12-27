@@ -108,7 +108,6 @@ class AuthenticationController extends StateNotifier<BaseState> {
           country: country,
           skills: skills,
           bio: bio,
-          educationLevel: educationLevel,
           experiences: experiences,
           educations: educations,
         );
@@ -138,7 +137,6 @@ class AuthenticationController extends StateNotifier<BaseState> {
     String? country,
     List<String>? skills,
     String? bio,
-    String? educationLevel,
     List<Experience>? experiences,
     List<Education>? educations,
   }) async {
@@ -146,7 +144,7 @@ class AuthenticationController extends StateNotifier<BaseState> {
       await FirebaseFirestore.instance.collection('Users').doc(user.uid).set({
         'userId': user.uid,
         'email': user.email,
-        'firstName': fullName,
+        'fullName': fullName,
         'phoneNumber': phoneNumber,
         'resumeUrl': resumeUrl,
         'profileImageUrl': profileImageUrl,
@@ -156,7 +154,6 @@ class AuthenticationController extends StateNotifier<BaseState> {
         'country': country,
         'skills': skills,
         'bio': bio,
-        'educationLevel': educationLevel,
         'experiences': experiences?.map((exp) => exp.toJson()).toList(),
         'educations': educations?.map((edu) => edu.toJson()).toList(),
       });

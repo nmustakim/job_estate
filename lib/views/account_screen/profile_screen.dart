@@ -31,7 +31,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     return SafeArea(
         child: Scaffold(
             appBar: _buildAppBar(context),
-            body: user ==null?Center(child: Text('No user'),):Container(
+            body: Container(
                 width: double.maxFinite,
                 padding: EdgeInsets.symmetric(vertical: 36.v),
                 child: Column(
@@ -44,7 +44,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                               children: [
                                 CustomImageView(
                                     imagePath:
-                                    user.profileImageUrl,
+                                    user!.profileImageUrl,
                                     height: 72.adaptSize,
                                     width: 72.adaptSize,
                                     radius: BorderRadius.circular(36.h)),
@@ -52,31 +52,31 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                     padding: EdgeInsets.only(
                                         left: 16.h, top: 9.v, bottom: 14.v),
                                     child: Column(children: [
-                                      Text("dominic_ovo",
+                                      Text(user.fullName,
                                           style: theme.textTheme.titleSmall),
                                       SizedBox(height: 8.v),
-                                      Text("dominic_ovo2",
+                                      Text(user.userType??'',
                                           style: theme.textTheme.bodySmall)
                                     ]))
                               ])),
                       SizedBox(height: 32.v),
                       _buildProfileDetailOption(context,
                           dateIcon: ImageConstant.imgGenderIcon,
-                          birthday: "gender",
-                          birthDateValue: user.gender??""),
+                          title: "gender",
+                          value: user.gender??""),
                       _buildProfileDetailOption(context,
                           dateIcon: ImageConstant.imgDateIcon,
-                          birthday: "birthday",
-                          birthDateValue:user.birthDate.toString()),
+                          title: "birthday",
+                          value:user.birthDate.toString()),
                       _buildProfileDetailOption(context,
                           dateIcon: ImageConstant.imgMailPrimary,
-                          birthday: "email",
-                          birthDateValue: user.email),
+                          title: "email",
+                          value: user.email),
                       SizedBox(height: 5.v),
                       _buildProfileDetailOption(context,
                           dateIcon: ImageConstant.imgLockPrimary,
-                          birthday: "change_password",
-                          birthDateValue: "msg",
+                          title: "change password",
+                          value: "msg",
                           onTapProfileDetailOption: () {
                             onTapProfileDetailOption(context);
                           })
@@ -96,12 +96,12 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             text: "profile", margin: EdgeInsets.only(left: 12.h)));
   }
 
-  /// Common widget
+
   Widget _buildProfileDetailOption(
       BuildContext context, {
         required String dateIcon,
-        required String birthday,
-        required String birthDateValue,
+        required String title,
+        required String value,
         Function? onTapProfileDetailOption,
       }) {
     return GestureDetector(
@@ -119,13 +119,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   width: 24.adaptSize),
               Padding(
                   padding: EdgeInsets.only(left: 16.h, top: 3.v, bottom: 2.v),
-                  child: Text(birthday,
+                  child: Text(title,
                       style: theme.textTheme.labelLarge!.copyWith(
                           color: theme.colorScheme.onPrimary.withOpacity(1)))),
               Spacer(),
               Padding(
                   padding: EdgeInsets.only(top: 2.v, bottom: 3.v),
-                  child: Text(birthDateValue,
+                  child: Text(value,
                       style: theme.textTheme.bodySmall!
                           .copyWith(color: appTheme.blueGray300))),
               CustomImageView(

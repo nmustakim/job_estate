@@ -1,7 +1,7 @@
 class UserModel {
   final String userId;
   final String email;
-  final String firstName;
+  final String fullName;
   final String? address;
   final String? bio;
   final String? city;
@@ -15,11 +15,12 @@ class UserModel {
   final List<Experience>? experiences;
   final DateTime? birthDate;
   final String? gender;
+  final String? userType;
 
   UserModel({
     required this.userId,
     required this.email,
-    required this.firstName,
+    required this.fullName,
     this.address,
     this.bio,
     this.city,
@@ -33,13 +34,14 @@ class UserModel {
     this.experiences,
     this.birthDate,
     this.gender,
+    this.userType,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       userId: json['userId'],
       email: json['email'],
-      firstName: json['firstName'],
+      fullName: json['fullName'],
       address: json['address'],
       bio: json['bio'],
       city: json['city'],
@@ -59,6 +61,7 @@ class UserModel {
           ? DateTime.parse(json['birthDate'])
           : null,
       gender: json['gender'],
+      userType: json['userType'],
     );
   }
 
@@ -66,7 +69,7 @@ class UserModel {
     return {
       'userId': userId,
       'email': email,
-      'firstName': firstName,
+      'fullName': fullName,
       'address': address,
       'bio': bio,
       'city': city,
@@ -80,6 +83,7 @@ class UserModel {
       'experiences': experiences?.map((e) => e.toJson()).toList(),
       'birthDate': birthDate?.toIso8601String(), // Serialize birthDate
       'gender': gender,
+      'userType': userType,
     };
   }
 }

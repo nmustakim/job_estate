@@ -37,7 +37,15 @@ class _HomeState extends ConsumerState<Home> {
     print(jobs);
     return SafeArea(
         child: Scaffold(
-            appBar: _buildAppBar(context),
+            appBar:  CustomAppBar(
+                title: AppbarTitleEdittext(
+                    margin: EdgeInsets.only(left: 16.h, top: 8.h),
+                    hintText: "Search jobs",
+                    controller: searchController),
+                actions: [
+                  AppbarTrailingImage(
+                      imagePath: ImageConstant.imgMicIcon, margin: EdgeInsets.all(16.h))
+                ]),
             body: SizedBox(
                 width: mediaQueryData.size.width,
                 child: SingleChildScrollView(
@@ -66,17 +74,7 @@ class _HomeState extends ConsumerState<Home> {
                         ])))));
   }
 
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return CustomAppBar(
-        title: AppbarTitleEdittext(
-            margin: EdgeInsets.only(left: 16.h, top: 8.h),
-            hintText: "Search jobs",
-            controller: searchController),
-        actions: [
-          AppbarTrailingImage(
-              imagePath: ImageConstant.imgMicIcon, margin: EdgeInsets.all(16.h))
-        ]);
-  }
+
 
   Widget _buildTopProfessions(BuildContext context) {
     return Padding(
