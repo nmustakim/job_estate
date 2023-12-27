@@ -44,7 +44,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                               children: [
                                 CustomImageView(
                                     imagePath:
-                                    user!.profileImageUrl,
+                                    user!.profileImageUrl?? ImageConstant.imgProfileDefault,
                                     height: 72.adaptSize,
                                     width: 72.adaptSize,
                                     radius: BorderRadius.circular(36.h)),
@@ -62,21 +62,21 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       SizedBox(height: 32.v),
                       _buildProfileDetailOption(context,
                           dateIcon: ImageConstant.imgGenderIcon,
-                          title: "gender",
+                          title: "Gender",
                           value: user.gender??""),
                       _buildProfileDetailOption(context,
                           dateIcon: ImageConstant.imgDateIcon,
-                          title: "birthday",
+                          title: "Birthday",
                           value:user.birthDate.toString()),
                       _buildProfileDetailOption(context,
                           dateIcon: ImageConstant.imgMailPrimary,
-                          title: "email",
+                          title: "Email",
                           value: user.email),
                       SizedBox(height: 5.v),
                       _buildProfileDetailOption(context,
                           dateIcon: ImageConstant.imgLockPrimary,
-                          title: "change password",
-                          value: "msg",
+                          title: "Change password",
+                          value: "",
                           onTapProfileDetailOption: () {
                             onTapProfileDetailOption(context);
                           })

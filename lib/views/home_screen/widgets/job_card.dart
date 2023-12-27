@@ -34,8 +34,8 @@ class JobCard extends StatelessWidget {
                 children: <Widget>[
                   CustomImageView(
                     imagePath: job.logo,
-                      width: 50.0.h,
-                    height: 50.0.v,
+                      width: 50.0.adaptSize,
+                    height: 50.0.adaptSize,
                   ),
                
                    SizedBox(width: 8.0.h),
