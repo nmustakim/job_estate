@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:job_estate/controllers/user/user_controller.dart';
 import 'package:job_estate/core/states/base_states.dart';
 import 'package:job_estate/views/account_screen/profile_screen/widgets/profile_item.dart';
@@ -25,7 +26,7 @@ class ProfileScreen extends ConsumerStatefulWidget {
 
 class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   TextEditingController _textEditingController = TextEditingController();
-
+  bool isEditing = false;
   @override
   void dispose() {
     _textEditingController.dispose();
@@ -42,9 +43,12 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       toast('Profile updated successfully');
     } catch (error) {
       toast('Failed to update profile');
+    } finally {
+      setState(() {
+        isEditing = false;
+      });
     }
   }
-
   Future<void> _showDatePickerDialog(BuildContext context) async {
     DateTime currentDate = DateTime.now();
     DateTime? selectedDate = await showDatePicker(
@@ -114,35 +118,64 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                              padding: EdgeInsets.only(left: 16.h),
-                              child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    CustomImageView(
-                                        imagePath: user.profileImageUrl ??
-                                            ImageConstant.imageNotFound,
-                                        height: 72.adaptSize,
-                                        width: 72.adaptSize,
-                                        radius: BorderRadius.circular(36.h)),
-                                    Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 16.h, top: 9.v, bottom: 14.v),
-                                        child: Column(children: [
-                                          Row(
-                                            children: [
-                                              Text(user.fullName,
-                                                  style:
-                                                      theme.textTheme.titleSmall),
-                                              SizedBox(width: 16.v,),
-                                              CustomImageView(imagePath: ImageConstant.imgEdit,   height: 16.adaptSize,
-                                                  width: 16.adaptSize,)
-                                            ],
+                            padding: EdgeInsets.only(left: 16.h),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomImageView(
+                                  imagePath:
+                                  user.profileImageUrl ?? ImageConstant.imageNotFound,
+                                  height: 72.adaptSize,
+                                  width: 72.adaptSize,
+                                  radius: BorderRadius.circular(36.h),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 16.h, top: 9.v, bottom: 14.v),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          isEditing
+                                              ? SizedBox(
+                                            width:200.v,
+                                            child: TextField(
+                                              controller: _textEditingController,
+                                            ),
+                                          )
+                                              : Text(
+                                            user.fullName,
+                                            style: theme.textTheme.titleSmall,
                                           ),
-                                          SizedBox(height: 8.v),
-                                          Text(user.userType ?? '',
-                                              style: theme.textTheme.bodySmall)
-                                        ]))
-                                  ])),
+                                          SizedBox(
+                                            width: 16.v,
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                isEditing = !isEditing;
+                                                if (isEditing) {
+                                                  _textEditingController.text =
+                                                      user.fullName ?? '';
+                                                }
+                                              });
+                                            },
+                                            child: CustomImageView(
+                                              imagePath:isEditing?ImageConstant.imgCheck: ImageConstant.imgEdit,
+                                              height: 16.adaptSize,
+                                              width: 16.adaptSize,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(height: 8.v),
+                                      Text(user.userType ?? '', style: theme.textTheme.bodySmall),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                           SizedBox(height: 32.v),
                           ProfileItem(
                             icon: ImageConstant.imgGenderIcon,
@@ -155,7 +188,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           ProfileItem(
                             icon: ImageConstant.imgDateIcon,
                             title: "Birthday",
-                            value: user.birthDate.toString(),
+                            value: user.birthDate != null ? DateFormat('dd-MM-yyyy').format(user.birthDate!):'',
                             onTapProfileDetailOption: () {
                               _showDatePickerDialog(context);
                             },

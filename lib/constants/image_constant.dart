@@ -8,7 +8,7 @@ class ImageConstant {
   static String imgPublish = '$imagePath/img_upload.svg';
   static String imgEdit = '$imagePath/edit.png';
   static String imgSave = '$imagePath/save.svg';
-  static String imgCheck = '$imagePath/check.svg';
+  static String imgCheck = '$imagePath/check.png';
   static String imgProgramming = '$imagePath/programming.svg';
   static String imgDesign = '$imagePath/design.svg';
   static String imgEngineering = '$imagePath/engineering.svg';
