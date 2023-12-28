@@ -8,7 +8,7 @@ class Lists {
     'Engineering'
   ];
   List<String> genderType = ['Male', 'Female'];
-
+  List<String> userType = ['Employer', 'Employee'];
   List<String> educationalDegrees = [
     'BE in Civil Engineering',
     'BE in Mechanical Engineering',

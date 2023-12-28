@@ -17,7 +17,6 @@ import '../../widgets/custom_icon_button.dart';
 import '../../widgets/custom_image_view.dart';
 import '../../widgets/custom_text_form_field.dart';
 
-// ignore_for_file: must_be_immutable
 class RegisterScreen extends StatefulWidget {
   RegisterScreen({Key? key}) : super(key: key);
 
@@ -29,7 +28,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController fullNameController = TextEditingController();
 
   TextEditingController genderController = TextEditingController();
-
+  TextEditingController usertypeController = TextEditingController();
   TextEditingController emailController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
@@ -43,48 +42,55 @@ class _RegisterScreenState extends State<RegisterScreen> {
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
         child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            body: Form(
-                key: _formKey,
-                child: Container(
-                    width: double.maxFinite,
-                    padding: EdgeInsets.symmetric(horizontal: 16.h),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          _buildPageHeader(context),
-                          SizedBox(height: 30.v),
-                          _buildFullName(context),
-                          SizedBox(height: 8.v),
-                          _buildEmail(context),
-                          SizedBox(height: 8.v),
-                          _buildPassword(context),
-                          SizedBox(height: 8.v),
-                          _buildPasswordAgain(context),
-                          SizedBox(height: 20.v),
-                          _buildSignUp(context),
-                          SizedBox(height: 20.v),
-                          RichText(
-                            text: TextSpan(children: [
-                              TextSpan(
-                                text: "Have an account",
-                                style: theme.textTheme.bodySmall,
-                              ),
-                              const TextSpan(text: " "),
-                              TextSpan(
-                                text: "Sign in",
-                                style: CustomTextStyles.labelLargePrimary_1,
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    NavigationService.navigateToNamedRoute(
-                                        AppRoutes.loginScreen);
-                                  },
-                              )
-                            ]),
-                            textAlign: TextAlign.left,
-                          ),
-                          SizedBox(height: 5.v)
-                        ])))));
+            // resizeToAvoidBottomInset: false,
+            body: SingleChildScrollView(
+              child: Form(
+                  key: _formKey,
+                  child: Container(
+                      width: double.maxFinite,
+                      padding: EdgeInsets.symmetric(horizontal: 16.h),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(height: 50.v),
+                            _buildPageHeader(context),
+                            SizedBox(height: 30.v),
+                            _buildFullName(context),
+                            SizedBox(height: 8.v),
+                            _buildEmail(context),
+                            SizedBox(height: 8.v),
+                            _buildGender(context),
+                            SizedBox(height: 8.v),
+                            _buildUserType(context),
+                            SizedBox(height: 8.v),
+                            _buildPassword(context),
+                            SizedBox(height: 8.v),
+                            _buildPasswordAgain(context),
+                            SizedBox(height: 20.v),
+                            _buildSignUp(context),
+                            SizedBox(height: 20.v),
+                            RichText(
+                              text: TextSpan(children: [
+                                TextSpan(
+                                  text: "Have an account",
+                                  style: theme.textTheme.bodySmall,
+                                ),
+                                const TextSpan(text: " "),
+                                TextSpan(
+                                  text: "Sign in",
+                                  style: CustomTextStyles.labelLargePrimary_1,
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      NavigationService.navigateToNamedRoute(
+                                          AppRoutes.loginScreen);
+                                    },
+                                )
+                              ]),
+                              textAlign: TextAlign.left,
+                            ),
+                            SizedBox(height: 5.v)
+                          ]))),
+            )));
   }
 
   Widget _buildPageHeader(BuildContext context) {
@@ -125,6 +131,58 @@ class _RegisterScreenState extends State<RegisterScreen> {
             margin: EdgeInsets.fromLTRB(16.h, 12.v, 10.h, 12.v),
             child: CustomImageView(
                 imagePath: ImageConstant.imgMail,
+                height: 24.adaptSize,
+                width: 24.adaptSize)),
+        prefixConstraints: BoxConstraints(maxHeight: 48.v),
+        contentPadding: EdgeInsets.only(top: 15.v, right: 30.h, bottom: 15.v));
+  }
+
+  Widget _buildUserType(BuildContext context) {
+    return CustomTextFormField(
+        controller: usertypeController,
+
+        textInputType: TextInputType.text,
+        suffix: CustomDropdownFormField(
+          leftPadding: 46.v,
+          hintText: "User type",
+          items: Lists().userType,
+          onChanged: (value) {
+            setState(() {
+              usertypeController.text = value ?? '';
+            });
+          },
+        ),
+        prefix: Container(
+            margin: EdgeInsets.fromLTRB(16.h, 12.v, 10.h, 12.v),
+            child: CustomImageView(
+                imagePath: ImageConstant.imgUserPrimary,
+                color: Colors.grey,
+                height: 24.adaptSize,
+                width: 24.adaptSize)),
+        prefixConstraints: BoxConstraints(maxHeight: 48.v),
+        contentPadding: EdgeInsets.only(top: 15.v, right: 30.h, bottom: 15.v));
+  }
+
+  Widget _buildGender(BuildContext context) {
+    return CustomTextFormField(
+        controller: genderController,
+
+        textInputType: TextInputType.text,
+        suffix: CustomDropdownFormField(
+          leftPadding: 46.v,
+          hintText: "Gender",
+          items: Lists().genderType,
+          onChanged: (value) {
+            setState(() {
+              genderController.text = value ?? '';
+            });
+          },
+        ),
+        prefix: Container(
+            margin: EdgeInsets.fromLTRB(16.h, 12.v, 10.h, 12.v),
+            child: CustomImageView(
+                imagePath: ImageConstant.imgGenderIcon,
+                color: Colors.grey,
                 height: 24.adaptSize,
                 width: 24.adaptSize)),
         prefixConstraints: BoxConstraints(maxHeight: 48.v),
@@ -175,10 +233,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
           onPressed: () async {
             if (_formKey.currentState!.validate()) {
               if (!(authState is LoadingState)) {
-                await ref.read(authenticationProvider.notifier).signUp(
+                await ref.read(authenticationProvider.notifier).signUp(userType: usertypeController.text,gender:genderController.text,
                     email: emailController.text.trim(),
                     password: passwordController.text.trim(),
-                    fullName: fullNameController.text);
+                    fullName: fullNameController.text,
+
+                );
                 fullNameController.clear();
                 emailController.clear();
                 passwordController.clear();

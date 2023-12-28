@@ -34,7 +34,7 @@ class CustomDropdownFormField extends FormField<String> {
                   padding:  EdgeInsets.only(left: leftPadding?.v??0.0),
                   child: Text(
                     hintText ?? "Please select an option",
-                    style: CustomTextStyles.labelLargeOnPrimary,
+                    style: theme.textTheme.bodySmall,
                   ),
                 ),
                 items: items.map((String value) {
@@ -46,7 +46,7 @@ class CustomDropdownFormField extends FormField<String> {
                           padding:  EdgeInsets.only(left: leftPadding?.v??0.0),
                           child: Text(
                             value,
-                            style: theme.textTheme.bodyMedium,
+                            style: CustomTextStyles.labelLargeOnPrimary,
                             overflow: TextOverflow.ellipsis,
                           ),
                         )),

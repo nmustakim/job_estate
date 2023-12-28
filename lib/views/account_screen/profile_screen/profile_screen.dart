@@ -133,8 +133,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                   padding: EdgeInsets.only(left: 16.h, top: 9.v, bottom: 14.v),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
+
                                     children: [
                                       Row(
+
                                         children: [
                                           isEditing
                                               ? SizedBox(
@@ -168,11 +170,12 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                               height: 16.adaptSize,
                                               width: 16.adaptSize,
                                             ),
-                                          )
+                                          ),
+
                                         ],
                                       ),
                                       SizedBox(height: 8.v),
-                                      Text(user.userType ?? '', style: theme.textTheme.bodySmall),
+                                      Text(user.email ?? '', style: theme.textTheme.bodySmall),
                                     ],
                                   ),
                                 ),
@@ -196,12 +199,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                               _showDatePickerDialog(context);
                             },
                           ),
-                          ProfileItem(
-                            icon: ImageConstant.imgMailPrimary,
-                            title: "Email",
-                            value: user.email,
-                            onTapProfileDetailOption: () {},
-                          ),
+
                           SizedBox(height: 5.v),
                           ProfileItem(
                               icon: ImageConstant.imgLockPrimary,
