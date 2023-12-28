@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:job_estate/views/account_screen/profile_screen.dart';
+import 'package:job_estate/views/account_screen/profile_screen/profile_screen.dart';
 import 'package:job_estate/views/account_screen/publish_job_screen.dart';
+import 'package:job_estate/views/auth/change_password_screen.dart';
 import 'package:job_estate/views/home_container_screen/home_container_screen.dart';
 import 'package:job_estate/views/recent_jobs_screen/recent_jobs_screen.dart';
 import 'package:job_estate/widgets/job_details.dart';
@@ -52,7 +53,7 @@ class AppRoutes {
   static const String filterScreen = '/filter_screen';
   static const String searchScreen = '/search_screen';
   static const String paymentMethodScreen = '/payment_method_screen';
-
+  static const String changePassScreen = '/change_password_screen';
   static const String accountScreen = '/account_page';
   static const String publishJobScreen = '/publish_job_screen';
 
@@ -72,6 +73,7 @@ class AppRoutes {
     recentJobsScreen: (context) => RecentJobsScreen(),
     publishJobScreen: (context) => PublishJobScreen(),
     profileScreen: (context) => ProfileScreen(),
+    changePassScreen: (context) => ChangePasswordScreen(),
     searchScreen: (context) => SearchSheet(),
     searchJobsByCategoryScreen: (context) => SearchJobsByCategoryScreen(),
     searchResultScreen: (context) => SearchResultScreen(),

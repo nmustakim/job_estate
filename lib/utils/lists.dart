@@ -7,10 +7,9 @@ class Lists {
     'Accounting',
     'Engineering'
   ];
-
+  List<String> genderType = ['Male', 'Female'];
 
   List<String> educationalDegrees = [
-
     'BE in Civil Engineering',
     'BE in Mechanical Engineering',
     'BE in Electrical Engineering',
@@ -27,8 +26,6 @@ class Lists {
     'ME in Aerospace Engineering',
     'ME in Software Engineering',
     'ME in Biomedical Engineering',
-
-
     'BSc. in Physics',
     'BSc. in Chemistry',
     'BSc. in Mathematics',
@@ -43,8 +40,6 @@ class Lists {
     'MSc. in Environmental Science',
     'MSc. in Physics',
     'MSc. in Statistics',
-
-
     'BBA',
     'Bachelor of Commerce',
     'Bachelor of Economics',
@@ -55,8 +50,6 @@ class Lists {
     'Master of Economics',
     'Master of Accounting',
     'Master of Finance',
-
-
     'BTech',
     'MTech',
     'BA in Hotel Management',
@@ -65,49 +58,42 @@ class Lists {
     'MA in Graphic Design',
   ];
 
-
- List<String> skills = [
-
-      'Graphic Design',
-      'Typography',
-      'Branding',
-      'User Interface Design',
-      'Web Design',
-      'Illustration',
-      'Animation',
-      'Photography',
-      'Video Editing',
-
+  List<String> skills = [
+    'Graphic Design',
+    'Typography',
+    'Branding',
+    'User Interface Design',
+    'Web Design',
+    'Illustration',
+    'Animation',
+    'Photography',
+    'Video Editing',
     'Software'
-      'Python',
-      'Java',
-      'C#',
-      'JavaScript',
-      'IDEs',
-      'Version Control Systems',
-      'Agile',
-      'Scrum',
-      'Unit Testing',
-      'Debugging Tools',
-
-
-      'Algebra',
-      'Calculus',
-      'Trigonometry',
-      'Engineering Ethics',
-      'Safety Regulations',
-      'CAD/CAM Software',
-      'Engineering Project Management',
-      'Teamwork Skills',
-
-      'GAAP',
-      'IFRS',
-      'QuickBooks',
-      'Excel',
-      'Balance Sheet',
-      'Income Statement',
-      'Accounting Research',
-      'Analysis Skills',
-    ];
-
+        'Python',
+    'Java',
+    'C#',
+    'JavaScript',
+    'IDEs',
+    'Version Control Systems',
+    'Agile',
+    'Scrum',
+    'Unit Testing',
+    'Debugging Tools',
+    'Algebra',
+    'Calculus',
+    'Trigonometry',
+    'Engineering Ethics',
+    'Safety Regulations',
+    'CAD/CAM Software',
+    'Engineering Project Management',
+    'Teamwork Skills',
+    'GAAP',
+    'IFRS',
+    'QuickBooks',
+    'Excel',
+    'Balance Sheet',
+    'Income Statement',
+    'Accounting Research',
+    'Analysis Skills',
+  ];
 }

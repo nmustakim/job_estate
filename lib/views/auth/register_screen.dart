@@ -9,17 +9,26 @@ import '../../services/navigation_service.dart';
 import '../../theme/custom_text_style.dart';
 import '../../theme/theme_helper.dart';
 import '../../constants/image_constant.dart';
+import '../../utils/lists.dart';
 import '../../utils/size_utils.dart';
+import '../../widgets/custom_dropdown.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_icon_button.dart';
 import '../../widgets/custom_image_view.dart';
 import '../../widgets/custom_text_form_field.dart';
 
 // ignore_for_file: must_be_immutable
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   RegisterScreen({Key? key}) : super(key: key);
 
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController fullNameController = TextEditingController();
+
+  TextEditingController genderController = TextEditingController();
 
   TextEditingController emailController = TextEditingController();
 
@@ -157,13 +166,12 @@ class RegisterScreen extends StatelessWidget {
 
   Widget _buildSignUp(BuildContext context) {
     return Consumer(builder: (context, ref, _) {
-    final  authState = ref.watch(authenticationProvider);
+      final authState = ref.watch(authenticationProvider);
       return CustomElevatedButton(
           buttonStyle: ElevatedButton.styleFrom(
-              backgroundColor: authState is LoadingState
-                  ? Colors.grey : theme.primaryColor
-          ),
-          text: authState is LoadingState ?"Please wait...":"Sign up",
+              backgroundColor:
+                  authState is LoadingState ? Colors.grey : theme.primaryColor),
+          text: authState is LoadingState ? "Please wait..." : "Sign up",
           onPressed: () async {
             if (_formKey.currentState!.validate()) {
               if (!(authState is LoadingState)) {

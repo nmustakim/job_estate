@@ -1,16 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:job_estate/app_export/app_export.dart';
 import 'package:job_estate/controllers/auth/auth_states.dart';
 import 'package:job_estate/controllers/jobs/fetch_jobs_controller.dart';
+import 'package:job_estate/controllers/user/user_controller.dart';
 import 'package:job_estate/routes/app_routes.dart';
 import 'package:job_estate/services/navigation_service.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../core/states/base_states.dart';
 import '../../models/user_model.dart';
-
 
 final firebaseAuthProvider = Provider<FirebaseAuth>((ref) {
   return FirebaseAuth.instance;
@@ -96,7 +96,7 @@ class AuthenticationController extends StateNotifier<BaseState> {
       final User? user = userCredential.user;
 
       if (user != null) {
-        await addUserToFirestore(
+        await ref.read(userProvider.notifier).addUserToFirestore(
           user: user,
           fullName: fullName,
           phoneNumber: phoneNumber,
@@ -114,7 +114,8 @@ class AuthenticationController extends StateNotifier<BaseState> {
 
         state = RegisterSuccessState();
         toast("Sign up successful");
-        ref.read(jobsProvider.notifier).fetchJobs().then((value) =>
+        await ref.read(userProvider.notifier).fetchUser();
+        await ref.read(jobsProvider.notifier).fetchJobs().then((value) =>
             NavigationService.navigateAndRemoveUntil(
                 AppRoutes.homeContainerScreen));
       }
@@ -125,43 +126,7 @@ class AuthenticationController extends StateNotifier<BaseState> {
     }
   }
 
-  Future<void> addUserToFirestore({
-    required User user,
-    required String fullName,
-    String? phoneNumber,
-    String? resumeUrl,
-    String? profileImageUrl,
-    String? address,
-    String? city,
-    String? state,
-    String? country,
-    List<String>? skills,
-    String? bio,
-    List<Experience>? experiences,
-    List<Education>? educations,
-  }) async {
-    try {
-      await FirebaseFirestore.instance.collection('Users').doc(user.uid).set({
-        'userId': user.uid,
-        'email': user.email,
-        'fullName': fullName,
-        'phoneNumber': phoneNumber,
-        'resumeUrl': resumeUrl,
-        'profileImageUrl': profileImageUrl,
-        'address': address,
-        'city': city,
-        'state': state,
-        'country': country,
-        'skills': skills,
-        'bio': bio,
-        'experiences': experiences?.map((exp) => exp.toJson()).toList(),
-        'educations': educations?.map((edu) => edu.toJson()).toList(),
-      });
-    } catch (e) {
-      toast("Error adding user details to Firestore");
-      print("Error adding user details to Firestore: $e");
-    }
-  }
+
 
   Future<void> signOut() async => await firebaseAuth.signOut();
 }

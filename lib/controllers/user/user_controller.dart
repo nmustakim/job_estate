@@ -48,4 +48,66 @@ class UserController extends StateNotifier<BaseState> {
       toast("Error fetching user");
     }
   }
+
+  Future<void> addUserToFirestore({
+    required User user,
+    required String fullName,
+    String? phoneNumber,
+    String? resumeUrl,
+    String? profileImageUrl,
+    String? address,
+    String? city,
+    String? state,
+    String? country,
+    String? gender,
+    String? userType,
+    String? birthDate,
+    List<String>? skills,
+    String? bio,
+    List<Experience>? experiences,
+    List<Education>? educations,
+  }) async {
+    try {
+      await FirebaseFirestore.instance.collection('Users').doc(user.uid).set({
+        'userId': user.uid,
+        'email': user.email,
+        'fullName': fullName,
+        'phoneNumber': phoneNumber,
+        'resumeUrl': resumeUrl,
+        'profileImageUrl': profileImageUrl,
+        'address': address,
+        'userType': userType,
+        'city': city,
+        'state': state,
+        'gender':gender,
+        'birthDate':birthDate,
+        'country': country,
+        'skills': skills,
+        'bio': bio,
+        'experiences': experiences?.map((exp) => exp.toJson()).toList(),
+        'educations': educations?.map((edu) => edu.toJson()).toList(),
+      });
+    } catch (e) {
+      toast("Error adding user details to Firestore");
+      print("Error adding user details to Firestore: $e");
+    }
+  }
+
+  Future<void> updateUserProfile(Map<String, dynamic> updatedFields) async {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      try {
+        state = LoadingState();
+        await FirebaseFirestore.instance
+            .collection('Users')
+            .doc(currentUser.uid)
+            .update(updatedFields);
+        state = UpdateUserProfileSuccessState();
+      } catch (error) {
+        state = ErrorState(message: error.toString());
+        print('Failed to update user profile: $error');
+        throw Exception('Failed to update user profile');
+      }
+    }
+  }
 }

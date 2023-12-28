@@ -7,3 +7,7 @@ class FetchUserSuccessState extends SuccessState{
 UserModel user;
   FetchUserSuccessState(this.user);
 }
+class UpdateUserProfileSuccessState extends SuccessState{
+
+  UpdateUserProfileSuccessState();
+}

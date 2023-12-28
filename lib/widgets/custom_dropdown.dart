@@ -8,8 +8,9 @@ class CustomDropdownFormField extends FormField<String> {
   final List<String> items;
   final ValueChanged<String>? onChanged;
   final String? hintText;
+  final double? leftPadding;
 
-  CustomDropdownFormField({
+  CustomDropdownFormField({this.leftPadding,
     this.hintText,
     required this.items,
     this.onChanged,
@@ -29,19 +30,25 @@ class CustomDropdownFormField extends FormField<String> {
                     border: UnderlineInputBorder(
                         borderSide:BorderSide.none)),
                 value: state.value,
-                hint: Text(
-                  hintText ?? "Please select an option",
-                  style: CustomTextStyles.labelLargeOnPrimary,
+                hint: Padding(
+                  padding:  EdgeInsets.only(left: leftPadding?.v??0.0),
+                  child: Text(
+                    hintText ?? "Please select an option",
+                    style: CustomTextStyles.labelLargeOnPrimary,
+                  ),
                 ),
                 items: items.map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: SizedBox(
                         width: 300.v,
-                        child: Text(
-                          value,
-                          style: theme.textTheme.bodyMedium,
-                          overflow: TextOverflow.ellipsis,
+                        child: Padding(
+                          padding:  EdgeInsets.only(left: leftPadding?.v??0.0),
+                          child: Text(
+                            value,
+                            style: theme.textTheme.bodyMedium,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         )),
                   );
                 }).toList(),

@@ -81,7 +81,7 @@ class UserModel {
       'skills': skills,
       'educations': educations?.map((e) => e.toJson()).toList(),
       'experiences': experiences?.map((e) => e.toJson()).toList(),
-      'birthDate': birthDate?.toIso8601String(), // Serialize birthDate
+      'birthDate': birthDate?.toIso8601String(),
       'gender': gender,
       'userType': userType,
     };
