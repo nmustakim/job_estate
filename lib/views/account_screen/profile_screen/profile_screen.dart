@@ -156,7 +156,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                                 isEditing = !isEditing;
                                                 if (isEditing) {
                                                   _textEditingController.text =
-                                                      user.fullName ?? '';
+                                                      user.fullName;
+                                                }
+                                                else {
+                                                  _updateProfileField('fullName', _textEditingController.text, context);
                                                 }
                                               });
                                             },

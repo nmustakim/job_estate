@@ -20,9 +20,6 @@ class ImageConstant {
   static String imgProductImage238x375 =
       '$imagePath/img_product_image_238x375.png';
   static String imgColors = '$imagePath/img_colors.png';
-  static String imgProfilePicture48x48 =
-      '$imagePath/img_profile_picture_48x48.png';
-  static String imgProfilePicture1 = '$imagePath/img_profile_picture_1.png';
   static String imgListIcon = '$imagePath/img_list_icon.svg';
   static String imgNotificationIconPrimary =
       '$imagePath/img_notification_icon_primary.svg';

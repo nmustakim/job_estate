@@ -43,7 +43,7 @@ class AccountScreen extends StatelessWidget {
                         AppRoutes.profileScreen);
                   }),
                   _buildAccountOption(context,
-                      image: ImageConstant.imgCheck,
+                      image: ImageConstant.imgCheckmark,
                       orderLabel: "Applied Jobs"),
                   SizedBox(height: 5.v),
                   _buildAccountOption(context,
@@ -88,7 +88,7 @@ class AccountScreen extends StatelessWidget {
             decoration: AppDecoration.fillOnPrimaryContainer,
             child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               CustomImageView(
-                  imagePath: image, height: 24.adaptSize, width: 24.adaptSize),
+                  imagePath: image, height: 24.adaptSize, width: 24.adaptSize,color: Colors.grey,),
               Padding(
                   padding: EdgeInsets.only(left: 16.h, top: 2.v, bottom: 3.v),
                   child: Text(orderLabel,
