@@ -11,7 +11,6 @@ import '../../widgets/app_bar/appbar_title_edittext.dart';
 import '../../widgets/job_details.dart';
 import '../../models/job_model.dart';
 import 'widgets/top_professions_item_widget.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:job_estate/app_export/app_export.dart';
 

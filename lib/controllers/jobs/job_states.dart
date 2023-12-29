@@ -17,6 +17,11 @@ class FetchTypeWiseJobsSuccessState extends SuccessState{
   FetchTypeWiseJobsSuccessState(this.typeWiseJobs);
 }
 
+class FetchUserFavoriteJobsSuccessState extends SuccessState{
+  List <Job> favJobs;
+  FetchUserFavoriteJobsSuccessState(this.favJobs);
+}
+
 class PublishJobSuccessState extends SuccessState{
 
   PublishJobSuccessState();
@@ -30,4 +35,9 @@ class RemoveJobsSuccessState extends SuccessState{
 class ApplyJobSuccessState extends SuccessState{
 
   ApplyJobSuccessState();
+}
+
+class AddToFavoritesJobSuccessState extends SuccessState{
+
+  AddToFavoritesJobSuccessState();
 }

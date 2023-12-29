@@ -67,7 +67,7 @@ class JobsController extends StateNotifier<BaseState> {
     final DateTime today = DateTime(now.year, now.month, now.day);
 
     return jobList
-        .where((job) => job.postedDate.isAtSameMomentAs(today))
+        .where((job) => job.postedDate.isAfter(today))
         .length.toString();
   }
 

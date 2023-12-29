@@ -154,7 +154,7 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                   onSubmitted: (value) {
                     setState(() {
                       selectedSkills.add(value);
-                      _skillsRequiredController.text = selectedSkills.join(',');
+                      _skillsRequiredController.clear();
                     });
                   },
                 ),

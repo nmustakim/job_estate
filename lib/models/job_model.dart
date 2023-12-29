@@ -5,6 +5,7 @@ class Job {
   final int salary;
   final String postedBy;
   final List<String>? applicants;
+  final List<String>? favoredBy;
   final List<String> skills;
   final String employmentType;
   final DateTime postedDate;
@@ -17,6 +18,7 @@ class Job {
 
   Job({
     this.id,
+    this.favoredBy,
     required this.title,
     required this.location,
     required this.salary,
@@ -42,6 +44,9 @@ class Job {
     applicants: json['applicants'] != null
         ? List<String>.from(json['applicants'])
         : null,
+    favoredBy:json['favoredBy'] != null
+  ? List<String>.from(json['favoredBy'])
+      : null,
     skills: List<String>.from(json['skillsRequired']),
     employmentType: json['employmentType'],
     postedDate: DateTime.parse(json['postedDate']),
@@ -61,6 +66,7 @@ class Job {
     'salary': salary,
     'postedBy': postedBy,
     'applicants': applicants,
+    'favoredBy':favoredBy,
     'skillsRequired': skills,
     'employmentType': employmentType,
     'postedDate': postedDate.toIso8601String(),
@@ -80,6 +86,7 @@ class Job {
     int? salary,
     String? postedBy,
     List<String>? applicants,
+    final List<String>? favoredBy,
     List<String>? skillsRequired,
     String? employmentType,
     DateTime? postedDate,
@@ -98,6 +105,7 @@ class Job {
       salary: salary ?? this.salary,
       postedBy: postedBy ?? this.postedBy,
       applicants: applicants ?? this.applicants,
+      favoredBy: favoredBy??this.favoredBy,
       skills: skillsRequired ?? this.skills,
       employmentType: employmentType ?? this.employmentType,
       postedDate: postedDate ?? this.postedDate,
