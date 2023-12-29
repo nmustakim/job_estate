@@ -1,16 +1,18 @@
+import 'package:firebase_storage/firebase_storage.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:job_estate/controllers/user/user_controller.dart';
-import 'package:job_estate/core/states/base_states.dart';
+
 import 'package:job_estate/views/account_screen/profile_screen/widgets/profile_item.dart';
-import 'package:nb_utils/nb_utils.dart';
 
 import '../../../constants/image_constant.dart';
 import '../../../controllers/user/userStates.dart';
 import '../../../routes/app_routes.dart';
-import '../../../theme/app_decoration.dart';
 import '../../../theme/theme_helper.dart';
+import '../../../utils/lists.dart';
 import '../../../utils/size_utils.dart';
 import '../../../widgets/app_bar/appbar_leading_image.dart';
 import '../../../widgets/app_bar/appbar_subtitle.dart';
@@ -25,6 +27,8 @@ class ProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _ProfileScreenState extends ConsumerState<ProfileScreen> {
+  final picker = ImagePicker();
+  final FirebaseStorage _storage = FirebaseStorage.instance;
   TextEditingController _textEditingController = TextEditingController();
   bool isEditing = false;
   @override
@@ -33,22 +37,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     super.dispose();
   }
 
-  Future<void> _updateProfileField(
-      String fieldName, String fieldValue, BuildContext context) async {
-    try {
-      await ref
-          .read(userProvider.notifier)
-          .updateUserProfile({fieldName: fieldValue}).then(
-              (value) => ref.read(userProvider.notifier).fetchUser());
-      toast('Profile updated successfully');
-    } catch (error) {
-      toast('Failed to update profile');
-    } finally {
-      setState(() {
-        isEditing = false;
-      });
-    }
-  }
   Future<void> _showDatePickerDialog(BuildContext context) async {
     DateTime currentDate = DateTime.now();
     DateTime? selectedDate = await showDatePicker(
@@ -61,18 +49,20 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     if (selectedDate != null && selectedDate != currentDate) {
       String formattedDate =
           "${selectedDate.year}-${selectedDate.month}-${selectedDate.day}";
-      _updateProfileField('birthDate', formattedDate, context);
+      ref
+          .read(userProvider.notifier)
+          .updateProfileField('birthDate', formattedDate, context);
     }
   }
 
   Future<void> _showGenderPickerDialog(BuildContext context) async {
-    List<String> genderOptions = ['Male', 'Female'];
     String? selectedGender = await showDialog(
       context: context,
       builder: (BuildContext context) {
         return SimpleDialog(
           title: Text('Select Gender'),
-          children: genderOptions
+          children: Lists()
+              .genderType
               .map(
                 (gender) => SimpleDialogOption(
                   onPressed: () {
@@ -87,7 +77,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     );
 
     if (selectedGender != null) {
-      _updateProfileField('gender', selectedGender, context);
+      ref
+          .read(userProvider.notifier)
+          .updateProfileField('gender', selectedGender, context);
     }
   }
 
@@ -122,33 +114,44 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                CustomImageView(
-                                  imagePath:
-                                  user.profileImageUrl ?? ImageConstant.imageNotFound,
-                                  height: 72.adaptSize,
-                                  width: 72.adaptSize,
-                                  radius: BorderRadius.circular(36.h),
+                                GestureDetector(
+                                  onTap: () {
+                                    if (!isEditing) {
+                                      ref
+                                          .read(userProvider.notifier)
+                                          .updateProfilePicture(context);
+                                    }
+                                  },
+                                  child: CustomImageView(
+                                    imagePath: user.profileImageUrl ??
+                                        ImageConstant.imageNotFound,
+                                    height: 72.adaptSize,
+                                    width: 72.adaptSize,
+                                    radius: BorderRadius.circular(36.h),
+                                  ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(left: 16.h, top: 9.v, bottom: 14.v),
+                                  padding: EdgeInsets.only(
+                                      left: 16.h, top: 9.v, bottom: 14.v),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Row(
-
                                         children: [
                                           isEditing
                                               ? SizedBox(
-                                            width:200.v,
-                                            child: TextField(
-                                              controller: _textEditingController,
-                                            ),
-                                          )
+                                                  width: 200.v,
+                                                  child: TextField(
+                                                    controller:
+                                                        _textEditingController,
+                                                  ),
+                                                )
                                               : Text(
-                                            user.fullName,
-                                            style: theme.textTheme.titleSmall,
-                                          ),
+                                                  user.fullName,
+                                                  style: theme
+                                                      .textTheme.titleSmall,
+                                                ),
                                           SizedBox(
                                             width: 16.v,
                                           ),
@@ -159,23 +162,31 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                                 if (isEditing) {
                                                   _textEditingController.text =
                                                       user.fullName;
-                                                }
-                                                else {
-                                                  _updateProfileField('fullName', _textEditingController.text, context);
+                                                } else {
+                                                  ref
+                                                      .read(
+                                                          userProvider.notifier)
+                                                      .updateProfileField(
+                                                          'fullName',
+                                                          _textEditingController
+                                                              .text,
+                                                          context);
                                                 }
                                               });
                                             },
                                             child: CustomImageView(
-                                              imagePath:isEditing?ImageConstant.imgCheck: ImageConstant.imgEdit,
+                                              imagePath: isEditing
+                                                  ? ImageConstant.imgCheck
+                                                  : ImageConstant.imgEdit,
                                               height: 16.adaptSize,
                                               width: 16.adaptSize,
                                             ),
                                           ),
-
                                         ],
                                       ),
                                       SizedBox(height: 8.v),
-                                      Text(user.email ?? '', style: theme.textTheme.bodySmall),
+                                      Text(user.email ?? '',
+                                          style: theme.textTheme.bodySmall),
                                     ],
                                   ),
                                 ),
@@ -194,12 +205,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           ProfileItem(
                             icon: ImageConstant.imgDateIcon,
                             title: "Birthday",
-                            value: user.birthDate != null ? DateFormat('dd-MM-yyyy').format(user.birthDate!):'',
+                            value: user.birthDate != null
+                                ? DateFormat('dd-MM-yyyy')
+                                    .format(user.birthDate!)
+                                : '',
                             onTapProfileDetailOption: () {
                               _showDatePickerDialog(context);
                             },
                           ),
-
                           SizedBox(height: 5.v),
                           ProfileItem(
                               icon: ImageConstant.imgLockPrimary,

@@ -8,7 +8,7 @@ import 'package:job_estate/routes/app_routes.dart';
 import 'package:job_estate/services/navigation_service.dart';
 
 import '../../controllers/auth/auth_controller.dart';
-import '../../controllers/jobs/fetch_jobs_controller.dart';
+import '../../controllers/jobs/job_controller.dart';
 import '../../theme/theme_helper.dart';
 import '../../constants/image_constant.dart';
 import '../../utils/size_utils.dart';

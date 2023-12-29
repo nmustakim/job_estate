@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:job_estate/views/account_screen/applied_jobs_screen.dart';
 import 'package:job_estate/views/account_screen/profile_screen/profile_screen.dart';
 import 'package:job_estate/views/account_screen/publish_job_screen.dart';
 import 'package:job_estate/views/auth/change_password_screen.dart';
@@ -61,7 +62,7 @@ class AppRoutes {
 
   static const String changePasswordScreen = '/change_password_screen';
 
-  static const String addCardScreen = '/add_card_screen';
+  static const String appliedJobsScreen = '/applied_jobs_screen';
 
   static const String appNavigationScreen = '/app_navigation_screen';
 
@@ -73,6 +74,7 @@ class AppRoutes {
     recentJobsScreen: (context) => RecentJobsScreen(),
     publishJobScreen: (context) => PublishJobScreen(),
     profileScreen: (context) => ProfileScreen(),
+    appliedJobsScreen:(context)=>AppliedJobsScreen(),
     changePassScreen: (context) => ChangePasswordScreen(),
     searchScreen: (context) => SearchSheet(),
     searchJobsByCategoryScreen: (context) => SearchJobsByCategoryScreen(),

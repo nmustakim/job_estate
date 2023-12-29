@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:job_estate/controllers/jobs/job_states.dart';
-import 'package:job_estate/controllers/jobs/fetch_jobs_controller.dart';
+import 'package:job_estate/controllers/jobs/job_controller.dart';
+import 'package:job_estate/controllers/jobs/typewise_job_controller.dart';
 import 'package:job_estate/views/home_screen/widgets/banner_widget.dart';
 import 'package:job_estate/views/home_screen/widgets/job_card_list.dart';
 import 'package:job_estate/views/typewise_jobs_screen/typewise_jobs_screen.dart';
@@ -53,7 +54,7 @@ class _HomeState extends ConsumerState<Home> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _buildBanner(context),
+                       Center(child: BannerWidget(totalJobs: jobs.length.toString(), newJobs: ref.read(jobsProvider.notifier).getJobsPostedLast7DaysCount(), postedToday: ref.read(jobsProvider.notifier).getTodayJobsCount())),
                           SizedBox(height: 25.v),
                           _buildHeader(
                             context,
@@ -90,54 +91,47 @@ class _HomeState extends ConsumerState<Home> {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: EdgeInsets.only(right: index == 3 ? 16 : 0),
-                  child: TopProfessionItemWidget(
-                    title: index == 0
-                        ? "Programming"
-                        : index == 1
-                            ? "Design"
-                            : index == 2
-                                ? "Engineering"
-                                : "Accounting",
-                    icon: index == 0
-                        ? ImageConstant.imgProgramming
-                        : index == 1
-                            ? ImageConstant.imgDesign
-                            : index == 2
-                                ? ImageConstant.imgEngineering
-                                : ImageConstant.imgAccounting,
-                    onTap: () => onTapProfession(
-                      context,
-                      title: index == 0
-                          ? "Programming"
+                  child: Consumer(
+                    builder: (context,ref,_) {
+                      final title = index == 0
+                          ? "Software Engineering"
                           : index == 1
-                              ? "Design"
+                          ? "Design"
+                          : index == 2
+                          ? "Engineering"
+                          : "Accounting";
+                      return TopProfessionItemWidget(
+                          title: title,
+                          icon: index == 0
+                              ? ImageConstant.imgProgramming
+                              : index == 1
+                              ? ImageConstant.imgDesign
                               : index == 2
-                                  ? "Engineering"
-                                  : "Accounting",
-                    ),
+                              ? ImageConstant.imgEngineering
+                              : ImageConstant.imgAccounting,
+                          onTap: ()async {
+                            await ref.read(typeWiseJobsProvider.notifier).fetchTypeWiseJobs(title);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        TypeWiseJobsScreen(title: index == 0
+                                            ? "Software Engineering"
+                                            : index == 1
+                                            ? "Design"
+                                            : index == 2
+                                            ? "Engineering"
+                                            : "Accounting")));
+                          }
+                      );
+                    }
                   ),
                 );
               })),
     );
   }
 
-  Widget _buildBanner(BuildContext context) {
-    return CarouselSlider.builder(
-        options: CarouselOptions(
-            height: 160.v,
-            initialPage: 0,
-            autoPlay: true,
-            viewportFraction: 1.0,
-            enableInfiniteScroll: false,
-            scrollDirection: Axis.horizontal,
-            onPageChanged: (index, reason) {
-              sliderIndex = index;
-            }),
-        itemCount: 1,
-        itemBuilder: (context, index, realIndex) {
-          return BannerWidget();
-        });
-  }
+
 
   Widget _buildHeader(
     BuildContext context, {
@@ -173,12 +167,6 @@ class _HomeState extends ConsumerState<Home> {
     Navigator.pushNamed(context, AppRoutes.recentJobsScreen);
   }
 
-  onTapProfession(BuildContext context, {required String title}) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => TypeWiseJobsScreen(title: title)));
-  }
 
   onTapJobCard(BuildContext context, Job job) {
     Navigator.push(

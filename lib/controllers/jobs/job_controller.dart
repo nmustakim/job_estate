@@ -16,6 +16,7 @@ class JobsController extends StateNotifier<BaseState> {
 
   List<Job> jobList = [];
 
+
   Future<void> fetchJobs() async {
     try {
       state = LoadingState();
@@ -33,6 +34,47 @@ class JobsController extends StateNotifier<BaseState> {
       toast("Error fetching jobs");
     }
   }
+
+  List<Job> getJobsPostedLast7Days() {
+    final DateTime now = DateTime.now();
+    final DateTime sevenDaysAgo = now.subtract(Duration(days: 7));
+
+    return jobList
+        .where((job) => job.postedDate.isAfter(sevenDaysAgo))
+        .toList();
+  }
+
+  List<Job> getTodayJobs() {
+    final DateTime now = DateTime.now();
+    final DateTime today = DateTime(now.year, now.month, now.day);
+
+    return jobList
+        .where((job) => job.postedDate.isAtSameMomentAs(today))
+        .toList();
+  }
+
+  String getJobsPostedLast7DaysCount() {
+    final DateTime now = DateTime.now();
+    final DateTime sevenDaysAgo = now.subtract(Duration(days: 7));
+
+    return jobList
+        .where((job) => job.postedDate.isAfter(sevenDaysAgo))
+        .length.toString();
+  }
+
+  String getTodayJobsCount() {
+    final DateTime now = DateTime.now();
+    final DateTime today = DateTime(now.year, now.month, now.day);
+
+    return jobList
+        .where((job) => job.postedDate.isAtSameMomentAs(today))
+        .length.toString();
+  }
+
+
+
+
+
 
 
 }

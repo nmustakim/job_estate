@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:job_estate/app_export/app_export.dart';
 
-
-
-// ignore: must_be_immutable
 class BannerWidget extends StatelessWidget {
-  const BannerWidget({Key? key})
+  final String totalJobs,newJobs,postedToday;
+  const BannerWidget({Key? key, required this.totalJobs, required this.newJobs, required this.postedToday})
       : super(
           key: key,
         );
@@ -19,30 +17,28 @@ class BannerWidget extends StatelessWidget {
         alignment: Alignment.centerLeft,
         children: [
           Container(
-  decoration: BoxDecoration(
-
-    gradient: LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      colors: [Colors.blue, Colors.redAccent],
-    ),
-    boxShadow: [
-      BoxShadow(
-        color: Colors.grey.withOpacity(0.5),
-        spreadRadius: 5,
-        blurRadius: 7,
-        offset: Offset(0, 3),
-      ),
-    ],
-    borderRadius: BorderRadius.circular(
-      8.h,
-    ),
-  ),
-  height: 160.v,
-  width: 343.h,
-  alignment: Alignment.center,
-),
-
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Colors.blue, Colors.redAccent],
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: Offset(0, 3),
+                ),
+              ],
+              borderRadius: BorderRadius.circular(
+                8.h,
+              ),
+            ),
+            height: 160.v,
+            width: 343.h,
+            alignment: Alignment.center,
+          ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -51,10 +47,9 @@ class BannerWidget extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    BannerText(title: "New Jobs", value: "1200"),
-                    BannerText(title: "Hot Jobs", value: "300"),
-                    BannerText(title: "Posted Today", value: "600"),
-
+                    BannerText(title: "Total Jobs", value: totalJobs),
+                    BannerText(title: "New Jobs", value: newJobs),
+                    BannerText(title: "Posted Today", value: postedToday),
                   ],
                 ),
               ),
@@ -66,14 +61,13 @@ class BannerWidget extends StatelessWidget {
   }
 }
 
-
 class BannerText extends StatelessWidget {
-  final String title,value;
+  final String title, value;
   const BannerText({super.key, required this.title, required this.value});
 
   @override
   Widget build(BuildContext context) {
-    return           Column(
+    return Column(
       children: [
         Padding(
           padding: EdgeInsets.only(
@@ -92,12 +86,11 @@ class BannerText extends StatelessWidget {
             horizontal: 9.h,
             vertical: 8.v,
           ),
-          decoration:
-          AppDecoration.fillOnPrimaryContainer.copyWith(
+          decoration: AppDecoration.fillOnPrimaryContainer.copyWith(
             borderRadius: BorderRadiusStyle.roundedBorder5,
           ),
           child: Text(
-        value,
+            value,
             textAlign: TextAlign.center,
             style: theme.textTheme.titleMedium,
           ),
@@ -106,4 +99,3 @@ class BannerText extends StatelessWidget {
     );
   }
 }
-

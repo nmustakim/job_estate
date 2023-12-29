@@ -1,9 +1,9 @@
 class Lists {
   List<String> employmentType = ['Full time', 'Part time', 'Contractual'];
 
-  List<String> organizationType = [
+  List<String> professionType = [
     'Design',
-    'Software',
+    'Software Engineering',
     'Accounting',
     'Engineering'
   ];

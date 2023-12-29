@@ -7,6 +7,16 @@ List <Job> jobsList;
 FetchJobsSuccessState(this.jobsList);
 }
 
+class FetchUserAppliedJobsSuccessState extends SuccessState{
+  List <Job> appliedJobs;
+  FetchUserAppliedJobsSuccessState(this.appliedJobs);
+}
+
+class FetchTypeWiseJobsSuccessState extends SuccessState{
+  List <Job> typeWiseJobs;
+  FetchTypeWiseJobsSuccessState(this.typeWiseJobs);
+}
+
 class PublishJobSuccessState extends SuccessState{
 
   PublishJobSuccessState();
@@ -15,4 +25,9 @@ class PublishJobSuccessState extends SuccessState{
 class RemoveJobsSuccessState extends SuccessState{
 
  RemoveJobsSuccessState();
+}
+
+class ApplyJobSuccessState extends SuccessState{
+
+  ApplyJobSuccessState();
 }

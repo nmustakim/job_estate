@@ -6,7 +6,7 @@ import 'package:nb_utils/nb_utils.dart';
 
 import '../../core/states/base_states.dart';
 import '../../models/job_model.dart';
-import 'fetch_jobs_controller.dart';
+import 'job_controller.dart';
 
 final publishJobProvider =
     StateNotifierProvider<PublishJobController, BaseState>(

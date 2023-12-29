@@ -1,5 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:job_estate/app_export/app_export.dart';
+import 'package:job_estate/controllers/user/user_controller.dart';
+import 'package:job_estate/core/states/base_states.dart';
 import 'package:job_estate/widgets/app_bar/custom_app_bar_job_list.dart';
 import 'package:job_estate/widgets/custom_elevated_button.dart';
 
@@ -87,7 +91,8 @@ class JobDetails extends StatelessWidget {
               Wrap(
                 spacing: 6.0,
                 children: [
-                  ...job.rolesAndResponsibilities.map((role) =>  Text(
+                  ...job.rolesAndResponsibilities.map(
+                    (role) => Text(
                       role,
                       style: theme.textTheme.bodyMedium,
                     ),
@@ -108,18 +113,28 @@ class JobDetails extends StatelessWidget {
                 spacing: 6.0, // Adjust spacing as needed
                 children: [
                   ...job.skills.map((skill) => Chip(
-                    label: Text(
-                      skill,
-                      style: theme.textTheme.bodyMedium,
-                    ),
-                  )),
+                        label: Text(
+                          skill,
+                          style: theme.textTheme.bodyMedium,
+                        ),
+                      )),
                 ],
               ),
               SizedBox(height: 20),
-              CustomElevatedButton(
-                text: "Apply",
-                onPressed: () {},
-              ),
+              Consumer(builder: (context, ref, _) {
+                final applyState = ref.watch(userProvider);
+                return CustomElevatedButton(
+                  buttonStyle: ElevatedButton.styleFrom(
+                      backgroundColor: applyState is LoadingState
+                          ? Colors.grey : theme.primaryColor
+                  ),
+                  text:applyState is LoadingState ?"Please wait...":"Apply",
+                  onPressed: () {
+                    final userId = FirebaseAuth.instance.currentUser!.uid;
+                    ref.read(userProvider.notifier).applyForJob(job.id!, userId);
+                  },
+                );
+              }),
               SizedBox(
                 height: 12.v,
               )

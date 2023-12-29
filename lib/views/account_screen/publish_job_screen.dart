@@ -71,7 +71,7 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
             CustomHeader(title: 'Organization type'),
             CustomTextFormField(
                 suffix: CustomDropdownFormField(
-                  items: Lists().organizationType,
+                  items: Lists().professionType,
                   onChanged: (value) {
                     setState(() {
                       _organizationTypeController.text = value ?? '';
@@ -80,7 +80,7 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                   },
                 ),
                 controller: _organizationTypeController,
-                hintText: 'Select organization type',
+                hintText: 'Select profession type',
                 validator: (value) => Validator.validateField(value: value)),
             SizedBox(height: 16.h),
             CustomHeader(title: 'Logo'),
@@ -220,7 +220,7 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                             postedDate: DateTime.now(),
                             logo: _logoNameController.text,
                             organizationName: _organizationNameController.text,
-                            organizationType: _organizationTypeController.text,
+                            professionType: _organizationTypeController.text,
                             jobSummary: _jobSummaryController.text,
                             rolesAndResponsibilities: selectedRolesAndResponsibilities,
                             education: _educationController.text,

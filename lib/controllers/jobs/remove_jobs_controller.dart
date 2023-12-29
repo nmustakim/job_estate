@@ -5,7 +5,7 @@ import 'package:nb_utils/nb_utils.dart';
 
 import '../../core/states/base_states.dart';
 
-import 'fetch_jobs_controller.dart';
+import 'job_controller.dart';
 
 final RemoveJobsProvider =
 StateNotifierProvider<RemoveJobsController, BaseState>(

@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:job_estate/app_export/app_export.dart';
 import 'package:job_estate/controllers/auth/auth_states.dart';
-import 'package:job_estate/controllers/jobs/fetch_jobs_controller.dart';
+import 'package:job_estate/controllers/jobs/job_controller.dart';
 import 'package:job_estate/controllers/user/user_controller.dart';
 import 'package:job_estate/routes/app_routes.dart';
 import 'package:job_estate/services/navigation_service.dart';

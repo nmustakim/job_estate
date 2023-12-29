@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:job_estate/services/navigation_service.dart';
 
 import '../../controllers/auth/auth_controller.dart';
+import '../../controllers/user/applied_jobs_controller.dart';
 import '../../routes/app_routes.dart';
 import '../../theme/app_decoration.dart';
 import '../../theme/theme_helper.dart';
@@ -42,15 +44,19 @@ class AccountScreen extends StatelessWidget {
                     NavigationService.navigateToNamedRoute(
                         AppRoutes.profileScreen);
                   }),
-                  _buildAccountOption(context,
+                  Consumer(
+                    builder: (context,ref,_) {
+                      return _buildAccountOption(context,
                       image: ImageConstant.imgCheckmark,
-                      orderLabel: "Applied Jobs"),
-                  SizedBox(height: 5.v),
-                  _buildAccountOption(context,
-                      image: ImageConstant.imgSave,
-                      orderLabel: "Saved Jobs", onTapAccountOption: () {
-                    onTapAccountOption1(context);
-                  }),
+                      orderLabel: "Applied Jobs",
+                      onTapAccountOption: ()async{
+                      final userId = FirebaseAuth.instance.currentUser!.uid;
+                      await ref.read(appliedJobsProvider.notifier).fetchUserAppliedJobs(userId).then((value) => NavigationService.navigateToNamedRoute(AppRoutes.appliedJobsScreen));
+                      }
+                      );
+                    }
+                  ),
+
                   SizedBox(height: 5.v),
                   _buildAccountOption(context,
                       image: ImageConstant.imgPublish,

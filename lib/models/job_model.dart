@@ -10,7 +10,7 @@ class Job {
   final DateTime postedDate;
   final String logo;
   final String organizationName;
-  final String organizationType;
+  final String professionType;
   final String jobSummary;
   final List<String> rolesAndResponsibilities;
   final String education;
@@ -27,7 +27,7 @@ class Job {
     required this.postedDate,
     required this.logo,
     required this.organizationName,
-    required this.organizationType,
+    required this.professionType,
     required this.jobSummary,
     required this.rolesAndResponsibilities,
     required this.education,
@@ -47,7 +47,7 @@ class Job {
     postedDate: DateTime.parse(json['postedDate']),
     logo: json['logo'],
     organizationName: json['organizationName'],
-    organizationType: json['organizationType'],
+    professionType: json['professionType'],
     jobSummary: json['jobSummary'],
     rolesAndResponsibilities:
     List<String>.from(json['rolesAndResponsibilities']),
@@ -66,7 +66,7 @@ class Job {
     'postedDate': postedDate.toIso8601String(),
     'logo': logo,
     'organizationName': organizationName,
-    'organizationType': organizationType,
+    'professionType': professionType,
     'jobSummary': jobSummary,
     'rolesAndResponsibilities': rolesAndResponsibilities,
     'education': education,
@@ -85,7 +85,7 @@ class Job {
     DateTime? postedDate,
     String? logo,
     String? organizationName,
-    String? organizationType,
+    String? professionType,
     String? jobSummary,
     List<String>? rolesAndResponsibilities,
     List<String>? requirements,
@@ -103,7 +103,7 @@ class Job {
       postedDate: postedDate ?? this.postedDate,
       logo: logo ?? this.logo,
       organizationName: organizationName ?? this.organizationName,
-      organizationType: organizationType ?? this.organizationType,
+      professionType: professionType ?? this.professionType,
       jobSummary: jobSummary ?? this.jobSummary,
       rolesAndResponsibilities:
       rolesAndResponsibilities ?? this.rolesAndResponsibilities,
