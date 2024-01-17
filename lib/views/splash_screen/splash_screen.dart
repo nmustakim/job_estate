@@ -18,8 +18,8 @@ import '../../widgets/custom_image_view.dart';
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({Key? key})
       : super(
-          key: key,
-        );
+    key: key,
+  );
 
   @override
   ConsumerState<SplashScreen> createState() => _SplashScreenState();

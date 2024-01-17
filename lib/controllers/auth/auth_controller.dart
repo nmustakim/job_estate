@@ -21,7 +21,7 @@ final authStateProvider = StreamProvider<User?>((ref) {
 });
 
 final authenticationProvider = StateNotifierProvider(
-  (ref) => AuthenticationController(
+      (ref) => AuthenticationController(
     ref: ref,
     firebaseAuth: ref.read(firebaseAuthProvider),
   ),
@@ -37,7 +37,7 @@ class AuthenticationController extends StateNotifier<BaseState> {
   Stream<User?> get authStateChange => firebaseAuth.authStateChanges();
 
   static StateNotifierProvider<AuthenticationController, dynamic>
-      get controller => authenticationProvider;
+  get controller => authenticationProvider;
 
   Future<void> signIn(context,
       {required String email, required String password}) async {
@@ -90,7 +90,7 @@ class AuthenticationController extends StateNotifier<BaseState> {
       state = LoadingState();
 
       final UserCredential userCredential =
-          await firebaseAuth.createUserWithEmailAndPassword(
+      await firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );

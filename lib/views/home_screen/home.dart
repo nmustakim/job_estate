@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:job_estate/controllers/jobs/job_states.dart';
 import 'package:job_estate/controllers/jobs/job_controller.dart';
 import 'package:job_estate/controllers/jobs/typewise_job_controller.dart';
+import 'package:job_estate/controllers/user/favorite_jobs_controller.dart';
 import 'package:job_estate/views/home_screen/widgets/banner_widget.dart';
 import 'package:job_estate/views/home_screen/widgets/job_card_list.dart';
 import 'package:job_estate/views/typewise_jobs_screen/typewise_jobs_screen.dart';
@@ -67,6 +69,7 @@ class _HomeState extends ConsumerState<Home> {
                             title: "Recent jobs",
                             seeMoreLink: "View all",
                           ),
+
                           JobCardList(
                             jobsList: jobs,
                             isHome: true,

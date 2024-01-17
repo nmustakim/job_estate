@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Job {
   final String? id;
   final String title;
@@ -45,8 +47,8 @@ class Job {
         ? List<String>.from(json['applicants'])
         : null,
     favoredBy:json['favoredBy'] != null
-  ? List<String>.from(json['favoredBy'])
-      : null,
+        ? List<String>.from(json['favoredBy'])
+        : null,
     skills: List<String>.from(json['skillsRequired']),
     employmentType: json['employmentType'],
     postedDate: DateTime.parse(json['postedDate']),
@@ -117,5 +119,33 @@ class Job {
       rolesAndResponsibilities ?? this.rolesAndResponsibilities,
       education: education ?? this.education,
     );
+  }
+
+  factory Job.fromDocument(DocumentSnapshot doc) {
+    Map<String, dynamic> json = doc.data() as Map<String, dynamic>;
+    json['id'] = doc.id;
+    return Job.fromJson(json);
+  }
+
+  // New method to convert a Job object into a Firestore document
+  Map<String, dynamic> toDocument() {
+    return {
+      'id': id,
+      'title': title,
+      'location': location,
+      'salary': salary,
+      'postedBy': postedBy,
+      'applicants': applicants,
+      'favoredBy': favoredBy,
+      'skillsRequired': skills,
+      'employmentType': employmentType,
+      'postedDate': postedDate.toIso8601String(),
+      'logo': logo,
+      'organizationName': organizationName,
+      'professionType': professionType,
+      'jobSummary': jobSummary,
+      'rolesAndResponsibilities': rolesAndResponsibilities,
+      'education': education,
+    };
   }
 }
