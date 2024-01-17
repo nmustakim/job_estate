@@ -22,6 +22,10 @@ class JobCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final userId = FirebaseAuth.instance.currentUser!.uid;
     final favJobs = ref.watch(favoriteJobsProvider);
+
+    final isFav = ref.watch(favoriteJobsProvider.notifier)
+        .favoriteJobIds
+        .contains(job.id!);
     return InkWell(
       onTap: onTap,
       child: Card(
@@ -60,13 +64,7 @@ class JobCard extends ConsumerWidget {
                     ],
                   ),
                   Expanded(child: SizedBox()),
-                  Consumer(
-                    builder: (context, ref, _) {
-
-                      final isFav = ref.watch(favoriteJobsProvider.notifier)
-                          .favoriteJobIds
-                          .contains(job.id!);
-                      return InkWell(
+              InkWell(
                         onTap: () async {
                           final favController = ref.read(favoriteJobsProvider.notifier);
                           if (isFav) {
@@ -80,9 +78,8 @@ class JobCard extends ConsumerWidget {
                               ? ImageConstant.imgLoveIcon
                               : ImageConstant.imgLoveOutlined,
                         ),
-                      );
-                    },
-                  ),
+                      )
+
                 ],
               ),
               SizedBox(height: 10.0.v),
