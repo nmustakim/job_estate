@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:job_estate/controllers/user/favorite_jobs_controller.dart';
 import 'package:job_estate/views/home_screen/widgets/job_card.dart';
 
 import '../../constants/image_constant.dart';
@@ -26,8 +27,8 @@ class _FavoriteScreenState extends ConsumerState<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
-    final jobsState = ref.watch(jobsProvider);
-    final jobs = jobsState is FetchJobsSuccessState ? jobsState.jobsList:[];
+    final jobsState = ref.watch(favoriteJobsProvider);
+    final jobs = jobsState is FetchUserFavoriteJobsSuccessState ? jobsState.favJobs:[];
     return Scaffold(
         appBar: _buildAppBar(context),
         body: Padding(

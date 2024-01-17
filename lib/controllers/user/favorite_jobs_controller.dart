@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:job_estate/controllers/jobs/job_controller.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../core/states/base_states.dart';
@@ -33,6 +34,8 @@ class FavoriteJobsController extends StateNotifier<BaseState> {
         final data = userFavorites.data();
         if (data != null) {
           favoriteJobIds.addAll(List<String>.from(data['favoriteJobIds']));
+          favoriteJobs = await fetchJobsByIds(favoriteJobIds);
+
           state = FetchUserFavoriteJobsSuccessState(favoriteJobs);
         }
       }
@@ -40,6 +43,18 @@ class FavoriteJobsController extends StateNotifier<BaseState> {
       print(stackTrace);
       state = ErrorState(message: error.toString());
       toast("Error fetching favorite jobs");
+    }
+  }
+
+  Future<List<Job>> fetchJobsByIds(Set<String> jobIds) async {
+    try {
+
+      final jobList = ref!.read(jobsProvider.notifier).jobList;
+      return jobList.where((job) => jobIds.contains(job.id)).toList();
+    } catch (error) {
+      print('fetchJobsByIds() error = $error');
+      toast("Error fetching jobs by IDs");
+      return [];
     }
   }
 
@@ -58,6 +73,7 @@ class FavoriteJobsController extends StateNotifier<BaseState> {
     try {
       favoriteJobIds.remove(jobId);
       await updateFavoritesInFirebase(userId);
+
       state = FetchUserFavoriteJobsSuccessState(favoriteJobs);
     } catch (error) {
       print('removeFromFavorites() error = $error');
@@ -70,6 +86,7 @@ class FavoriteJobsController extends StateNotifier<BaseState> {
       await favoritesCollection
           .doc(userId)
           .set({'favoriteJobIds': favoriteJobIds.toList()});
+      await fetchFavorites(userId);
     } catch (error) {
       print('updateFavoritesInFirebase() error = $error');
     }
