@@ -21,7 +21,7 @@ class JobCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userId = FirebaseAuth.instance.currentUser!.uid;
-
+    final favJobs = ref.watch(favoriteJobsProvider);
     return InkWell(
       onTap: onTap,
       child: Card(
@@ -62,7 +62,7 @@ class JobCard extends ConsumerWidget {
                   Expanded(child: SizedBox()),
                   Consumer(
                     builder: (context, ref, _) {
-                       final favJobs = ref.watch(favoriteJobsProvider);
+
                       final isFav = ref.watch(favoriteJobsProvider.notifier)
                           .favoriteJobIds
                           .contains(job.id!);
