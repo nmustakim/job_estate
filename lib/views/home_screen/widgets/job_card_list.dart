@@ -37,6 +37,7 @@ class _JobCardListState extends State<JobCardList> {
             margin: const EdgeInsets.symmetric(vertical: 8.0),
             child: JobCard(
               job: job,
+              onFavScreen: false,
               onTap: () => _onTapProfessionIcon(context, job),
             ),
           );

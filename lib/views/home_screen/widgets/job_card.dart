@@ -10,12 +10,13 @@ import '../../../models/job_model.dart';
 
 class JobCard extends StatelessWidget {
   final Job job;
+  final bool onFavScreen;
   final VoidCallback onTap;
 
   const JobCard({
     Key? key,
     required this.job,
-    required this.onTap,
+    required this.onTap, required this.onFavScreen,
   }) : super(key: key);
 
   @override
@@ -73,7 +74,7 @@ class JobCard extends StatelessWidget {
                     final favController = ref.read(
                         favoriteJobsProvider.notifier);
                     if (isFav) {
-                      await favController.removeFromFavorites(userId, job.id!);
+                      await favController.removeFromFavorites(userId, job.id!,);
                     } else {
                       await favController.addToFavorites(userId, job.id!);
                     }

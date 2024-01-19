@@ -47,7 +47,7 @@ class _FavoriteScreenState extends ConsumerState<FavoriteScreen> {
                 itemCount: jobs.length,
                 itemBuilder: (context, index) {
                   final job = jobs[index];
-                  return JobCard(job: job, onTap: () { onTapJobCard(context,job); },);
+                  return JobCard(job: job,onFavScreen: true, onTap: () { onTapJobCard(context,job); },);
                 })));
 
   }

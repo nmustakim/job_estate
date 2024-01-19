@@ -53,6 +53,7 @@ class _AppliedJobsScreenState extends ConsumerState<AppliedJobsScreen> {
                   final job = jobs[index];
                   return JobCard(
                     job: job,
+                    onFavScreen: false,
                     onTap: () {
                       onTapJobCard(context, job);
                     },

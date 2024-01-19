@@ -125,16 +125,17 @@ class JobDetails extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 Consumer(builder: (context, ref, _) {
-                  final applyState = ref.watch(userProvider);
+                  final userId = FirebaseAuth.instance.currentUser!.uid;
+                  final applyState = ref.watch(appliedJobsProvider);
                   return CustomElevatedButton(
                     buttonStyle: ElevatedButton.styleFrom(
-                        backgroundColor: applyState is LoadingState
+                        backgroundColor:job.applicants!.contains(userId)|| applyState is LoadingState
                             ? Colors.grey : theme.primaryColor
                     ),
-                    text:applyState is LoadingState ?"Please wait...":"Apply",
+                    text:job.applicants!.contains(userId)?"Already applied":applyState is LoadingState ?"Please wait...":"Apply",
                     onPressed: () {
-                      final userId = FirebaseAuth.instance.currentUser!.uid;
-                      ref.read(appliedJobsProvider.notifier).applyForJob(job.id!, userId);
+
+                      job.applicants!.contains(userId)?null: ref.read(appliedJobsProvider.notifier).applyForJob(job.id!, userId);
 
                     },
                   );
