@@ -86,7 +86,7 @@ class FavoriteJobsController extends StateNotifier<BaseState> {
       await favoritesCollection
           .doc(userId)
           .set({'favoriteJobIds': favoriteJobIds.toList()});
-      await fetchFavorites(userId);
+
     } catch (error) {
       print('updateFavoritesInFirebase() error = $error');
     }

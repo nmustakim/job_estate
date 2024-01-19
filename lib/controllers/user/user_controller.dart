@@ -26,6 +26,7 @@ class UserController extends StateNotifier<BaseState> {
 
   UserModel? user;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  List <String> appliedJObIds = [];
 
   Future<void> fetchUser() async {
     try {
@@ -174,22 +175,7 @@ class UserController extends StateNotifier<BaseState> {
 
 
 
-  Future<void> applyForJob(String jobId, String userId) async {
-    try {
-      state = LoadingState();
-      DocumentReference jobRef = _firestore.collection('Jobs').doc(jobId);
 
-      await jobRef.update({
-        'applicants': FieldValue.arrayUnion([userId]),
-      });
-      toast('Successfully applied to the job');
-      state = ApplyJobSuccessState();
-    } catch (error) {
-      state = ErrorState(message: error.toString());
-      toast('Failed to apply');
-      ;
-    }
-  }
 
 
 }

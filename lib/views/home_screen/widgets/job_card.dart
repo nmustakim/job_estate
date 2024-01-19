@@ -8,7 +8,7 @@ import 'package:job_estate/controllers/user/user_controller.dart';
 
 import '../../../models/job_model.dart';
 
-class JobCard extends ConsumerWidget {
+class JobCard extends StatelessWidget {
   final Job job;
   final VoidCallback onTap;
 
@@ -19,13 +19,9 @@ class JobCard extends ConsumerWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final userId = FirebaseAuth.instance.currentUser!.uid;
-    final favJobs = ref.watch(favoriteJobsProvider);
 
-    final isFav = ref.watch(favoriteJobsProvider.notifier)
-        .favoriteJobIds
-        .contains(job.id!);
     return InkWell(
       onTap: onTap,
       child: Card(
@@ -64,21 +60,33 @@ class JobCard extends ConsumerWidget {
                     ],
                   ),
                   Expanded(child: SizedBox()),
-              InkWell(
-                        onTap: () async {
-                          final favController = ref.read(favoriteJobsProvider.notifier);
-                          if (isFav) {
-                            await favController.removeFromFavorites(userId, job.id!);
-                          } else {
-                            await favController.addToFavorites(userId, job.id!);
-                          }
-                        },
-                        child: CustomImageView(
-                          imagePath: isFav
-                              ? ImageConstant.imgLoveIcon
-                              : ImageConstant.imgLoveOutlined,
-                        ),
-                      )
+              Consumer(builder: (context,ref,_) {
+                final favJobs = ref.watch(favoriteJobsProvider);
+
+                final isFav = ref
+                    .read(favoriteJobsProvider.notifier)
+                    .favoriteJobIds
+                    .contains(job.id!);
+
+                return InkWell(
+                  onTap: () async {
+                    final favController = ref.read(
+                        favoriteJobsProvider.notifier);
+                    if (isFav) {
+                      await favController.removeFromFavorites(userId, job.id!);
+                    } else {
+                      await favController.addToFavorites(userId, job.id!);
+                    }
+                  },
+                  child: CustomImageView(
+                    imagePath: isFav
+                        ? ImageConstant.imgLoveIcon
+                        : ImageConstant.imgLoveOutlined,
+                  ),
+
+                );
+              }
+              )
 
                 ],
               ),

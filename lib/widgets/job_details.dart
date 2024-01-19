@@ -2,11 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:job_estate/app_export/app_export.dart';
+import 'package:job_estate/controllers/user/applied_jobs_controller.dart';
 import 'package:job_estate/controllers/user/user_controller.dart';
 import 'package:job_estate/core/states/base_states.dart';
 import 'package:job_estate/widgets/app_bar/custom_app_bar_job_list.dart';
 import 'package:job_estate/widgets/custom_elevated_button.dart';
 
+import '../controllers/jobs/job_controller.dart';
 import '../models/job_model.dart';
 import 'app_bar/appbar_leading_image.dart';
 import 'app_bar/appbar_subtitle.dart';
@@ -132,7 +134,8 @@ class JobDetails extends StatelessWidget {
                     text:applyState is LoadingState ?"Please wait...":"Apply",
                     onPressed: () {
                       final userId = FirebaseAuth.instance.currentUser!.uid;
-                      ref.read(userProvider.notifier).applyForJob(job.id!, userId);
+                      ref.read(appliedJobsProvider.notifier).applyForJob(job.id!, userId);
+
                     },
                   );
                 }),

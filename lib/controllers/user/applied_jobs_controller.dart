@@ -15,15 +15,18 @@ class AppliedJobsController extends StateNotifier<BaseState> {
   final Ref? ref;
   AppliedJobsController({this.ref}) : super(const InitialState());
 
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
 
   List<Job> appliedJobs = [];
+  List <String> appliedJobIds = [];
 
 
   Future<void> fetchUserAppliedJobs(String userId) async {
     try {
       state = LoadingState();
 
-      appliedJobs = ref!.read(jobsProvider.notifier).jobList.where((job) => job.applicants?.contains(userId) == true).toList();
+      appliedJobs = ref!.watch(jobsProvider.notifier).jobList.where((job) => job.applicants?.contains(userId) == true).toList();
 
       state = FetchUserAppliedJobsSuccessState(appliedJobs);
     } catch (error, stackTrace) {
@@ -34,7 +37,24 @@ class AppliedJobsController extends StateNotifier<BaseState> {
     }
   }
 
+  Future<void> applyForJob(String jobId, String userId) async {
+    try {
+      state = LoadingState();
+      DocumentReference jobRef = _firestore.collection('Jobs').doc(jobId);
 
+      await jobRef.update({
+        'applicants': FieldValue.arrayUnion([userId]),
+      });
+      ref!.read(jobsProvider.notifier).fetchJobs();
+
+      toast('Successfully applied to the job');
+      state = ApplyJobSuccessState();
+    } catch (error) {
+      state = ErrorState(message: error.toString());
+      toast('Failed to apply');
+      ;
+    }
+  }
 
 
 
