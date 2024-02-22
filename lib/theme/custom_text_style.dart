@@ -1,18 +1,19 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../app_export/app_export.dart';
 
 class CustomTextStyles {
   // Body text style
   static get bodySmall10 => theme.textTheme.bodySmall!.copyWith(
-        fontSize: 10.fSize,
+        fontSize: 10.sp,
       );
   static get bodySmallOnPrimary => theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.onPrimary.withOpacity(1),
       );
   static get bodySmallOnPrimary10 => theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.onPrimary.withOpacity(1),
-        fontSize: 10.fSize,
+        fontSize: 10.sp,
       );
   static get bodySmallOnPrimaryContainer => theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.onPrimaryContainer.withOpacity(1),
@@ -20,7 +21,7 @@ class CustomTextStyles {
   static get bodySmallOnPrimaryContainer10 =>
       theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.onPrimaryContainer,
-        fontSize: 10.fSize,
+        fontSize: 10.sp,
       );
   static get bodySmallOnPrimary_1 => theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.onPrimary,

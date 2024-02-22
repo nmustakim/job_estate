@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_estate/app_export/app_export.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -13,8 +14,8 @@ class ShimmerOnJobList extends StatelessWidget {
       child: ListView.builder(
         itemCount: 5,
         itemBuilder: (_, __) => SizedBox(
-          height: 150.v,
-          width: 230.h,
+          height: 150.h,
+          width: 230.w,
           child: Card(
             elevation: 4.0,
             shape: RoundedRectangleBorder(
@@ -30,8 +31,8 @@ class ShimmerOnJobList extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Container(
-                        width: 50.0.adaptSize,
-                        height: 50.0.adaptSize,
+                        width: 50.0.h,
+                        height: 50.0.w,
                         color: Colors.white,
                       ),
                       SizedBox(width: 8.0.h),
@@ -39,11 +40,11 @@ class ShimmerOnJobList extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Container(
-                            width: 230.v,
+                            width: 230.w,
                             height: theme.textTheme.titleLarge!.fontSize,
                             color: Colors.white,
                           ),
-                          SizedBox(height: 6.0.v),
+                          SizedBox(height: 6.0.h),
                           Container(
                             width: double.infinity,
                             height: theme.textTheme.bodyMedium!.fontSize,
@@ -53,26 +54,26 @@ class ShimmerOnJobList extends StatelessWidget {
                       ),
                       Expanded(child: SizedBox()),
                       Container(
-                        width: 24.0.adaptSize,
-                        height: 24.0.adaptSize,
+                        width: 24.0.h,
+                        height: 24.0.w,
                         color: Colors.white,
                       ),
                     ],
                   ),
-                  SizedBox(height: 10.0.v),
+                  SizedBox(height: 10.0.h),
                   Padding(
                     padding: EdgeInsets.only(left: 8.h),
                     child: Container(
-                      width: 150.v, // Adjust the width as needed
+                      width: 150.w,
                       height: theme.textTheme.titleMedium!.fontSize,
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(height: 6.0.v),
+                  SizedBox(height: 6.0.h),
                   Padding(
-                    padding: EdgeInsets.only(left: 8.h, bottom: 8.v),
+                    padding: EdgeInsets.only(left: 8.w, bottom: 8.h),
                     child: Container(
-                      width: 200.v, // Adjust the width as needed
+                      width: 200.w,
                       height: theme.textTheme.bodySmall!.fontSize,
                       color: Colors.white,
                     ),

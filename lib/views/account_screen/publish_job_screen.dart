@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_estate/app_export/app_export.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -47,20 +48,20 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-          leadingWidth: 50.v,
+          leadingWidth: 50.w,
           leading: AppbarLeadingImage(
               imagePath: ImageConstant.imgArrowLeftBlueGray300,
-              margin: EdgeInsets.only(left: 16.h, top: 16.v, bottom: 15.v),
+              margin: EdgeInsets.only(left: 16.w, top: 16.h, bottom: 15.h),
               onTap: () {
                 Navigator.pop(context);
               }),
-          height: 50.v,
+          height: 50.h,
           title: AppbarSubtitle(
               text: "Publish job", margin: EdgeInsets.only(left: 12.h))),
       body: Form(
         key: _formKey,
         child: ListView(
-          padding: EdgeInsets.fromLTRB(16.h, 24.v, 16.h, 0),
+          padding: EdgeInsets.fromLTRB(16.w, 24.h, 16.w, 0),
           children: <Widget>[
             CustomHeader(title: 'Organization Name'),
             CustomTextFormField(
@@ -91,7 +92,7 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                 });
               },
             ),
-            SizedBox(height: 16.v),
+            SizedBox(height: 16.h),
             CustomHeader(title: 'Job Title'),
             CustomTextFormField(
                 controller: _titleController,
@@ -118,7 +119,7 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                 controller: _salaryController,
                 hintText: 'Salary',
                 validator: (value) => Validator.validateField(value: value)),
-            SizedBox(height: 16.v),
+            SizedBox(height: 16.h),
             CustomHeader(title: 'Employment type'),
             CustomTextFormField(
                 suffix: CustomDropdownFormField(
@@ -132,7 +133,7 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                 controller: _employmentTypeController,
                 hintText: 'Select employment type',
                 validator: (value) => Validator.validateField(value: value)),
-            SizedBox(height: 16.v),
+            SizedBox(height: 16.h),
             CustomHeader(title: 'Skills'),
             Wrap(
               spacing: 4.0,
@@ -200,7 +201,7 @@ class _PublishJobScreenState extends State<PublishJobScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 20.v),
+            SizedBox(height: 20.h),
             Consumer(builder: (context, ref, _) {
               final publishJobState = ref.watch(publishJobProvider);
               return CustomElevatedButton(

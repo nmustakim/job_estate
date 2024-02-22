@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../app_export/app_export.dart';
 
 String _appTheme = "primary";
@@ -53,7 +54,7 @@ class ThemeHelper {
         style: ElevatedButton.styleFrom(
           backgroundColor: colorScheme.primary.withOpacity(1),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5.h),
+            borderRadius: BorderRadius.circular(5.r),
           ),
           shadowColor: colorScheme.primary,
           elevation: 10,
@@ -69,10 +70,10 @@ class ThemeHelper {
           backgroundColor: Colors.transparent,
           side: BorderSide(
             color: appTheme.blue50,
-            width: 1.h,
+            width: 1.r,
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5.h),
+            borderRadius: BorderRadius.circular(5.r),
           ),
           visualDensity: const VisualDensity(
             vertical: -4,
@@ -101,43 +102,43 @@ class TextThemes {
   static TextTheme textTheme(ColorScheme colorScheme) => TextTheme(
         bodySmall: TextStyle(
           color: appTheme.blueGray300,
-          fontSize: 12.fSize,
+          fontSize: 12.sp,
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w400,
         ),
         headlineSmall: TextStyle(
           color: colorScheme.onPrimaryContainer.withOpacity(1),
-          fontSize: 24.fSize,
+          fontSize: 24.sp,
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w700,
         ),
         labelLarge: TextStyle(
           color: colorScheme.onPrimary.withOpacity(1),
-          fontSize: 12.fSize,
+          fontSize: 12.sp,
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w700,
         ),
         labelMedium: TextStyle(
           color: appTheme.pink300,
-          fontSize: 10.fSize,
+          fontSize: 10.sp,
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w700,
         ),
         titleLarge: TextStyle(
           color: colorScheme.primary.withOpacity(1),
-          fontSize: 20.fSize,
+          fontSize: 20.sp,
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w700,
         ),
         titleMedium: TextStyle(
           color: colorScheme.onPrimary.withOpacity(1),
-          fontSize: 16.fSize,
+          fontSize: 16.sp,
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w700,
         ),
         titleSmall: TextStyle(
           color: colorScheme.onPrimary.withOpacity(1),
-          fontSize: 14.fSize,
+          fontSize: 14.sp,
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w700,
         ),

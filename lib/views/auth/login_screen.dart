@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_estate/app_export/app_export.dart';
 import 'package:job_estate/services/navigation_service.dart';
 
@@ -29,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
+
 
     return SafeArea(
         child: Scaffold(
@@ -39,11 +40,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Container(
                     width: double.maxFinite,
                     padding:
-                        EdgeInsets.only(left: 16.h, top: 68.v, right: 16.h),
+                        EdgeInsets.only(left: 16.w, top: 68.h, right: 16.w),
                     child: Column(children: [
-                      SizedBox(height: 50.v),
+                      SizedBox(height: 50.h),
                       _buildPageHeader(context),
-                      SizedBox(height: 28.v),
+                      SizedBox(height: 28.h),
                       CustomTextFormField(
                           validator:(value)=> Validator.validateEmail(value: value),
                           controller: emailController,
@@ -51,15 +52,15 @@ class _LoginScreenState extends State<LoginScreen> {
                           textInputType: TextInputType.emailAddress,
                           prefix: Container(
                               margin:
-                                  EdgeInsets.fromLTRB(16.h, 12.v, 10.h, 12.v),
+                                  EdgeInsets.fromLTRB(16.w, 12.h, 10.w, 12.h),
                               child: CustomImageView(
                                   imagePath: ImageConstant.imgMail,
-                                  height: 24.adaptSize,
-                                  width: 24.adaptSize)),
-                          prefixConstraints: BoxConstraints(maxHeight: 48.v),
+                                  height: 24.h,
+                                  width: 24.w)),
+                          prefixConstraints: BoxConstraints(maxHeight: 48.h),
                           contentPadding: EdgeInsets.only(
-                              top: 15.v, right: 30.h, bottom: 15.v)),
-                      SizedBox(height: 10.v),
+                              top: 15.h, right: 30.h, bottom: 15.h)),
+                      SizedBox(height: 10.h),
                       CustomTextFormField(
                         validator:(value)=> Validator.validatePassword(value: value),
                           controller: passwordController,
@@ -68,16 +69,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           textInputType: TextInputType.visiblePassword,
                           prefix: Container(
                               margin:
-                                  EdgeInsets.fromLTRB(16.h, 12.v, 10.h, 12.v),
+                                  EdgeInsets.fromLTRB(16.w, 12.h, 10.w, 12.h),
                               child: CustomImageView(
                                   imagePath: ImageConstant.imgLock,
-                                  height: 24.adaptSize,
-                                  width: 24.adaptSize)),
-                          prefixConstraints: BoxConstraints(maxHeight: 48.v),
+                                  height: 24.h,
+                                  width: 24.w)),
+                          prefixConstraints: BoxConstraints(maxHeight: 48.h),
                           obscureText: true,
                           contentPadding: EdgeInsets.only(
-                              top: 15.v, right: 30.h, bottom: 15.v)),
-                      SizedBox(height: 16.v),
+                              top: 15.h, right: 30.h, bottom: 15.h)),
+                      SizedBox(height: 16.h),
                       Consumer(
                         builder:(context,ref,_) {
                           final authState = ref.watch(authenticationProvider);
@@ -106,10 +107,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         }
                       ),
-                      SizedBox(height: 17.v),
+                      SizedBox(height: 17.h),
                       Text("Forgot password",
                           style: CustomTextStyles.labelLargePrimary),
-                      SizedBox(height: 7.v),
+                      SizedBox(height: 7.h),
                       RichText(
                         text: TextSpan(children: [
                           TextSpan(
@@ -129,21 +130,21 @@ class _LoginScreenState extends State<LoginScreen> {
                         ]),
                         textAlign: TextAlign.left,
                       ),
-                      SizedBox(height: 5.v)
+                      SizedBox(height: 5.h)
                     ])))));
   }
 
   Widget _buildPageHeader(BuildContext context) {
     return Column(children: [
       CustomIconButton(
-          height: 72.adaptSize,
-          width: 72.adaptSize,
+          height: 72.h,
+          width: 72.w,
           padding: EdgeInsets.all(20.h),
           decoration: IconButtonStyleHelper.fillPrimary,
           child: CustomImageView(imagePath: ImageConstant.imgLogo)),
-      SizedBox(height: 16.v),
+      SizedBox(height: 16.h),
       Text("Welcome to JobEstate", style: theme.textTheme.titleMedium),
-      SizedBox(height: 10.v),
+      SizedBox(height: 10.h),
       Text("Sign in to continue", style: theme.textTheme.bodySmall)
     ]);
   }

@@ -2,6 +2,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:job_estate/controllers/user/user_controller.dart';
@@ -13,7 +14,7 @@ import '../../../controllers/user/userStates.dart';
 import '../../../routes/app_routes.dart';
 import '../../../theme/theme_helper.dart';
 import '../../../utils/lists.dart';
-import '../../../utils/size_utils.dart';
+
 import '../../../widgets/app_bar/appbar_leading_image.dart';
 import '../../../widgets/app_bar/appbar_subtitle.dart';
 import '../../../widgets/app_bar/custom_app_bar.dart';
@@ -95,7 +96,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 leading: AppbarLeadingImage(
                     imagePath: ImageConstant.imgArrowLeftBlueGray300,
                     margin:
-                        EdgeInsets.only(left: 16.h, top: 16.v, bottom: 15.v),
+                        EdgeInsets.only(left: 16.h, top: 16.h, bottom: 15.h),
                     onTap: () {
                       Navigator.pop(context);
                     }),
@@ -105,7 +106,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 ? Center(child: CircularProgressIndicator())
                 : Container(
                     width: double.maxFinite,
-                    padding: EdgeInsets.symmetric(vertical: 36.v),
+                    padding: EdgeInsets.symmetric(vertical: 36.h),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -125,14 +126,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                   child: CustomImageView(
                                     imagePath: user.profileImageUrl ??
                                         ImageConstant.imageNotFound,
-                                    height: 72.adaptSize,
-                                    width: 72.adaptSize,
+                                    height: 72.h,
+                                    width: 72.h,
                                     radius: BorderRadius.circular(36.h),
                                   ),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(
-                                      left: 16.h, top: 9.v, bottom: 14.v),
+                                      left: 16.h, top: 9.h, bottom: 14.h),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -141,7 +142,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                         children: [
                                           isEditing
                                               ? SizedBox(
-                                                  width: 200.v,
+                                                  width: 200.h,
                                                   child: TextField(
                                                     controller:
                                                         _textEditingController,
@@ -153,7 +154,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                                       .textTheme.titleSmall,
                                                 ),
                                           SizedBox(
-                                            width: 16.v,
+                                            width: 16.h,
                                           ),
                                           GestureDetector(
                                             onTap: () {
@@ -178,13 +179,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                               imagePath: isEditing
                                                   ? ImageConstant.imgCheck
                                                   : ImageConstant.imgEdit,
-                                              height: 16.adaptSize,
-                                              width: 16.adaptSize,
+                                              height: 16.h,
+                                              width: 16.h,
                                             ),
                                           ),
                                         ],
                                       ),
-                                      SizedBox(height: 8.v),
+                                      SizedBox(height: 8.h),
                                       Text(user.email ?? '',
                                           style: theme.textTheme.bodySmall),
                                     ],
@@ -193,7 +194,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                               ],
                             ),
                           ),
-                          SizedBox(height: 32.v),
+                          SizedBox(height: 32.h),
                           ProfileItem(
                             icon: ImageConstant.imgGenderIcon,
                             title: "Gender",
@@ -213,7 +214,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                               _showDatePickerDialog(context);
                             },
                           ),
-                          SizedBox(height: 5.v),
+                          SizedBox(height: 5.h),
                           ProfileItem(
                               icon: ImageConstant.imgLockPrimary,
                               title: "Change password",

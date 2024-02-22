@@ -1,4 +1,5 @@
-import 'dart:ui';
+
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_estate/app_export/app_export.dart';
 
 import 'package:job_estate/theme/theme_helper.dart';
@@ -11,7 +12,7 @@ class CustomButtonStyles {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.horizontal(
             right: Radius.circular(
-              5.h,
+              5.r,
             ),
           ),
         ),

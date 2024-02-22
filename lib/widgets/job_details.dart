@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_estate/app_export/app_export.dart';
 import 'package:job_estate/controllers/user/applied_jobs_controller.dart';
 import 'package:job_estate/controllers/user/user_controller.dart';
@@ -24,32 +25,32 @@ class JobDetails extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: CustomAppBar(
-            leadingWidth: 50.v,
+            leadingWidth: 50.h,
             leading: AppbarLeadingImage(
                 imagePath: ImageConstant.imgArrowLeftBlueGray300,
-                margin: EdgeInsets.only(left: 16.h, top: 16.v, bottom: 15.v),
+                margin: EdgeInsets.only(left: 16.w, top: 16.h, bottom: 15.h),
                 onTap: () {
                   Navigator.pop(context);
                 }),
-            height: 50.v,
+            height: 50.h,
             title: AppbarSubtitle(
-                text: "Job details", margin: EdgeInsets.only(left: 12.h))),
+                text: "Job details", margin: EdgeInsets.only(left: 12.w))),
         body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0.h),
+            padding: EdgeInsets.symmetric(horizontal: 16.0.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 SizedBox(
-                  height: 16.h,
+                  height: 16.w,
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
-                        height: 80.h,
-                        width: 80.h,
+                        height: 80.w,
+                        width: 80.w,
                         decoration: BoxDecoration(
                           color: Colors.grey.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(12),
@@ -57,11 +58,11 @@ class JobDetails extends StatelessWidget {
                         padding: EdgeInsets.all(16),
                         child: CustomImageView(
                           imagePath: job.logo,
-                          height: 50.adaptSize,
-                          width: 50.adaptSize,
+                          height: 50.h,
+                          width: 50.w,
                         )),
                     SizedBox(
-                      width: 20.h,
+                      width: 20.w,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,7 +72,7 @@ class JobDetails extends StatelessWidget {
                           style: theme.textTheme.titleMedium,
                         ),
                         SizedBox(
-                          height: 1.h,
+                          height: 1.w,
                         ),
                         Text(
                           job.location,
@@ -81,16 +82,16 @@ class JobDetails extends StatelessWidget {
                     )
                   ],
                 ),
-                SizedBox(height: 20.h),
+                SizedBox(height: 20.w),
                 _buildHeader(context, title: "Job Summary"),
-                SizedBox(height: 8.h),
+                SizedBox(height: 8.w),
                 Text(
                   job.jobSummary ?? '',
                   style: theme.textTheme.bodyMedium,
                 ),
-                SizedBox(height: 20.h),
+                SizedBox(height: 20.w),
                 _buildHeader(context, title: "Roles & Responsibilities"),
-                SizedBox(height: 8.h),
+                SizedBox(height: 8.w),
                 Wrap(
                   spacing: 6.0,
                   children: [
@@ -102,16 +103,16 @@ class JobDetails extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 20.h),
+                SizedBox(height: 20.w),
                 _buildHeader(context, title: "Education"),
-                SizedBox(height: 8.h),
+                SizedBox(height: 8.w),
                 Text(
                   job.education,
                   style: theme.textTheme.bodyMedium,
                 ),
-                SizedBox(height: 20.h),
+                SizedBox(height: 20.w),
                 _buildHeader(context, title: "Required Skills"),
-                SizedBox(height: 8.h),
+                SizedBox(height: 8.w),
                 Wrap(
                   spacing: 6.0, // Adjust spacing as needed
                   children: [
@@ -141,7 +142,7 @@ class JobDetails extends StatelessWidget {
                   );
                 }),
                 SizedBox(
-                  height: 12.v,
+                  height: 12.h,
                 )
               ],
             ),

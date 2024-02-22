@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_estate/controllers/user/applied_jobs_controller.dart';
 import 'package:job_estate/views/home_screen/widgets/job_card.dart';
 
@@ -8,7 +9,6 @@ import '../../constants/image_constant.dart';
 import '../../controllers/jobs/job_states.dart';
 import '../../models/job_model.dart';
 
-import '../../utils/size_utils.dart';
 
 import '../../widgets/app_bar/appbar_leading_image.dart';
 import '../../widgets/app_bar/appbar_subtitle.dart';
@@ -27,24 +27,24 @@ class _AppliedJobsScreenState extends ConsumerState<AppliedJobsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
+
     final jobsState = ref.watch(appliedJobsProvider);
     final jobs = jobsState is FetchUserAppliedJobsSuccessState
         ? jobsState.appliedJobs
         : [];
     return Scaffold(
         appBar: CustomAppBar(
-            leadingWidth: 40.h,
+            leadingWidth: 40.w,
             leading: AppbarLeadingImage(
                 imagePath: ImageConstant.imgArrowLeftBlueGray300,
-                margin: EdgeInsets.only(left: 16.h, top: 16.v, bottom: 15.v),
+                margin: EdgeInsets.only(left: 16.w, top: 16.h, bottom: 15.h),
                 onTap: () {
                   Navigator.pop(context);
                 }),
             title: AppbarSubtitle(
-                text: "Applied jobs", margin: EdgeInsets.only(left: 12.h))),
+                text: "Applied jobs", margin: EdgeInsets.only(left: 12.w))),
         body: Padding(
-            padding: EdgeInsets.only(left: 16.h, top: 8.v, right: 16.h),
+            padding: EdgeInsets.only(left: 16.w, top: 8.h, right: 16.w),
             child: ListView.builder(
                 shrinkWrap: true,
                 physics: BouncingScrollPhysics(),
