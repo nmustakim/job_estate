@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_estate/app_export/app_export.dart';
 
 
@@ -32,7 +33,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
-      toolbarHeight: height ?? 56.v,
+      toolbarHeight: height ?? 56.h,
       automaticallyImplyLeading: false,
       backgroundColor: Colors.transparent,
       leadingWidth: leadingWidth ?? 0,
@@ -46,7 +47,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => Size(
-        mediaQueryData.size.width,
-        height ?? 56.v,
+      double.infinity,
+        height ?? 56.h,
       );
 }

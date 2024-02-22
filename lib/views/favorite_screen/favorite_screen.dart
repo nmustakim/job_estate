@@ -1,19 +1,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_estate/controllers/user/favorite_jobs_controller.dart';
 import 'package:job_estate/views/home_screen/widgets/job_card.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../constants/image_constant.dart';
-import '../../controllers/jobs/job_controller.dart';
 import '../../controllers/jobs/job_states.dart';
 import '../../core/states/base_states.dart';
 import '../../models/job_model.dart';
 
 import '../../theme/theme_helper.dart';
-import '../../utils/size_utils.dart';
-import '../../widgets/app_bar/appbar_leading_image.dart';
+
 import '../../widgets/app_bar/appbar_subtitle.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
 import '../../widgets/job_details.dart';
@@ -29,7 +27,7 @@ class _FavoriteScreenState extends ConsumerState<FavoriteScreen> {
 
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
+
     final jobsState = ref.watch(favoriteJobsProvider);
     final jobs = jobsState is FetchUserFavoriteJobsSuccessState ? jobsState.favJobs:[];
     if (jobsState is LoadingState) {
@@ -38,7 +36,7 @@ class _FavoriteScreenState extends ConsumerState<FavoriteScreen> {
     return Scaffold(
         appBar: _buildAppBar(context),
         body: Padding(
-            padding: EdgeInsets.only(left: 16.h, top: 8.v, right: 16.h),
+            padding: EdgeInsets.only(left: 16.w, top: 8.h, right: 16.w),
             child:jobs.isEmpty
                 ? _buildEmptyMessage()
                 : ListView.builder(
@@ -80,8 +78,8 @@ class _FavoriteScreenState extends ConsumerState<FavoriteScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
-                    width: 50.0.adaptSize,
-                    height: 50.0.adaptSize,
+                    width: 50.0.w,
+                    height: 50.0.h,
                     color: Colors.white,
                   ),
                   SizedBox(width: 8.0.h),
@@ -89,11 +87,11 @@ class _FavoriteScreenState extends ConsumerState<FavoriteScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Container(
-                        width: 230.v,
+                        width: 230.w,
                         height: theme.textTheme.titleLarge!.fontSize,
                         color: Colors.white,
                       ),
-                      SizedBox(height: 6.0.v),
+                      SizedBox(height: 6.0.h),
                       Container(
                         width: double.infinity,
                         height: theme.textTheme.bodyMedium!.fontSize,
@@ -103,26 +101,26 @@ class _FavoriteScreenState extends ConsumerState<FavoriteScreen> {
                   ),
                   Expanded(child: SizedBox()),
                   Container(
-                    width: 24.0.adaptSize,
-                    height: 24.0.adaptSize,
+                    width: 24.0.w,
+                    height: 24.0.h,
                     color: Colors.white,
                   ),
                 ],
               ),
-              SizedBox(height: 10.0.v),
+              SizedBox(height: 10.0.h),
               Padding(
                 padding: EdgeInsets.only(left: 8.h),
                 child: Container(
-                  width: 150.v, // Adjust the width as needed
+                  width: 150.w,
                   height: theme.textTheme.titleMedium!.fontSize,
                   color: Colors.white,
                 ),
               ),
-              SizedBox(height: 6.0.v),
+              SizedBox(height: 6.0.h),
               Padding(
-                padding: EdgeInsets.only(left: 8.h, bottom: 8.v),
+                padding: EdgeInsets.only(left: 8.h, bottom: 8.h),
                 child: Container(
-                  width: 200.v, // Adjust the width as needed
+                  width: 200.w,
                   height: theme.textTheme.bodySmall!.fontSize,
                   color: Colors.white,
                 ),

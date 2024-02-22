@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_estate/app_export/app_export.dart';
 
-import '../../../theme/app_decoration.dart';
-import '../../../widgets/custom_image_view.dart';
 
+class SearchResultItemWidget extends StatelessWidget {
 
-// ignore: must_be_immutable
-class SearchresultItemWidget extends StatelessWidget {
-  const SearchresultItemWidget({Key? key})
-      : super(
-          key: key,
-        );
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +19,16 @@ class SearchresultItemWidget extends StatelessWidget {
         children: [
           CustomImageView(
             imagePath:"",
-            height: 133.adaptSize,
-            width: 133.adaptSize,
+            height: 133.h,
+            width: 133.w,
             radius: BorderRadius.circular(
-              5.h,
+              5.r,
             ),
           ),
-          SizedBox(height: 8.v),
+          SizedBox(height: 8.h),
           SizedBox(
-            width: 107.h,
-            child: Text(
-              "msg_nike_air_max_270",
+            width: 107.w,
+            child: Text("Demo Text",
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: theme.textTheme.labelLarge!.copyWith(
@@ -44,24 +37,21 @@ class SearchresultItemWidget extends StatelessWidget {
             ),
           ),
 
-          SizedBox(height: 18.v),
-          Text(
-            "lbl_299_43",
+          SizedBox(height: 18.h),
+          Text("Demo Text",
             style: CustomTextStyles.labelLargePrimary,
           ),
-          SizedBox(height: 5.v),
+          SizedBox(height: 5.h),
           Row(
             children: [
-              Text(
-                "lbl_534_33",
+              Text("Demo Text",
                 style: CustomTextStyles.bodySmall10.copyWith(
                   decoration: TextDecoration.lineThrough,
                 ),
               ),
               Padding(
                 padding: EdgeInsets.only(left: 8.h),
-                child: Text(
-                  "lbl_24_off",
+                child: Text("Demo Text",
                   style: theme.textTheme.labelMedium,
                 ),
               ),

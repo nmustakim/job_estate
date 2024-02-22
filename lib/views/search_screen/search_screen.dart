@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_estate/app_export/app_export.dart';
 import 'package:job_estate/widgets/app_bar/appbar_title_edittext.dart';
 import 'package:job_estate/widgets/app_bar/appbar_trailing_image.dart';
@@ -12,52 +13,51 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
     return SafeArea(
         child: Scaffold(
             appBar: _buildAppBar(context),
             body: Container(
                 width: double.maxFinite,
-                padding: EdgeInsets.symmetric(vertical: 11.v),
+                padding: EdgeInsets.symmetric(vertical: 11.h),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Divider(indent: 6.h),
-                      SizedBox(height: 26.v),
+                      Divider(indent: 6.w),
+                      SizedBox(height: 26.h),
                       GestureDetector(
                           onTap: () {
                             onTapTxtNikeAirMaxReact(context);
                           },
                           child: Padding(
-                              padding: EdgeInsets.only(left: 16.h),
-                              child: Text("msg_nike_air_max_2703",
+                              padding: EdgeInsets.only(left: 16.w),
+                              child: Text("Demo Text",
                                   style: theme.textTheme.bodySmall))),
-                      SizedBox(height: 37.v),
+                      SizedBox(height: 37.h),
                       Padding(
                           padding: EdgeInsets.only(left: 16.h),
-                          child: Text("msg_nike_air_vapormax",
+                          child: Text("Demo Text",
                               style: theme.textTheme.bodySmall)),
-                      SizedBox(height: 34.v),
+                      SizedBox(height: 34.h),
                       Padding(
                           padding: EdgeInsets.only(left: 16.h),
-                          child: Text("msg_nike_air_max_2703",
+                          child:Text("Demo Text",
                               style: theme.textTheme.bodySmall)),
-                      SizedBox(height: 36.v),
+                      SizedBox(height: 36.h),
                       Padding(
                           padding: EdgeInsets.only(left: 16.h),
-                          child: Text("msg_nike_air_max_2704",
+                          child: Text("Demo Text",
                               style: theme.textTheme.bodySmall)),
-                      SizedBox(height: 37.v),
+                      SizedBox(height: 37.h),
                       Padding(
                           padding: EdgeInsets.only(left: 16.h),
-                          child: Text("msg_nike_air_vapormax2",
+                          child: Text("Demo Text",
                               style: theme.textTheme.bodySmall)),
-                      SizedBox(height: 35.v),
+                      SizedBox(height: 35.h),
                       Padding(
                           padding: EdgeInsets.only(left: 16.h),
-                          child: Text("msg_nike_air_max_97",
+                          child: Text("Demo Text",
                               style: theme.textTheme.bodySmall)),
-                      SizedBox(height: 5.v)
+                      SizedBox(height: 5.h)
                     ]))));
   }
 

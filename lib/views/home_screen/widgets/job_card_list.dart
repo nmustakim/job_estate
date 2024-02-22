@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:job_estate/app_export/app_export.dart';
-import 'package:job_estate/utils/size_utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 import '../../../widgets/job_details.dart';
 import '../../../models/job_model.dart';
@@ -22,7 +22,7 @@ class _JobCardListState extends State<JobCardList> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0.h),
+      padding: EdgeInsets.symmetric(horizontal: 16.0.w),
       child: ListView.builder(
         physics: widget.isHome == true
             ? NeverScrollableScrollPhysics()

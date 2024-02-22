@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 import '../../theme/custom_text_style.dart';
 import '../../theme/theme_helper.dart';
 import '../../constants/image_constant.dart';
-import '../../utils/size_utils.dart';
+
 import '../../widgets/app_bar/appbar_title_searchview.dart';
 import '../../widgets/app_bar/appbar_trailing_image.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
@@ -22,27 +23,27 @@ class SearchResultNoDataFoundScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
+
 
     return SafeArea(
       child: Scaffold(
         appBar: _buildAppBar(context),
         body: Container(
           width: double.maxFinite,
-          padding: EdgeInsets.symmetric(vertical: 11.v),
+          padding: EdgeInsets.symmetric(vertical: 11.h),
           child: Column(
             children: [
               Divider(),
-              SizedBox(height: 15.v),
+              SizedBox(height: 15.h),
               _buildResultCounter(context),
               Spacer(
                 flex: 31,
               ),
               _buildNoData(context),
-              SizedBox(height: 16.v),
+              SizedBox(height: 16.h),
               CustomElevatedButton(
-                text: "lbl_back_to_home",
-                margin: EdgeInsets.symmetric(horizontal: 16.h),
+                text: "Demo",
+                margin: EdgeInsets.symmetric(horizontal: 16.w),
               ),
               Spacer(
                 flex: 68,
@@ -67,7 +68,7 @@ class SearchResultNoDataFoundScreen extends StatelessWidget {
           imagePath: ImageConstant.imgSort,
           margin: EdgeInsets.only(
             left: 16.h,
-            top: 16.v,
+            top: 16.h,
             right: 16.h,
           ),
         ),
@@ -75,7 +76,7 @@ class SearchResultNoDataFoundScreen extends StatelessWidget {
           imagePath: ImageConstant.imgFilter,
           margin: EdgeInsets.only(
             left: 16.h,
-            top: 16.v,
+            top: 16.h,
             right: 32.h,
           ),
         ),
@@ -94,7 +95,7 @@ class SearchResultNoDataFoundScreen extends StatelessWidget {
           Opacity(
             opacity: 0.5,
             child: Padding(
-              padding: EdgeInsets.only(bottom: 4.v),
+              padding: EdgeInsets.only(bottom: 4.h),
               child: Text(
                 "lbl_0_result",
                 style: CustomTextStyles.labelLargeOnPrimary,
@@ -104,8 +105,8 @@ class SearchResultNoDataFoundScreen extends StatelessWidget {
           Spacer(),
           Padding(
             padding: EdgeInsets.only(
-              top: 2.v,
-              bottom: 3.v,
+              top: 2.h,
+              bottom: 3.h,
             ),
             child: Text(
               "lbl_man_shoes",
@@ -114,8 +115,8 @@ class SearchResultNoDataFoundScreen extends StatelessWidget {
           ),
           CustomImageView(
             imagePath: ImageConstant.imgDownIcon,
-            height: 24.adaptSize,
-            width: 24.adaptSize,
+            height: 24.h,
+            width: 24.w,
             margin: EdgeInsets.only(left: 8.h),
           ),
         ],
@@ -128,22 +129,22 @@ class SearchResultNoDataFoundScreen extends StatelessWidget {
     return Column(
       children: [
         CustomIconButton(
-          height: 72.adaptSize,
-          width: 72.adaptSize,
+          height: 72.h,
+          width: 72.w,
           padding: EdgeInsets.all(28.h),
           decoration: IconButtonStyleHelper.outlinePrimary,
           child: CustomImageView(
             imagePath: ImageConstant.imgCloseOnprimarycontainer,
           ),
         ),
-        SizedBox(height: 15.v),
+        SizedBox(height: 15.h),
         Text(
-          "msg_product_not_found",
+          "Product not found",
           style: CustomTextStyles.headlineSmallOnPrimary,
         ),
-        SizedBox(height: 11.v),
+        SizedBox(height: 11.h),
         Text(
-          "msg_thank_you_for_shopping",
+          "Demo",
           style: theme.textTheme.bodySmall,
         ),
       ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_estate/app_export/app_export.dart';
 import 'package:job_estate/views/account_screen/account_screen.dart';
 import 'package:job_estate/views/search_jobs_by_category_screen/search_jobs_by_category_screen.dart';
@@ -132,7 +133,7 @@ class BottomNavigationItem extends StatelessWidget {
             return CustomImageView(
                 imagePath: icon,
                 height: 20.h,
-                width: 20.h,
+                width: 20.w,
                 color: notifier.value != itemIndex
                     ? Colors.grey.shade500
                     : Colors.white);

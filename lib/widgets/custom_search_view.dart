@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_estate/app_export/app_export.dart';
 
 
@@ -104,21 +105,21 @@ class CustomSearchView extends StatelessWidget {
         hintStyle: hintStyle ?? theme.textTheme.bodySmall,
         prefixIcon: prefix ??
             Container(
-              margin: EdgeInsets.fromLTRB(16.h, 15.v, 8.h, 15.v),
+              margin: EdgeInsets.fromLTRB(16.w, 15.h, 8.w, 15.h),
               child: CustomImageView(
                 imagePath: ImageConstant.imgSearch,
-                height: 16.adaptSize,
-                width: 16.adaptSize,
+                height: 16.h,
+                width: 16.w,
               ),
             ),
         prefixIconConstraints: prefixConstraints ??
             BoxConstraints(
-              maxHeight: 46.v,
+              maxHeight: 46.h,
             ),
         suffixIcon: suffix ??
             Padding(
               padding: EdgeInsets.only(
-                right: 15.h,
+                right: 15.w,
               ),
               child: IconButton(
                 onPressed: () => controller!.clear(),
@@ -130,14 +131,14 @@ class CustomSearchView extends StatelessWidget {
             ),
         suffixIconConstraints: suffixConstraints ??
             BoxConstraints(
-              maxHeight: 46.v,
+              maxHeight: 46.h,
             ),
         isDense: true,
         contentPadding: contentPadding ??
             EdgeInsets.only(
-              top: 14.v,
-              right: 14.h,
-              bottom: 14.v,
+              top: 14.h,
+              right: 14.w,
+              bottom: 14.h,
             ),
         fillColor: fillColor,
         filled: filled,

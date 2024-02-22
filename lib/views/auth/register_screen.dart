@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_estate/controllers/auth/auth_controller.dart';
 
 import '../../core/states/base_states.dart';
@@ -10,7 +11,7 @@ import '../../theme/custom_text_style.dart';
 import '../../theme/theme_helper.dart';
 import '../../constants/image_constant.dart';
 import '../../utils/lists.dart';
-import '../../utils/size_utils.dart';
+
 import '../../widgets/custom_dropdown.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_icon_button.dart';
@@ -39,7 +40,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
+
     return SafeArea(
         child: Scaffold(
             // resizeToAvoidBottomInset: false,
@@ -48,27 +49,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   key: _formKey,
                   child: Container(
                       width: double.maxFinite,
-                      padding: EdgeInsets.symmetric(horizontal: 16.h),
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(height: 50.v),
+                            SizedBox(height: 50.h),
                             _buildPageHeader(context),
-                            SizedBox(height: 30.v),
+                            SizedBox(height: 30.h),
                             _buildFullName(context),
-                            SizedBox(height: 8.v),
+                            SizedBox(height: 8.h),
                             _buildEmail(context),
-                            SizedBox(height: 8.v),
+                            SizedBox(height: 8.h),
                             _buildGender(context),
-                            SizedBox(height: 8.v),
+                            SizedBox(height: 8.h),
                             _buildUserType(context),
-                            SizedBox(height: 8.v),
+                            SizedBox(height: 8.h),
                             _buildPassword(context),
-                            SizedBox(height: 8.v),
+                            SizedBox(height: 8.h),
                             _buildPasswordAgain(context),
-                            SizedBox(height: 20.v),
+                            SizedBox(height: 20.h),
                             _buildSignUp(context),
-                            SizedBox(height: 20.v),
+                            SizedBox(height: 20.h),
                             RichText(
                               text: TextSpan(children: [
                                 TextSpan(
@@ -88,7 +89,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ]),
                               textAlign: TextAlign.left,
                             ),
-                            SizedBox(height: 5.v)
+                            SizedBox(height: 5.h)
                           ]))),
             )));
   }
@@ -96,14 +97,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget _buildPageHeader(BuildContext context) {
     return Column(children: [
       CustomIconButton(
-          height: 72.adaptSize,
-          width: 72.adaptSize,
+          height: 72.h,
+          width: 72.w,
           padding: EdgeInsets.all(20.h),
           decoration: IconButtonStyleHelper.fillPrimary,
           child: CustomImageView(imagePath: ImageConstant.imgLogo)),
-      SizedBox(height: 16.v),
+      SizedBox(height: 16.h),
       Text("Let's get started", style: theme.textTheme.titleMedium),
-      SizedBox(height: 9.v),
+      SizedBox(height: 9.h),
       Text("Create new account", style: theme.textTheme.bodySmall)
     ]);
   }
@@ -113,13 +114,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
         controller: fullNameController,
         hintText: "Full name",
         prefix: Container(
-            margin: EdgeInsets.fromLTRB(16.h, 12.v, 10.h, 12.v),
+            margin: EdgeInsets.fromLTRB(16.w, 12.h, 10.w, 12.h),
             child: CustomImageView(
                 imagePath: ImageConstant.imgUser,
-                height: 24.adaptSize,
-                width: 24.adaptSize)),
-        prefixConstraints: BoxConstraints(maxHeight: 48.v),
-        contentPadding: EdgeInsets.only(top: 15.v, right: 30.h, bottom: 15.v));
+                height: 24.h,
+                width: 24.w)),
+        prefixConstraints: BoxConstraints(maxHeight: 48.h),
+        contentPadding: EdgeInsets.only(top: 15.w, right: 30.w, bottom: 15.h));
   }
 
   Widget _buildEmail(BuildContext context) {
@@ -128,13 +129,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
         hintText: "Email",
         textInputType: TextInputType.emailAddress,
         prefix: Container(
-            margin: EdgeInsets.fromLTRB(16.h, 12.v, 10.h, 12.v),
+            margin: EdgeInsets.fromLTRB(16.w, 12.h, 10.w, 12.h),
             child: CustomImageView(
                 imagePath: ImageConstant.imgMail,
-                height: 24.adaptSize,
-                width: 24.adaptSize)),
-        prefixConstraints: BoxConstraints(maxHeight: 48.v),
-        contentPadding: EdgeInsets.only(top: 15.v, right: 30.h, bottom: 15.v));
+                height: 24.h,
+                width: 24.w)),
+        prefixConstraints: BoxConstraints(maxHeight: 48.h),
+        contentPadding: EdgeInsets.only(top: 15.h, right: 30.w, bottom: 15.h));
   }
 
   Widget _buildUserType(BuildContext context) {
@@ -143,7 +144,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
         textInputType: TextInputType.text,
         suffix: CustomDropdownFormField(
-          leftPadding: 46.v,
+          leftPadding: 46.h,
           hintText: "User type",
           items: Lists().userType,
           onChanged: (value) {
@@ -153,14 +154,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
           },
         ),
         prefix: Container(
-            margin: EdgeInsets.fromLTRB(16.h, 12.v, 10.h, 12.v),
+            margin: EdgeInsets.fromLTRB(16.h, 12.h, 10.h, 12.h),
             child: CustomImageView(
                 imagePath: ImageConstant.imgUserPrimary,
                 color: Colors.grey,
-                height: 24.adaptSize,
-                width: 24.adaptSize)),
-        prefixConstraints: BoxConstraints(maxHeight: 48.v),
-        contentPadding: EdgeInsets.only(top: 15.v, right: 30.h, bottom: 15.v));
+                height: 24.h,
+                width: 24.w)),
+        prefixConstraints: BoxConstraints(maxHeight: 48.h),
+        contentPadding: EdgeInsets.only(top: 15.h, right: 30.h, bottom: 15.h));
   }
 
   Widget _buildGender(BuildContext context) {
@@ -169,7 +170,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
         textInputType: TextInputType.text,
         suffix: CustomDropdownFormField(
-          leftPadding: 46.v,
+          leftPadding: 46.h,
           hintText: "Gender",
           items: Lists().genderType,
           onChanged: (value) {
@@ -179,14 +180,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
           },
         ),
         prefix: Container(
-            margin: EdgeInsets.fromLTRB(16.h, 12.v, 10.h, 12.v),
+            margin: EdgeInsets.fromLTRB(16.h, 12.h, 10.h, 12.h),
             child: CustomImageView(
                 imagePath: ImageConstant.imgGenderIcon,
                 color: Colors.grey,
-                height: 24.adaptSize,
-                width: 24.adaptSize)),
-        prefixConstraints: BoxConstraints(maxHeight: 48.v),
-        contentPadding: EdgeInsets.only(top: 15.v, right: 30.h, bottom: 15.v));
+                height: 24.h,
+                width: 24.w)),
+        prefixConstraints: BoxConstraints(maxHeight: 48.h),
+        contentPadding: EdgeInsets.only(top: 15.h, right: 30.h, bottom: 15.h));
   }
 
   Widget _buildPassword(BuildContext context) {
@@ -195,14 +196,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
         hintText: "Password",
         textInputType: TextInputType.visiblePassword,
         prefix: Container(
-            margin: EdgeInsets.fromLTRB(16.h, 12.v, 10.h, 12.v),
+            margin: EdgeInsets.fromLTRB(16.h, 12.h, 10.h, 12.h),
             child: CustomImageView(
                 imagePath: ImageConstant.imgLock,
-                height: 24.adaptSize,
-                width: 24.adaptSize)),
-        prefixConstraints: BoxConstraints(maxHeight: 48.v),
+                height: 24.h,
+                width: 24.w)),
+        prefixConstraints: BoxConstraints(maxHeight: 48.h),
         obscureText: true,
-        contentPadding: EdgeInsets.only(top: 15.v, right: 30.h, bottom: 15.v));
+        contentPadding: EdgeInsets.only(top: 15.h, right: 30.h, bottom: 15.h));
   }
 
   Widget _buildPasswordAgain(BuildContext context) {
@@ -212,14 +213,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
         textInputAction: TextInputAction.done,
         textInputType: TextInputType.visiblePassword,
         prefix: Container(
-            margin: EdgeInsets.fromLTRB(16.h, 12.v, 10.h, 12.v),
+            margin: EdgeInsets.fromLTRB(16.h, 12.h, 10.h, 12.h),
             child: CustomImageView(
                 imagePath: ImageConstant.imgLock,
-                height: 24.adaptSize,
-                width: 24.adaptSize)),
-        prefixConstraints: BoxConstraints(maxHeight: 48.v),
+                height: 24.h,
+                width: 24.w)),
+        prefixConstraints: BoxConstraints(maxHeight: 48.h),
         obscureText: true,
-        contentPadding: EdgeInsets.only(top: 15.v, right: 30.h, bottom: 15.v));
+        contentPadding: EdgeInsets.only(top: 15.h, right: 30.h, bottom: 15.h));
   }
 
   Widget _buildSignUp(BuildContext context) {

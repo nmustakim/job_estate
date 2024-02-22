@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:job_estate/app_export/app_export.dart';
 import 'package:job_estate/controllers/user/favorite_jobs_controller.dart';
@@ -41,22 +42,22 @@ class JobCard extends StatelessWidget {
                 children: <Widget>[
                   CustomImageView(
                     imagePath: job.logo,
-                    width: 50.0.adaptSize,
-                    height: 50.0.adaptSize,
+                    width: 50.0.w,
+                    height: 50.0.h,
                   ),
                   SizedBox(width: 8.0.h),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       SizedBox(
-                        width: 230.v,
+                        width: 230.w,
                         child: Text(
                           job.organizationName,
                           style: theme.textTheme.titleLarge,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      SizedBox(height: 6.0.v),
+                      SizedBox(height: 6.0.h),
                       Text(job.location, style: theme.textTheme.bodyMedium),
                     ],
                   ),
@@ -91,14 +92,14 @@ class JobCard extends StatelessWidget {
 
                 ],
               ),
-              SizedBox(height: 10.0.v),
+              SizedBox(height: 10.0.h),
               Padding(
                 padding: EdgeInsets.only(left: 8.h),
                 child: Text(job.title, style: theme.textTheme.titleMedium),
               ),
-              SizedBox(height: 6.0.v),
+              SizedBox(height: 6.0.h),
               Padding(
-                padding: EdgeInsets.only(left: 8.h, bottom: 8.v),
+                padding: EdgeInsets.only(left: 8.w, bottom: 8.h),
                 child: Text(
                   'Posted on: ${DateFormat('dd-MM-yyyy, hh:mm a').format(job.postedDate)}',
                   style: theme.textTheme.bodySmall,

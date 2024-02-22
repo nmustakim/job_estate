@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_estate/app_export/app_export.dart';
 
 import '../custom_image_view.dart';
@@ -31,8 +32,8 @@ class AppbarTrailingImage extends StatelessWidget {
         padding: margin ?? EdgeInsets.zero,
         child: CustomImageView(
           imagePath: imagePath,
-          height: 24.adaptSize,
-          width: 24.adaptSize,
+          height: 24.h,
+          width: 24.w,
           fit: BoxFit.contain,
         ),
       ),

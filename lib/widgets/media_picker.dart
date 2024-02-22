@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:job_estate/app_export/app_export.dart';
@@ -104,7 +105,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
     return GestureDetector(
       onTap: _showPickImageDialog,
       child: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 16.v),
+        padding:  EdgeInsets.symmetric(horizontal: 16.w),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

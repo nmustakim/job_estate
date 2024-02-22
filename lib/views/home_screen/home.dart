@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_estate/controllers/jobs/job_states.dart';
 import 'package:job_estate/controllers/jobs/job_controller.dart';
 import 'package:job_estate/controllers/jobs/typewise_job_controller.dart';
-import 'package:job_estate/controllers/user/favorite_jobs_controller.dart';
 import 'package:job_estate/views/home_screen/widgets/banner_widget.dart';
 import 'package:job_estate/views/home_screen/widgets/job_card_list.dart';
 import 'package:job_estate/views/typewise_jobs_screen/typewise_jobs_screen.dart';
@@ -33,7 +33,7 @@ class _HomeState extends ConsumerState<Home> {
 
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
+
     final jobsState = ref.watch(jobsProvider);
     final jobs = jobsState is FetchJobsSuccessState ? jobsState.jobsList:[];
     print(jobs);
@@ -49,21 +49,21 @@ class _HomeState extends ConsumerState<Home> {
                       imagePath: ImageConstant.imgMicIcon, margin: EdgeInsets.all(16.h))
                 ]),
             body: SizedBox(
-                width: mediaQueryData.size.width,
+                width: MediaQuery.sizeOf(context).width,
                 child: SingleChildScrollView(
-                    padding: EdgeInsets.only(top: 27.v),
+                    padding: EdgeInsets.only(top: 27.h),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                        Center(child: BannerWidget(totalJobs: jobs.length.toString(), newJobs: ref.read(jobsProvider.notifier).getJobsPostedLast7DaysCount(), postedToday: ref.read(jobsProvider.notifier).getTodayJobsCount())),
-                          SizedBox(height: 25.v),
+                          SizedBox(height: 25.h),
                           _buildHeader(
                             context,
                             title: "All professions",
                           ),
-                          SizedBox(height: 10.v),
+                          SizedBox(height: 10.h),
                           _buildTopProfessions(context),
-                          SizedBox(height: 16.v),
+                          SizedBox(height: 16.h),
                           _buildHeader(
                             context,
                             title: "Recent jobs",
@@ -83,7 +83,7 @@ class _HomeState extends ConsumerState<Home> {
     return Padding(
       padding: EdgeInsets.only(left: 16.h),
       child: SizedBox(
-          height: 140.v,
+          height: 140.h,
           child: ListView.separated(
               scrollDirection: Axis.horizontal,
               separatorBuilder: (context, index) {

@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_estate/app_export/app_export.dart';
 
 import '../../widgets/app_bar/appbar_title_edittext_one.dart';
@@ -14,18 +15,18 @@ class SearchResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
+
     return SafeArea(
         child: Scaffold(
             appBar: _buildAppBar(context),
             body: Container(
                 width: double.maxFinite,
-                padding: EdgeInsets.symmetric(vertical: 11.v),
+                padding: EdgeInsets.symmetric(vertical: 11.h),
                 child: Column(children: [
                   Divider(),
-                  SizedBox(height: 15.v),
+                  SizedBox(height: 15.h),
                   _buildResultCounter(context),
-                  SizedBox(height: 16.v),
+                  SizedBox(height: 16.h),
                   _buildSearchResult(context)
                 ]))));
   }
@@ -34,18 +35,18 @@ class SearchResultScreen extends StatelessWidget {
     return CustomAppBar(
         title: AppbarTitleEdittextOne(
             margin: EdgeInsets.only(left: 16.h),
-            hintText: "lbl_nike_air_max",
+            hintText: "Demo text",
             controller: searchController),
         actions: [
           AppbarTrailingImage(
               imagePath: ImageConstant.imgSort,
-              margin: EdgeInsets.only(left: 16.h, top: 16.v, right: 16.h),
+              margin: EdgeInsets.only(left: 16.w, top: 16.h, right: 16.w),
               onTap: () {
                 onTapSort(context);
               }),
           AppbarTrailingImage(
               imagePath: ImageConstant.imgFilter,
-              margin: EdgeInsets.only(left: 16.h, top: 16.v, right: 32.h),
+              margin: EdgeInsets.only(left: 16.h, top: 16.h, right: 32.h),
               onTap: () {
                 onTapFilter(context);
               })
@@ -62,18 +63,18 @@ class SearchResultScreen extends StatelessWidget {
               Opacity(
                   opacity: 0.5,
                   child: Padding(
-                      padding: EdgeInsets.only(bottom: 4.v),
-                      child: Text("lbl_145_result",
+                      padding: EdgeInsets.only(bottom: 4.h),
+                      child: Text("Demo",
                           style: CustomTextStyles.labelLargeOnPrimary))),
               Spacer(),
               Padding(
-                  padding: EdgeInsets.only(top: 2.v, bottom: 3.v),
-                  child: Text("lbl_man_shoes",
+                  padding: EdgeInsets.only(top: 2.h, bottom: 3.h),
+                  child: Text("Demo",
                       style: theme.textTheme.labelLarge)),
               CustomImageView(
                   imagePath: ImageConstant.imgDownIcon,
-                  height: 24.adaptSize,
-                  width: 24.adaptSize,
+                  height: 24.h,
+                  width: 24.w,
                   margin: EdgeInsets.only(left: 8.h))
             ]));
   }
@@ -85,14 +86,14 @@ class SearchResultScreen extends StatelessWidget {
             child: GridView.builder(
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    mainAxisExtent: 283.v,
+                    mainAxisExtent: 283.h,
                     crossAxisCount: 2,
                     mainAxisSpacing: 13.h,
                     crossAxisSpacing: 13.h),
                 physics: BouncingScrollPhysics(),
                 itemCount: 6,
                 itemBuilder: (context, index) {
-                  return SearchresultItemWidget();
+                  return SearchResultItemWidget();
                 })));
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_estate/app_export/app_export.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -98,7 +99,7 @@ class CustomTextFormField extends StatelessWidget {
         contentPadding: contentPadding ??
             EdgeInsets.symmetric(
               horizontal: 12.h,
-              vertical: 15.v,
+              vertical: 15.w,
             ),
         fillColor: fillColor ?? theme.colorScheme.onPrimaryContainer,
         filled: filled,

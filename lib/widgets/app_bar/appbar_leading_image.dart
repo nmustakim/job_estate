@@ -1,4 +1,5 @@
 
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_estate/app_export/app_export.dart';
 import 'package:flutter/material.dart';
 
@@ -31,8 +32,8 @@ class AppbarLeadingImage extends StatelessWidget {
         padding: margin ?? EdgeInsets.zero,
         child: CustomImageView(
           imagePath: imagePath,
-          height: 20.adaptSize,
-          width: 20.adaptSize,
+          height: 20.h,
+          width: 20.w,
           fit: BoxFit.contain,
         ),
       ),

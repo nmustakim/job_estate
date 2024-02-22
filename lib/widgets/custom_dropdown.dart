@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:job_estate/utils/size_utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../theme/custom_text_style.dart';
 import '../theme/theme_helper.dart';
@@ -24,14 +24,14 @@ class CustomDropdownFormField extends FormField<String> {
           initialValue: initialValue,
           builder: (FormFieldState<String> state) {
             return Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.v,),
+              padding: EdgeInsets.symmetric(horizontal: 8.w,),
               child: DropdownButtonFormField<String>(
                 decoration: InputDecoration(
                     border: UnderlineInputBorder(
                         borderSide:BorderSide.none)),
                 value: state.value,
                 hint: Padding(
-                  padding:  EdgeInsets.only(left: leftPadding?.v??0.0),
+                  padding:  EdgeInsets.only(left: leftPadding?.w??0.0),
                   child: Text(
                     hintText ?? "Please select an option",
                     style: theme.textTheme.bodySmall,
@@ -41,9 +41,9 @@ class CustomDropdownFormField extends FormField<String> {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: SizedBox(
-                        width: 300.v,
+                        width: 300.w,
                         child: Padding(
-                          padding:  EdgeInsets.only(left: leftPadding?.v??0.0),
+                          padding:  EdgeInsets.only(left: leftPadding?.w??0.0),
                           child: Text(
                             value,
                             style: CustomTextStyles.labelLargeOnPrimary,

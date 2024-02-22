@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_estate/app_export/app_export.dart';
 
 class CustomAppBarForJobList extends StatelessWidget implements PreferredSizeWidget {
@@ -23,7 +24,7 @@ class CustomAppBarForJobList extends StatelessWidget implements PreferredSizeWid
       elevation: this.elevation,
       leading: IconButton(
     
-        icon: Icon(Icons.navigate_before,size:35.adaptSize,color: Colors.black,),onPressed:()=> Navigator.pop(context),)
+        icon: Icon(Icons.navigate_before,size:ScreenUtil().setWidth(35),color: Colors.black,),onPressed:()=> Navigator.pop(context),)
     );
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_estate/app_export/app_export.dart';
 
 class BannerWidget extends StatelessWidget {
@@ -11,8 +12,8 @@ class BannerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 160.v,
-      width: 343.h,
+      height: 160.h,
+      width: 343.w,
       child: Stack(
         alignment: Alignment.centerLeft,
         children: [
@@ -35,7 +36,7 @@ class BannerWidget extends StatelessWidget {
                 8.h,
               ),
             ),
-            height: 160.v,
+            height: 160.h,
             width: 343.h,
             alignment: Alignment.center,
           ),
@@ -71,9 +72,9 @@ class BannerText extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.only(
-            left: 4.h,
-            top: 10.v,
-            bottom: 9.v,
+            left: 4.w,
+            top: 10.h,
+            bottom: 9.h,
           ),
           child: Text(
             title,
@@ -81,10 +82,10 @@ class BannerText extends StatelessWidget {
           ),
         ),
         Container(
-          width: 80.h,
+          width: 80.w,
           padding: EdgeInsets.symmetric(
-            horizontal: 9.h,
-            vertical: 8.v,
+            horizontal: 9.w,
+            vertical: 8.h,
           ),
           decoration: AppDecoration.fillOnPrimaryContainer.copyWith(
             borderRadius: BorderRadiusStyle.roundedBorder5,

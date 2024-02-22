@@ -1,5 +1,6 @@
-// ignore: must_be_immutable
+
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_estate/app_export/app_export.dart';
 
 
@@ -19,7 +20,7 @@ class TopProfessionItemWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(15.h),
+        padding: EdgeInsets.fromLTRB(15.w, 15.h, 15.w, 15.h),
         decoration: AppDecoration.outlineBlue.copyWith(
           border: Border.all(color: Colors.grey),
           borderRadius: BorderRadiusStyle.roundedBorder5,
@@ -32,13 +33,13 @@ class TopProfessionItemWidget extends StatelessWidget {
           children: [
             CustomImageView(
               imagePath: icon,
-              height: 40.adaptSize,
-              width: 40.adaptSize,
+              height: 40.h,
+              width: 40.w,
               radius: BorderRadius.circular(
                 5.h,
               ),
             ),
-            SizedBox(height: 7.v),
+            SizedBox(height: 7.h),
             Text(
               title,
               maxLines: 1,
@@ -47,7 +48,7 @@ class TopProfessionItemWidget extends StatelessWidget {
                 height: 1.50,
               ),
             ),
-            SizedBox(height: 11.v),
+            SizedBox(height: 11.h),
           ],
         ),
       ),

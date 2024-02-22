@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_estate/app_export/app_export.dart';
 
 
@@ -56,7 +57,7 @@ class CustomIconButton extends StatelessWidget {
                   borderRadius: BorderRadius.circular(35.h),
                   border: Border.all(
                     color: appTheme.blue50,
-                    width: 1.h,
+                    width: 1.w,
                   ),
                 ),
             child: child,
@@ -70,16 +71,16 @@ class CustomIconButton extends StatelessWidget {
 extension IconButtonStyleHelper on CustomIconButton {
   static BoxDecoration get fillPrimary => BoxDecoration(
         color: theme.colorScheme.primary.withOpacity(1),
-        borderRadius: BorderRadius.circular(16.h),
+        borderRadius: BorderRadius.circular(16.r),
       );
   static BoxDecoration get outlinePrimary => BoxDecoration(
         color: theme.colorScheme.primary.withOpacity(1),
-        borderRadius: BorderRadius.circular(36.h),
+        borderRadius: BorderRadius.circular(36.r),
         boxShadow: [
           BoxShadow(
             color: theme.colorScheme.primary,
-            spreadRadius: 2.h,
-            blurRadius: 2.h,
+            spreadRadius: 2.r,
+            blurRadius: 2.r,
             offset: Offset(
               0,
               10,
@@ -89,6 +90,6 @@ extension IconButtonStyleHelper on CustomIconButton {
       );
   static BoxDecoration get fillPrimaryTL12 => BoxDecoration(
         color: theme.colorScheme.primary.withOpacity(1),
-        borderRadius: BorderRadius.circular(12.h),
+        borderRadius: BorderRadius.circular(12.r),
       );
 }
